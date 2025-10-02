@@ -1,7 +1,0 @@
-CCFLAGS=-g -O0 -c -I$(INCMY) -I-$(INC) -I$(UIKIT) -I$(MYLIB) -I$(LIBUV)/include -D_GNU_SOURCE
-
-$(TARGET): $(OBJS)
-	$(CC) $(LDFLAGS) $(OBJS) -o $(TARGET).tmp $(LIBS)
-	cp $(TARGET).tmp $(TARGET) 
-	$(STRIP) $(TARGET) 
-	cp $(TARGET) /home/secu/tftpboot
