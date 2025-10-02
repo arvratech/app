@@ -1,0 +1,2 @@
+"slave_read.c", line 222: Warning: C2207W: inventing 'extern int cprintf();'
+slave.c: 1 warning, 0 errors, 0 serious errors

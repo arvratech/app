@@ -1,0 +1,4 @@
+"bmpc.c", line 973: Warning: C2916W: use of '=' in condition context
+"bmpc.c", line 1026: Warning: C2916W: use of '=' in condition context
+"bmpc.c", line 1080: Warning: C2916W: use of '=' in condition context
+bmpc.c: 3 warnings, 0 errors, 0 serious errors

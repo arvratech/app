@@ -1,0 +1,172 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <stdarg.h>
+////////////////////////////////
+#include "defs.h"
+#include "defs_obj.h"
+#include "defs_pkt.h"
+#include "prim.h"
+#include "cotask.h"
+#include "rtc.h"
+#include "cbuf.h"
+#include "iodev.h"
+#include "key.h"
+#include "lcdc.h"
+#include "sio.h"
+#include "sin.h"
+#include "usbd.h"
+#include "user.h"
+#include "sysdep.h"
+#include "syscfg.h"
+#include "dhcp_new.h"
+#include "unit.h"
+#include "acad.h"
+#include "acap.h"
+#include "bio.h"
+#include "fire.h"
+#include "sdi.h"
+#include "ff.h"
+#include "fsuser.h"
+#include "cr.h"
+#include "msg.h"
+#include "evt.h"
+#include "event.h"
+#include "ta.h"
+#include "console.h"
+#include "sinport.h"
+#include "slavenet.h"
+#include "menuprim.h"
+#include "wnds.h"
+#include "desktop.h"
+#include "admcon.h"
+#include "adm.h"
+#include "auth.h"
+#include "net.h"
+#include "msgsvr.h"
+#include "svr.h"
+#include "svrcmd.h"
+#include "cli.h"
+#include "topprim.h"
+#include "devprim.h"
+#include "toptask.h"
+#include "system_hdr.h"
+
+extern int		gRequest, gIOStatus;
+extern unsigned char ServerNetState, gTouch, gSound, gSoundStop, taState;
+extern unsigned char gConsoleState;
+extern FP_USER	*gUser, *gUser2;
+
+FATFS	_FatFs;
+
+//int _iicRead(unsigned char SlaveAddr, unsigned char Addr, unsigned char *Data, int Size);
+unsigned char PassbackResetTime[6];
+
+
+void ctClock(void *arg)
+{
+	ACCESS_POINT	*ap;
+	unsigned char	ctm[8];
+	int		rval, inserted;
+
+	ap = apsGetAt(0);
+	wdtReset(); //cprintf("%ld wdtReset...\n", DS_TIMER);
+	if(DesktopIconsIsVisible()) DesktopOnClockBlink();
+	if(gIOStatus & G_TAMPER) {
+		//lcdBackLight(c);
+	}
+	if((sys_cfg->Passback & 0x03) == 0x03) {
+		rtcGetDateTime(ctm);
+		if(ctm[3] == sys_cfg->PassbackResetTime[0] && ctm[4] == sys_cfg->PassbackResetTime[1] && n_memcmp(PassbackResetTime, ctm, 5)) {
+			userfsRemoveAllTransaction();
+			memcpy(PassbackResetTime, ctm, 5);
+//cprintf("Reset Passback...\n");
+		}
+	}
+	taskDelay(5);
+	if(DesktopIconsIsVisible()) DesktopOffClockBlink();
+	if(gIOStatus & G_TAMPER) {
+		//lcdBackLight(0);
+	}
+	ProcessDoorsLockSchedule();
+	taState = taCalculateState();
+	taskDelay(5);
+	rval = sdiGetState(); inserted = sdiCardIsInserted();
+	if(!rval && inserted) {
+cprintf("Inserted...\n");
+		rval = sdiSelectCard();
+		if(!rval) {
+			f_mount((unsigned char)0, &_FatFs);
+			rtcGetDateTime(ctm);
+			rval = SDCardOpenEvtFile(ctm);
+			if(rval) rval = SDCardOpenEvtFile(ctm); // 2GB SanDisk 의 경우 여기서 sdiError=11 발생	
+		} else {
+cprintf("sdiError=%d\n", sdiGetError());
+		}
+		DesktopDrawSDCard();
+	} else if(rval && !inserted) {
+cprintf("Deinserted...\n");
+		SDCardCloseEvtFile();
+		sdiDeselectCard();
+		f_mount((unsigned char)0, NULL);
+		DesktopDrawSDCard();
+	}
+//sioPrintStatistics(0);
+}
+
+void _StartMenu(ACCESS_POINT *ap)
+{
+}
+
+void ctMainInit(void)
+{
+	ACCESS_POINT	*ap;
+
+	ap = apsGetAt(0);
+	ap->State = 0; ap->AccessEvent = 0;
+	ap->MsgTimer = 0L;
+	gTouch = 0;
+	MenuSetViewPage(0);
+	memset(PassbackResetTime, 0xff, 6);
+}
+
+void ctMain(void *arg)
+{
+/*
+int		c;	
+OnBackLight();
+c = keyGet();
+if(c) cprintf("Key=%d\n", c);
+*/
+	ACCESS_POINT	*ap;
+	int		c;
+
+	DesktopProcess();
+	OnBackLight();
+	c = keyGet();
+	if(c == KEY_MENU) {
+		_StartMenu(ap);
+		c = MenuAdminAuth();
+		if(c > 1) {
+			MenuAdm();
+		}
+	} else if(c == KEY_F2) {
+		c = MenuGetViewPage();
+		c--; if(c < 0) c = 2;
+		MenuSetViewPage(c);
+		UpdateViewMain();
+	} else if(c == KEY_F3 || c == KEY_OK) {
+		c = MenuGetViewPage();
+		c++; if(c > 2) c = 0;
+		MenuSetViewPage(c);
+		UpdateViewMain();		
+	}
+	StartBackLightTimer();
+}
+
+#include "toptask_svr.c"
+#include "toptask_ni.c"
+#include "toptask_sin.c"
+#include "toptask_con.c"
+//#include "toptask_cam.c"
+#include "toptask_unit.c"

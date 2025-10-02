@@ -1,0 +1,4 @@
+"adm_sys_sd.c", line 584: Warning: C2916W: use of '=' in condition context
+"adm_sys_sd.c", line 740: Warning: C2207W: inventing 'extern int cprintf();'
+"adm_sys_sd.c", line 808: Warning: C2870W: variable 'rval' declared but not used
+adm_sys.c: 3 warnings, 0 errors, 0 serious errors

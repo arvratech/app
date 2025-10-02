@@ -1,0 +1,268 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+////////////////////////////////
+#include "defs.h"
+#include "asciidefs.h"
+#include "pktdefs.h"
+#include "rtc.h"
+#include "prim.h"
+#include "cbuf.h"
+#include "lbuf.h"
+#include "net.h"
+
+extern unsigned char sin_req[];
+extern unsigned char sin_rsp[];
+extern unsigned long sin_reqbuf[];
+extern unsigned long sin_rspbuf[];
+
+unsigned char	InvokeID;
+
+
+int netGetRequest(NET *net)
+{
+	int		rval;
+
+	rval = cbuf_get(sin_req, (unsigned char *)net, 10);
+	if(rval == 10) {
+		if(net->BufferLength) net->Buffer = lbufGet(sin_reqbuf, (int)net->BufferOffset);
+	}
+	return rval;
+}
+
+int netGetResponse(NET *net)
+{
+	int		rval;
+
+	rval = cbuf_get(sin_rsp, (unsigned char *)net, 10);
+	if(rval == 10) {
+		if(net->BufferLength) net->Buffer = lbufGet(sin_rspbuf, (int)net->BufferOffset);
+	}
+	return rval;
+}
+
+int netPutRequest(NET *net)
+{
+	return cbuf_put(sin_req, (unsigned char *)net, 10);
+}
+
+int netPutResponse(NET *net)
+{
+	return cbuf_put(sin_rsp, (unsigned char *)net, 10);
+}
+
+int netAllocRequest(NET *net)
+{
+	int		rval, size;
+
+	size = net->BufferLength;
+	if(size & 1) size++;
+	rval = lbufAlloc(sin_reqbuf, size);
+	if(rval >= 0) {
+		net->BufferOffset = (unsigned short)rval;
+		net->Buffer = lbufGet(sin_reqbuf, rval);
+cprintf("allocReq: %d %d\n", (int)net->BufferOffset, (int)net->BufferLength); 
+	}
+	return rval;
+}
+
+int netAllocResponse(NET *net)
+{
+	int		rval, size;
+
+	size = net->BufferLength;
+	if(size & 1) size++;
+	rval = lbufAlloc(sin_rspbuf, size);
+	if(rval >= 0) {
+		net->BufferOffset = (unsigned short)rval;
+		net->Buffer = lbufGet(sin_rspbuf, rval);
+cprintf("allocRsp: %d %d\n", (int)net->BufferOffset, (int)net->BufferLength); 
+	}
+	return rval;
+}
+
+void netReduceAllocRequest(NET *net, int Length)
+{
+	int		size;
+
+	size = net->BufferLength;
+	if(size & 1) size++;
+	net->BufferLength = Length;
+	if(Length & 1) Length++;
+	size -= Length;
+	lbufReduce(sin_reqbuf, size);
+cprintf("reduceReq: %d %d\n", (int)net->BufferOffset, (int)net->BufferLength); 
+}
+
+void netReduceAllocResponse(NET *net, int Length)
+{
+	int		size;
+
+	size = net->BufferLength;
+	if(size & 1) size++;
+	net->BufferLength = Length;
+	if(Length & 1) Length++;
+	size -= Length;
+	lbufReduce(sin_rspbuf, size);
+cprintf("reduceRsp: %d %d\n", (int)net->BufferOffset, (int)net->BufferLength); 
+}
+
+void netFreeRequest(NET *net)
+{
+	int		size;
+
+	size = net->BufferLength;
+	if(size) {
+		if(size & 1) size++;
+		lbufFree(sin_reqbuf, net->BufferOffset, size);
+cprintf("freeReq: %d %d\n", (int)net->BufferOffset, (int)net->BufferLength); 
+		net->BufferOffset = 0; net->BufferLength = 0; 
+	}
+}
+
+void netFreeResponse(NET *net)
+{
+	int		size;
+
+	size = net->BufferLength;
+	if(size) {
+		if(size & 1) size++;
+		lbufFree(sin_rspbuf, net->BufferOffset, size);
+cprintf("freeRsp: %d %d\n", (int)net->BufferOffset, (int)net->BufferLength);
+		net->BufferOffset = 0; net->BufferLength = 0; 
+	}
+}
+
+int netGetNextInvokeID(void)
+{
+	InvokeID++;
+	if(!InvokeID) InvokeID++;
+	return (int)InvokeID;
+}
+
+void netCodeLogin(NET *net, unsigned char *Buffer, int Length)
+{
+	net->Address	  = 0;
+	net->Type		  = T_CONF_REQUEST;
+	net->InvokeID	  = 0;
+	net->Head0		  = P_LOGIN;
+	net->Head1		  = 0;
+	net->BufferOffset = 0;
+	net->BufferLength = (unsigned short)Length;
+	net->Buffer		  = Buffer;
+}
+
+void netCodeHeartBeat(NET *net)
+{
+	net->Address	  = 0;
+	net->Type		  = T_UNCONF_REQUEST;
+	net->InvokeID	  = 0;
+	net->Head0		  = P_LOGIN;
+	net->Head1		  = 0;
+	net->BufferOffset = 0;
+	net->BufferLength = 0;
+}
+
+void netCodeConfRequest(NET *net, int ServiceChoice)
+{
+	net->Type		  = T_CONF_REQUEST;
+	net->InvokeID	  = (unsigned char)netGetNextInvokeID();
+	net->Head0		  = (unsigned char)ServiceChoice;
+	net->Head1		  = 0;
+}
+
+void netCodeResponse(NET *net)
+{
+	net->Type		  = T_RESPONSE;
+	net->Head0		  = 0;
+	net->Head1		  = 0;
+}
+
+void netCodeError(NET *net, int ErrorClass, int ErrorCode)
+{
+	net->Type		  = T_ERROR;
+	net->Head0		  = (unsigned char)ErrorClass;
+	net->Head1		  = (unsigned char)ErrorCode;
+}
+
+void netCodeReject(NET *net, int RejectReason)
+{
+	net->Type		  = T_REJECT;
+	net->Head0		  = (unsigned char)RejectReason;
+	net->Head1		  = 0;
+}
+
+void netLogTx(NET *net, unsigned short SourceAddress)
+{
+	int		i;
+
+	cprintf("%lu Tx %d-%d %02x-%02x-%02x-%02x", DS_TIMER, (int)SourceAddress, (int)net->Address, (int)net->Type, (int)net->InvokeID, (int)net->Head0 , (int)net->Head1);
+	if(net->BufferLength) {
+		cprintf(" %d [%02x", (int)net->BufferLength, (int)net->Buffer[0]);
+		for(i = 1;i < net->BufferLength;i++) {
+			cprintf(" %02x", net->Buffer[i]);
+			if(i > 64) {
+				cprintf("...");
+				break;
+			}
+		}
+		cprintf("]");
+	}
+	cprintf("\n");
+}
+
+void netLogRx(NET *net, unsigned short DestinationAddress)
+{
+	int		i;
+
+	cprintf("%lu Rx %d-%d %02x-%02x-%02x-%02x", DS_TIMER, (int)net->Address, (int)DestinationAddress, (int)net->Type, (int)net->InvokeID, (int)net->Head0 , (int)net->Head1);
+	if(net->BufferLength) {
+		cprintf(" %d [%02x", (int)net->BufferLength, (int)net->Buffer[0]);
+		for(i = 1;i < net->BufferLength;i++) {
+			cprintf(" %02x", net->Buffer[i]);
+			if(i > 64) {
+				cprintf("...");
+				break;
+			}
+		}
+		cprintf("]");
+	}
+	cprintf("\n");
+}
+
+void tsmsInit(NET_TSM *tsms, int size)
+{
+	NET_TSM	*tsm;
+	int		i;
+	
+	for(i = 0, tsm = tsms;i < size;i++, tsm++) {
+		tsm->State = 0;
+	}
+}
+
+NET_TSM *tsmsFind(NET_TSM *tsms, int size, NET *net)
+{
+	NET_TSM	*tsm;
+	int		i;
+	
+	for(i = 0, tsm = tsms;i < size;i++, tsm++)
+		if(tsm->Address == net->Address && tsm->InvokeID == net->InvokeID) break;
+	if(i >= size) tsm = (NET_TSM *)0;
+	return tsm;
+}
+
+NET_TSM *tsmsAdd(NET_TSM *tsms, int size, NET *net)
+{
+	NET_TSM	*tsm;
+	int		i;
+	
+	for(i = 0, tsm = tsms;i < size;i++, tsm++)
+		if(!tsm->State) break;
+	if(i >= size) tsm = (NET_TSM *)0;
+	else {
+		tsm->Address  = net->Address;
+		tsm->InvokeID = net->InvokeID;
+	}
+	return tsm;
+}
+ 

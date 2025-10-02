@@ -1,0 +1,2 @@
+"fire.c", line 277: Warning: C2207W: inventing 'extern int cprintf();'
+fire.c: 1 warning, 0 errors, 0 serious errors

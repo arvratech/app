@@ -1,0 +1,2 @@
+"userauth_sg.c", line 71: Warning: C2207W: inventing 'extern int cprintf();'
+userauth_sg.c: 1 warning, 0 errors, 0 serious errors

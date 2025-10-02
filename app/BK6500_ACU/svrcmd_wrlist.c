@@ -1,0 +1,276 @@
+void WriteObjectList(NET_TSM *tsm, NET *reqnet, NET *rspnet)
+{
+	unsigned char	*p;
+	int		rval, result, count, size;
+
+	if(!tsm->WrState) {
+		if(reqnet->DataLength < 1) {
+			netCodeReject(rspnet, R_PARAMETER_ERROR);
+			tsm->SvcPending = 1;
+			return;
+		}
+		if(tsmsWritingObject(RspTSMs, MAX_RSP_TSM_SZ, tsm, (int)reqnet->Data[0])) {
+			result = R_ACTION_NOT_ALLOWED;
+			if(reqnet->Type == T_REQ) netCodeError(rspnet, 1, result);
+			else	netCodeAbortSrv(rspnet, result);
+			tsm->SvcPending = 1;
+			return;
+		}
+		tsm->ObjectType = reqnet->Data[0];
+		p = reqnet->Data + 1;
+		size = reqnet->DataLength - 1;
+	} else {
+		p = reqnet->Data;
+		size = reqnet->DataLength;		
+	}
+cprintf("WriteObjectList: OT=%02x Data=%d\n", (int)tsm->ObjectType, size);
+	result = 0;
+	switch(tsm->ObjectType) {
+	case OT_CALENDAR:
+		if(!tsm->WrState) calfsRemoveAll();
+		rval = calfsAddBulk(p, size);
+		break;
+	case OT_SCHEDULE:
+		if(!tsm->WrState) schefsRemoveAll();
+		rval = schefsAddBulk(p, size);
+		break;
+	case OT_USER:
+		if(!tsm->WrState) {
+			userfsRemoveAll();
+//cprintf("userfsRemoveAll...\n");
+		} count = userfsGetCount() + size / USER_RECORD_SZ;
+		if(count >= GetMaxUserSize()) result = R_OBJECT_IS_FULL;
+		else {
+			rval = userfsAddBulk(p, size);
+//cprintf("userfsAddBulk=%d %02x-%02x-%02x-%02x\n", rval, (int)p[0], (int)p[1], (int)p[2], (int)p[3]);
+		}
+		break;
+	case OT_ACCESS_RIGHTS:
+		if(!tsm->WrState) arfsRemoveAll();
+		rval = arfsAddBulk(p, size);
+		break;
+	default:	result = R_PARAMETER_ERROR;
+	}
+	if(!result && rval < 0) result = R_R_SYSTEM_ERROR;	
+	if(reqnet->Type == T_REQ) {
+		if(result == R_PARAMETER_ERROR) netCodeReject(rspnet, result);
+		else if(result) netCodeError(rspnet, 1, result);
+		else {
+			tsm->WrState = 1; rspnet->DataLength = 0;
+			netCodeResponse(rspnet);
+		}
+	} else {
+		if(result == R_PARAMETER_ERROR) netCodeReject(rspnet, result);
+		else if(result) netCodeAbortSrv(rspnet, result);
+		else {
+			tsm->WrState = 1;
+			netCodeAckSrv(rspnet);
+		}
+	}
+	tsm->SvcPending = 1;
+}
+
+void WritePropertyList(NET_TSM *tsm, NET *reqnet, NET *rspnet)
+{
+	unsigned char	*p, *data;
+	int		rval, result, count, size;
+
+	if(!tsm->WrState) {
+		if(reqnet->DataLength < 2) {
+			netCodeReject(rspnet, R_PARAMETER_ERROR);
+			tsm->SvcPending = 1;
+			return;
+		}
+		if(tsmsWritingObject(RspTSMs, MAX_RSP_TSM_SZ, tsm, (int)reqnet->Data[0])) {
+			result = R_ACTION_NOT_ALLOWED;
+			if(reqnet->Type == T_REQ) netCodeError(rspnet, 1, result);
+			else	netCodeAbortSrv(rspnet, result);
+			tsm->SvcPending = 1;
+			return;
+		}
+		tsm->ObjectType = reqnet->Data[0];
+		tsm->PropertyID = reqnet->Data[1];
+		p = reqnet->Data + 2;
+		size = reqnet->DataLength - 2;
+	} else {
+		p = reqnet->Data;
+		size = reqnet->DataLength;		
+	}
+cprintf("WritePropertyList: OT=%02x OP=%02x Data=%d\n", (int)tsm->ObjectType, (int)tsm->PropertyID, size);
+	result = 0;
+	switch(tsm->ObjectType) {
+	case OT_USER:
+		switch(tsm->PropertyID) {
+		case OP_FP_AUTHENTICATION_FACTOR:
+			if(!tsm->WrState) sfpRemoveAllTemplate();
+			if(size == 0 || size == 804 || size == 1608) {
+				if(size) {
+					count = userfsGetFPTemplateCount() + size / 804;
+					//if(sys_cfg->FPReader.FPIdentify) rval = GetMaxFPIdentifySize();
+					//else	rval = GetMaxFPTemplateSize();
+					rval = GetMaxFPIdentifySize();
+					if(count > rval) result = R_OBJECT_IS_FULL;
+					else {
+						wdtReset();
+						rval = userfsAddBulkFPTemplate(p, size);
+					}
+				} else {
+					rval = 0;
+				}
+				if(reqnet->Type == T_REQ) {
+					wdtResetLong();	
+					sfpExitTemplate();
+					sfpInitTemplate(1);
+					wdtReset();
+cprintf("FPTemplates download completed...\n");
+				}
+			} else {
+				result = R_PARAMETER_ERROR;
+			}
+			break;
+		case OP_USER_EX:
+			if(!tsm->WrState) userfsRemoveAllEx();
+			rval = userfsAddBulkEx(p, size);
+			break;
+		case OP_USER_PHOTO:
+			if(!tsm->WrState) userfsRemoveAllPhoto();
+			rval = userfsAddBulkPhoto(p, size);
+			break;
+		case OP_USER_ACCESS_RIGHTS:
+			if(!tsm->WrState) userfsRemoveAllAccessRights();
+			rval = userfsAddBulkAccessRights(p, size);
+			break;
+		default:	result = R_PARAMETER_ERROR;
+		}
+		break;
+	default:	result = R_PARAMETER_ERROR;
+	}
+	if(!result && rval < 0) result = R_R_SYSTEM_ERROR;	
+	if(reqnet->Type == T_REQ) {
+		if(result == R_PARAMETER_ERROR) netCodeReject(rspnet, result);
+		else if(result) netCodeError(rspnet, 1, result);
+		else {
+			tsm->WrState = 1; rspnet->DataLength = 0;
+			netCodeResponse(rspnet);
+		}
+	} else {
+		if(result == R_PARAMETER_ERROR) netCodeReject(rspnet, result);
+		else if(result) netCodeAbortSrv(rspnet, result);
+		else {
+			tsm->WrState = 1;
+			netCodeAckSrv(rspnet);
+		}
+	}
+	tsm->SvcPending = 1;
+}
+
+void WriteFile(NET_TSM *tsm, NET *reqnet, NET *rspnet)
+{
+	FS_FILE		*f;
+	unsigned char	*p, *d;
+	int		rval, result, count, file, size;
+int		i;
+
+	if(!tsm->WrState) {
+		if(reqnet->DataLength < 1) {
+			netCodeReject(rspnet, R_PARAMETER_ERROR);
+			tsm->SvcPending = 1;
+			return;
+		}
+		if(tsmsWritingFile(RspTSMs, MAX_RSP_TSM_SZ, tsm, (int)reqnet->Data[0])) {
+			result = R_ACTION_NOT_ALLOWED;
+			if(reqnet->Type == T_REQ) netCodeError(rspnet, 1, result);
+			else	netCodeAbortSrv(rspnet, result);
+			tsm->SvcPending = 1;
+			return;
+		}
+		tsm->ObjectType = reqnet->Data[0];
+		p = reqnet->Data + 1;
+		size = reqnet->DataLength - 1;
+	} else {
+		p = reqnet->Data;
+		size = reqnet->DataLength;		
+	}
+	file = tsm->ObjectType;
+	result = 0;
+	if(file == 0) {
+		d = GetXferBuffer(0);
+		if(!tsm->WrState) count = 0;
+		else	count = GetXferSize(0);
+		memcpy(d+count, p, size); count += size;
+		SetXferSize(0, count);
+		if(reqnet->Type == T_REQ) {
+cprintf("WriteFie: file=0 size=%d\n", count);
+			rval = WriteAppProgram(d, count >> 2);
+			if(rval < 1) { 
+				taskDelay(3);
+				rval = WriteAppProgram(d, count >> 2);
+			}
+			if(rval < 1) result = R_R_SYSTEM_ERROR;
+			else	gResetFlag = 1;
+		}
+#ifndef STAND_ALONE
+	} else if(file == 1 || file == 2) {
+		d = GetXferBuffer(0);
+		if(!tsm->WrState) count = 0;
+		else	count = GetXferSize(0);
+		memcpy(d+count, p, size);
+		count += size;
+		SetXferSize(0, count);
+		if(reqnet->Type == T_REQ) {
+cprintf("WriteFile: file=%d size=%d\n", file, count);
+			if(CliGetXferState()) result = R_ACTION_NOT_ALLOWED;
+			else if(count > CliGetXferBufferSize()) result = R_OBJECT_IS_FULL;
+			else {
+				memcpy(CliGetXferBuffer(), d, count);
+				CliSetXferSize(count);
+//				ClisXferFileChanged(0xffffff);	// commented at 2022.7.8
+			}
+		}
+#endif
+	} else {
+		flashWriteEnable();
+		if(!tsm->WrState) {
+			rval = fsDelete(file);
+			f = fsCreate(file);
+		} else {
+			f = fsOpen(file, FS_WRITE);	// 자동으로 Eof 설정됨
+		}
+		if(!f) {
+#ifdef BK_DEBUG
+			cprintf("fsCreate(%d) error: %d\n", file, fsErrno);
+#endif	
+			result = R_R_SYSTEM_ERROR;
+		} else {
+			rval = fsWrite(f, p, size);
+			if(rval != size) {
+#ifdef BK_DEBUG
+				cprintf("fsWrite(%d) error: %d\n", file, fsErrno);
+#endif
+				fsClose(f);
+				fsDelete(file);
+				result = R_R_SYSTEM_ERROR;
+			} else {
+				fsClose(f);
+			}
+		}
+		flashWriteDisable();
+	}
+	if(reqnet->Type == T_REQ) {
+		if(result == R_PARAMETER_ERROR) netCodeReject(rspnet, result);
+		else if(result) netCodeError(rspnet, 1, result);
+		else {
+			tsm->WrState = 1; rspnet->DataLength = 0;
+			netCodeResponse(rspnet);
+		}
+	} else {
+		if(result == R_PARAMETER_ERROR) netCodeReject(rspnet, result);
+		else if(result) netCodeAbortSrv(rspnet, result);
+		else {
+			tsm->WrState = 1;
+			netCodeAckSrv(rspnet);
+		}
+	}
+	tsm->SvcPending = 1;
+}
+

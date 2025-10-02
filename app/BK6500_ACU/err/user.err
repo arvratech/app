@@ -1,0 +1,3 @@
+"usercfg.c", line 206: Warning: C2207W: inventing 'extern int cprintf();'
+"user_sg.c", line 199: Warning: C2870W: variable 'zoneFrom' declared but not used
+user_sg.c: 2 warnings, 0 errors, 0 serious errors

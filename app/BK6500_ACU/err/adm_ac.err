@@ -1,0 +1,4 @@
+"adm_ac_ad.c", line 385: Warning: C2207W: inventing 'extern int _SaveDoorAlarm();'
+"adm_ac_az.c", line 88: Warning: C2207W: inventing 'extern int _SetMenuProperSize();'
+"adm_ac_az.c", line 89: Warning: C2207W: inventing 'extern int _SetSelectMenuColor();'
+adm_ac.c: 3 warnings, 0 errors, 0 serious errors

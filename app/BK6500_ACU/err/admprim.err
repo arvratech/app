@@ -1,0 +1,2 @@
+"admprim.c", line 304: Warning: C2207W: inventing 'extern int fzGetEnable();'
+admprim.c: 1 warning, 0 errors, 0 serious errors

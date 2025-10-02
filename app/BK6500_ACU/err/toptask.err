@@ -1,0 +1,2 @@
+"toptask.c", line 75: Warning: C2207W: inventing 'extern int DesktopIconsIsVisible();'
+toptask.c: 1 warning, 0 errors, 0 serious errors

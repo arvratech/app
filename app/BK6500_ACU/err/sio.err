@@ -1,0 +1,3 @@
+"slavenet_sin.c", line 140: Warning: C2207W: inventing 'extern int bin2card();'
+"sio.c", line 629: Warning: C2871W: static 'Ttxdelay' declared but not used
+sio.c: 2 warnings, 0 errors, 0 serious errors

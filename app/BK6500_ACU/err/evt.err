@@ -1,0 +1,3 @@
+"evt.c", line 79: Warning: C2207W: inventing 'extern int cprintf();'
+"evt.c", line 149: Warning: C2917W: no side effect in void context: '<expr> - <expr>'
+evt.c: 2 warnings, 0 errors, 0 serious errors

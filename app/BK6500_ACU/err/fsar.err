@@ -1,0 +1,2 @@
+"fscal.c", line 38: Warning: C2207W: inventing 'extern int cprintf();'
+fsar.c: 1 warning, 0 errors, 0 serious errors

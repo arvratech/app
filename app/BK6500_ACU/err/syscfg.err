@@ -1,0 +1,2 @@
+"syscfg.c", line 183: Warning: C2207W: inventing 'extern int cprintf();'
+syscfg.c: 1 warning, 0 errors, 0 serious errors

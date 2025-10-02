@@ -1,0 +1,279 @@
+#ifndef _DEFS_H_
+#define _DEFS_H_
+
+
+#define STORED_TMPL_SZ			512
+#define STORED_TMPL_DOUBLE_SZ	1024
+#define STORED_TMPL_SHIFT		9
+
+#define MIN_PASSWORD_SIZE		4
+#define MAX_PASSWORD_SIZE		12
+#define RF_INPUT_TIMEOUT		8000L
+#define KEY_BEEP_DELAY			30
+#define MENT_BEEP_DELAY			200
+#define RF_BEEP_DELAY			80
+
+#define MAX_SVRBUF_SZ			2096	// buffer size
+#define MAX_SVRBUF_QTR_SZ		516		// buffer quarter size
+#define SOCK_PORT				0		// Socket channel 0
+#define CAM_SIN_PORT			1		// Socket channel 1
+
+// socket port definitions
+#define SOCK_SERVER				0
+#define SOCK_CONSOLE			1
+#define SOCK_VOIP				2
+#define SOCK_CAM_VOIP			3
+#define SOCK_SLAVE				4
+
+// ICON definitions
+#define BTN_UP_ARROW			151
+#define BTN_DOWN_ARROW			152
+#define BTN_LEFT_ARROW			153
+#define BTN_RIGHT_ARROW			154
+#define BTN_BACK				155
+#define BTN_NEXT				156
+#define BTN_OK					157
+#define BTN_CANCEL				158
+#define BTN_NO					159
+#define BTN_CHECK_ON			161
+#define BTN_CHECK_OFF			162
+#define BOX_CHECKED				161
+#define BOX_UNCHECKED			162
+#define BTN_ASTERISK			163
+#define BTN_SHARP				164
+#define BTN_PERIOD				165
+#define BTN_BACKSPACE			166
+#define BTN_DELETE				167
+#define INFORMATION_ICON		168
+#define EXCLAMATION_ICON		169
+#define QUESTION_ICON			170
+#define POSITIVE_ICON			171
+#define NEGATIVE_ICON			172
+#define FAIL_ICON				173
+#define BTN_RADIO_ON			174
+#define BTN_RADIO_OFF			175
+#define WAITING_ICON			176
+
+#define MASTER_ICON				180
+#define UNIT_ICON				181
+#define UNIT_FAIL_ICON			182
+#define UNIT_DISABLE_ICON		183
+#define DOOR_ICON				184
+#define DOOR_DISABLE_ICON		185
+#define WIEGAND_ICON			186
+#define WIEGAND_DISABLE_ICON	187
+#define READER_ICON				188
+#define READER_FAIL_ICON		189
+#define READER_DISABLE_ICON		190
+#define LOCK_ICON				191
+#define UNLOCK_ICON				192
+#define DOOR_OPENED_ICON		193
+#define OPEN_TOO_LONG_ICON		194
+#define FORCED_OPEN_ICON		195
+#define FIRE_ICON				196
+#define FIRE_DISABLE_ICON		197
+#define ACTION_ICON				198
+#define ACTION_DISABLE_ICON		199
+#define SERIAL_ICON				200
+#define SERIAL_FAIL_ICON		201
+#define TCPIP_ICON				202
+#define TCPIP_FAIL_ICON			203
+#define TCPIP_WAIT_ICON			204
+#define CAM_RUNNING_ICON		205
+#define CAM_STOPPED_ICON		206
+#define CAM_FAIL_ICON			207
+#define SD_CARD_ICON			208
+#define VOLUME_PLUS_ICON		209
+#define VOLUME_MINUS_ICON		210
+#define SPEAKER_ICON			211
+#define MICROPHONE_ICON			212
+#define PHONE_ICON				213
+#define INTERCOM_ICON			214
+#define ZONE_ICON				215
+#define OUTPUT_COMMAND_ICON		216
+
+
+// Request definitions
+#define G_CARD_OPEN_REQUESTED	0x01
+#define G_CARD_CLOSE_REQUESTED	0x02
+#define G_CARD_REQUESTED		0x03
+#define G_SERIAL_SPEED_CHANGED	0x04
+#define G_TCP_IP_CHANGED		0x08
+#define G_NETWORK_OPEN_DELAY	0x10
+#define G_DATE_TIME_UPDATED		0x20
+
+// ctInOut status definitions
+#define G_CALL_BUTTON			0x01
+#define G_REQUEST_TO_EXIT		0x02
+#define G_TAMPER				0x04
+#define G_FIRE_ALARM			0x08
+
+// Reader Type definitions
+//#define	READER_LOCAL			0
+//#define	READER_26_WIEGAND		1
+//#define	READER_34_WIEGAND		2
+//#define	READER_STORED_ON_CARD	3
+
+// Meal Option definitions
+#define	MEAL_PRINTER			0x01	// 0-bit
+#define	MEAL_AVOID_OVERLAP		0x02	// 1-bit
+
+#define FP_CAPTURE_X			0
+#define FP_CAPTURE_Y			43
+
+// Lock State definitions
+#define S_NORMAL_LOCKED		 	0	
+#define S_NORMAL_UNLOCKED	 	1	
+#define S_FORCED_LOCKED		 	2	
+#define S_FORCED_UNLOCKED	 	3	
+#define S_SCHEDULED_LOCKED	 	4	
+#define S_SCHEDULED_UNLOCKED 	5	
+#define S_LOCK_DOWNED		 	6	
+#define S_LOCK_OPENED		 	7	
+
+// Network Status definitions
+#define S_NULL				 	0
+#define S_IDLE				 	1
+#define S_WAIT_DIAL			 	2
+#define S_DIALING			 	3
+#define S_CONNECTED			 	4
+#define S_DISCONNECTING		 	5
+
+// USB State definitions
+#define S_USB_IDLE				0
+#define S_USB_CONNECTED			1
+#define S_USB_CONNECTED_TO_HOST	2
+#define S_USB_ADMIN_LOCK		3
+#define S_USB_ADMIN_AUTH		4
+#define S_USB_ADMIN				5
+
+// Event definitions
+// Lock Event
+#define E_NORMAL_UNLOCKED_ACCESS_GRANTED		100
+#define E_NORMAL_UNLOCKED_REQUEST_TO_EXIT		101
+#define E_NORMAL_UNLOCKED_MOMEMTARY_UNLOCK		102
+#define E_NORMAL_LOCKED_UNLOCK_TIMEOUT			103
+#define E_NORMAL_LOCKED_CLEAR					104
+#define E_NORMAL_LOCKED_LOCK_DOWN_RELEASE		105
+#define E_NORMAL_LOCKED_LOCK_OPEN_RELEASE		106
+#define E_FORCED_LOCKED							107
+#define E_FORCED_LOCKED_LOCK_DOWN_RELEASE		108
+#define E_FORCED_LOCKED_LOCK_OPEN_RELEASE		109
+#define E_NORMAL_LOCKED_FORCED_LOCK_RELEASE		110
+#define E_FORCED_UNLOCKED						111
+#define E_FORCED_UNLOCKED_LOCK_DOWN_RELEASE		112
+#define E_FORCED_UNLOCKED_LOCK_OPEN_RELEASE		113
+#define E_NORMAL_LOCKED_FORCED_UNLOCK_RELEASE	114
+#define E_SCHEDULED_LOCKED						115
+#define E_SCHEDULED_LOCKED_LOCK_DOWN_RELEASE	116
+#define E_SCHEDULED_LOCKED_LOCK_OPEN_RELEASE	117
+#define E_NORMAL_LOCKED_SCHEDULED_LOCK_END		118
+#define E_SCHEDULED_UNLOCKED					119
+#define E_SCHEDULED_UNLOCKED_LOCK_DOWN_RELEASE	120
+#define E_SCHEDULED_UNLOCKED_LOCK_OPEN_RELEASE	121
+#define E_NORMAL_LOCKED_SCHEDULED_UNLOCK_END	122
+#define E_LOCK_DOWNED							123
+#define E_LOCK_OPENED							124
+
+// Access Event
+#define E_ACCESS_GRANTED_FP						130
+#define E_ACCESS_GRANTED_CARD					131
+#define E_ACCESS_GRANTED_PIN					132
+#define E_ACCESS_GRANTED_CARD_FP				133
+#define E_ACCESS_GRANTED_CARD_PIN				134
+#define E_ACCESS_DENIED_USER_NOT_ACTIVATED		135
+#define E_ACCESS_DENIED_USER_EXPIRED			136
+#define E_ACCESS_DENIED_ACCESS_CONTROL			137
+#define E_ACCESS_DENIED_ACCESS_RIGHTS			138
+#define E_ACCESS_DENIED_BAD_FP					139
+#define E_ACCESS_DENIED_BAD_CARD				140
+#define E_ACCESS_DENIED_BAD_PIN					141
+#define E_ACCESS_DENIED_GOOD_CARD_BAD_FP		142
+#define E_ACCESS_DENIED_GOOD_CARD_BAD_PIN		143
+#define E_ACCESS_DENIED_UNREGISTERED_FP			144
+#define E_ACCESS_DENIED_UNREGISTERED_CARD		145
+#define E_ACCESS_DENIED_LOST_CARD				146
+#define E_ACCESS_DENIED_ACCESS_MODE				147
+#define E_ACCESS_DENIED_PASSBACK				148			// Appended 2009.8.28
+#define E_ACCESS_DURESS							149
+#define E_ACCESS_GRANTED_CARD_FP_PIN			150			// Card+FP+PIN
+#define E_ACCESS_DENIED_GOOD_CARD_BAD_FP_PIN	151			// Card+FP+PIN
+#define E_ACCESS_DENIED_GOOD_CARD_FP_BAD_PIN	152			// Card+FP+PIN
+#define E_ACCESS_DENIED_GOOD_CARD_BAD_FP_BAD_PIN 153		// CardD+FP or Card+PIN
+#define E_ACCESS_DENIED_ALL						154
+#define E_ACCESS_GRANTED_ALL					155
+#define E_DENIED_MEAL_OVERLAP					156			// Appended 2010.3.4
+#define E_DENIED_NEGATIVE_BALANCE               157         // Appended 2012.7.13
+#define E_DENIED_CARD_RW_ERROR                  158         // Appended 2012.7.13
+#define E_DENIED_FAIL_SERVER					159
+#define E_PASSBACK_DETECTED						160
+#define E_ACCESS_GRANTED_EMV_CARD               171
+#define E_ACCESS_DENIED_UNREGISTERED_EMV_CARD   175
+#define E_ACCESS_GRANTED_ALL_EMV		        177
+
+// Other Event
+#define E_DEVICE_RESET							200
+#define E_DEVICE_TAMPER_NORMAL					201
+#define E_CALL_BUTTON_PRESSED					202
+#define E_DEVICE_TAMPER_ALARM					203
+#define E_DOOR_NORMAL							204
+#define E_DOOR_OPEN_TOO_LONG					205
+#define E_DOOR_FORCED_OPEN						206
+#define E_FIRE_ALARM							208
+#define E_FIRE_NORMAL							209
+#define E_MAKE_CALL								210
+#define E_INPUT_ALARM							211
+#define E_INPUT_NORMAL							212
+#define E_READER_TAMPER_ALARM					213
+#define E_READER_TAMPER_NORMAL					214
+#define E_INTRUSION_ALARM						215
+#define E_INTRUSION_NORMAL						216
+#define E_UNIT_DISCONNECTED						219
+#define E_UNIT_CONNECTED						220
+
+// Authentication packet type definitions
+#define PIN0						0x13861686
+#define AUTH_RAND1					0x5c
+#define AUTH_RAND2					0x5d
+#define AUTH_AUTH1					0xa1
+#define AUTH_AUTH2					0xa2
+#define AUTH_AUTH3					0xa3
+#define AUTH_AUTH_REQ				0x97
+#define AUTH_AUTH_RSP				0x48
+#define AUTH_PING					0x58
+#define AUTH_ISSUE_CERT				0x49
+
+// Result definitions
+#define	R_SUCCESS					0x00
+#define R_PACKET_FORMAT_ERROR		0x01
+#define R_PACKET_ADDRESS_ERROR		0x02
+#define R_PACKET_CHECKSUM_ERROR		0x03
+#define R_UNKNOWN_COMMAND 			0x04	
+#define R_PARAMETER_ERROR			0x05
+#define R_R_SYSTEM_ERROR			0x06
+#define R_OBJECT_NOT_FOUND			0x07
+#define R_OBJECT_IS_FULL			0x08
+#define R_ACTION_NOT_ALLOWED		0x09
+#define R_XFER_PROTOCOL_ERROR		0x0c
+#define R_XFER_ACCESS_VIOLATION		0x0d
+#define R_XFER_FILE_NOT_FOUND		0x0e
+#define R_XFER_SYSTEM_ERROR			0x0f
+
+// Network cause efinitions
+#define R_NETWORK_CLEAR				0
+#define R_LINK_DOWN					1
+#define R_NO_DHCP_SERVER			2
+#define R_NO_HOST_SERVER			3
+#define R_AUTH_SYSTEM_ERROR			4
+#define R_AUTH_PACKET_FORMAT_ERROR	5
+#define R_AUTH_DISCONNECTED			6
+#define R_AUTH_TIMEOUT				7
+#define R_AUTH_PROTOCOL_ERROR		8
+#define R_NOT_ACTIVE_PERIOD			9
+#define R_AUTH_DEVICE_NOT_FOUND		10
+#define R_AUTH_DEVICE_BUSY			11
+#define R_AUTH_DEVICE_FULL			12
+#define R_AUTH_CERT_FAILED			13
+
+
+#endif	/* _DEFS_H_ */

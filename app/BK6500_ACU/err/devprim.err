@@ -1,0 +1,2 @@
+"devprim.c", line 189: Warning: C2207W: inventing 'extern int cprintf();'
+devprim.c: 1 warning, 0 errors, 0 serious errors

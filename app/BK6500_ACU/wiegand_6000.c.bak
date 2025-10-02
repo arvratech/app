@@ -1,0 +1,304 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <time.h>
+////////////////////////////////
+#include "system_hdr.h"
+////////////////////////////////
+#include "prim.h"
+#include "rtc.h"
+#include "wiegand.h"
+
+#define MAX_WG_DATA_SZ		136
+
+static unsigned char  wg1RetVal, wg2RetVal, wg1RetData[18], wg2RetData[18], wg1Data[18], wg2Data[18];
+static unsigned short wg1Timer, wg2Timer;
+static int		wg1Bits, wg2Bits;
+
+
+#include "wiegand_lib.c"
+
+// Standard:100us-1ms Twain:100us-1ms HID:40us-2ms RND:50us-5ms 중국저가:400us-1.9ms MotololaSectorReader:115us-1ms
+//    HID Reader Observation Result: tcnt=9-11
+#define WG_TCNT_MAX		1500	// 1100*5=5500us(5.50ms)
+#define WG_TCNT_NOISE	4		// (4+1)*5=25us
+	
+#define StartTimer3() {	rTCNTB3=wg1Timer=WG_TCNT_MAX; rTCON = (rTCON & 0xfff0ffff) | 0x00020000; rTCON = (rTCON & 0xfff0ffff) | 0x00010000; }
+		// Timer 3 auto reload on/off[19]=0(One-Shot) manual update[17]=1(Update TCNTB3) start/stop[16]=0(Stop)
+		// Timer 3 auto reload on/off[19]=0(One-Shot) manual update[17]=0(No operation)  start/stop[16]=1(Start)
+#define StopTimer3() {	rTCON &= 0xfff0ffff; }
+
+#define StartTimer4() {	rTCNTB4=wg2Timer=WG_TCNT_MAX; rTCON = (rTCON & 0xff0fffff) | 0x00200000; rTCON = (rTCON & 0xff0fffff) | 0x00100000; }
+		// Timer 4 auto reload on/off[23]=0(One-Shot) manual update[21]=1(Update TCNTB4) start/stop[20]=0(Stop)
+		// Timer 4 auto reload on/off[23]=0(One-Shot) manual update[21]=0(No operation)  start/stop[20]=1(Start)
+#define StopTimer4() {	rTCON &= 0xff0fffff; }
+
+#define _putc(c) { if((c>>4) <= 9) WrUTXH2((c>>4)+'0'); else WrUTXH2((c>>4)+'A'-10); if((c&0xf) <= 9) WrUTXH2((c&0xf)+'0'); else WrUTXH2((c&0xf)+'A'-10); }
+
+
+void __irq EINT8_23_ISR(void)
+{
+	int		c, val;
+
+	c = rSRCPND; c = rINTPND; c = rEINTPEND;
+	val = rGPGDAT & 0x00000018;
+	if(c & BIT_EINT11) {
+WrUTXH2('0');
+		if(!(val & 0x00000008)) {	// GPG3
+			StartTimer3();
+		} else if(val == 0x00000018 && (short)(wg1Timer-rTCNTO3) > WG_TCNT_NOISE) {	// GPG3, GPG4
+			if(wg1Bits < MAX_WG_DATA_SZ) {
+				if(!(wg1Bits & 0x7)) wg1Data[wg1Bits >> 3] = 0x00;
+				wg1Bits++;
+			}
+			wg1Timer = 0;
+		}
+	}
+	if(c & BIT_EINT12) {
+WrUTXH2('1');
+		if(!(val & 0x00000010)) {	// GPG4
+			StartTimer3();
+		} else if(val == 0x00000018 && (short)(wg1Timer-rTCNTO3) > WG_TCNT_NOISE) {	// GPG3, GPG4	
+			if(wg1Bits < MAX_WG_DATA_SZ) {
+				val = wg1Bits & 0x7;
+				if(val) wg1Data[wg1Bits >> 3] |= 0x80 >> val;
+				else	wg1Data[wg1Bits >> 3] = 0x80;
+				wg1Bits++;
+			}
+			wg1Timer = 0;
+		}
+	}
+	val = rGPGDAT & 0x00001800;	
+	if(c & BIT_EINT19) {
+		if(!(val & 0x00000800)) {	// GPG11
+			StartTimer4();
+		} else if(val == 0x00001800 && (short)(wg2Timer-rTCNTO4) > WG_TCNT_NOISE) {	// GPG11, GPG12
+			if(wg2Bits < MAX_WG_DATA_SZ) {
+				if(!(wg2Bits & 0x7)) wg2Data[wg2Bits >> 3] = 0x00;
+				wg2Bits++;
+			}
+			wg2Timer = 0;
+		}
+	}
+	if(c & BIT_EINT20) {
+		if(!(val & 0x00001000)) {	// GPG12
+			StartTimer4();
+		} else if(val == 0x00001800 && (short)(wg2Timer-rTCNTO4) > WG_TCNT_NOISE) {	// GPG11, GPG12
+			if(wg2Bits < MAX_WG_DATA_SZ) {
+				val = wg2Bits & 0x7;
+				if(val) wg2Data[wg2Bits >> 3] |= 0x80 >> val;
+				else	wg2Data[wg2Bits >> 3] = 0x80;
+				wg2Bits++;
+			}
+			wg2Timer = 0;
+		}
+	}
+	rEINTPEND = c & (BIT_EINT11 | BIT_EINT12 | BIT_EINT19 | BIT_EINT20);
+	rSRCPND = BIT_EINT8_23; rINTPND = BIT_EINT8_23; 
+}
+
+void __irq Timer3Done(void)
+{
+	int		c, i;
+
+WrUTXH2('\r'); WrUTXH2('\n'); WrUTXH2('A'); _putc(wg1Bits); WrUTXH2('\r'); WrUTXH2('\n');
+	c = rSRCPND; c = rINTPND;
+	wg1RetVal = wg1Bits; wg1Bits = 0; wg1Timer = 0;
+	c = (wg1RetVal + 7) >> 3;
+	for(i = 0;i < c;i++) wg1RetData[i] = wg1Data[i];
+	rSRCPND = BIT_TIMER3; rINTPND = BIT_TIMER3;
+}
+
+void __irq Timer4Done(void)
+{
+	int		c, i;
+
+WrUTXH2('\r'); WrUTXH2('\n'); WrUTXH2('B'); _putc(wg2Bits); WrUTXH2('\r'); WrUTXH2('\n');
+	c = rSRCPND; c = rINTPND;
+	wg2RetVal = wg2Bits; wg2Bits = 0; wg2Timer = 0;
+	c = (wg2RetVal + 7) >> 3;
+	for(i = 0;i < c;i++) wg2RetData[i] = wg2Data[i];
+	rSRCPND = BIT_TIMER4; rINTPND = BIT_TIMER4;
+}
+
+void wiegandOpen(int port)
+{
+	int		mask;
+
+	mask = BIT_EINT11 | BIT_EINT12 | BIT_EINT13 | BIT_EINT19 | BIT_EINT20;	
+	if(port) {
+		rGPGCON  = (rGPGCON  & 0xfc3fffff) | 0x02800000; // GPG12[25:24]=10(EINT20):Data1 GPG11[23:22]=10(EINT19)Data0
+		rEXTINT2 = (rEXTINT2 & 0xfff00fff) | 0x00066000; // EINT20[18:16]=11x(Both edge triggered) EINT19[14:12]=11x(Both edge triggered)
+		if((rEINTMASK & mask) == mask) {
+			pISR_EINT8_23 = (unsigned)EINT8_23_ISR;
+			rSRCPND = BIT_EINT8_23; rINTPND = BIT_EINT8_23;
+			SET_IRQFIQ(); rINTMSK &= ~BIT_EINT8_23; CLR_IRQFIQ();
+//cprintf("BIT_EINT8_23 Opened...\n");
+		}
+		rEINTPEND = BIT_EINT19 | BIT_EINT20; rEINTMASK &= ~(BIT_EINT19 | BIT_EINT20);
+		wg2Bits = 0; wg2RetVal = 0;	wg2Timer = 0;
+		pISR_TIMER4 = (int)Timer4Done;
+		rSRCPND = BIT_TIMER4; rINTPND = BIT_TIMER4;
+		SET_IRQFIQ(); rINTMSK &= ~BIT_TIMER4; CLR_IRQFIQ();
+	} else {
+		rGPGCON  = (rGPGCON  & 0xfffffc3f) | 0x00000280; // GPG4[9:8]=10(EINT12):Data1 GPG3[7:6]=10(EINT11)Data0 
+		rEXTINT1 = (rEXTINT1 & 0xfff00fff) | 0x00066000; // EINT12[18:16]=11x(Both edge triggered) EINT11[14:12]=11x(Both edge triggered)	
+		if((rEINTMASK & mask) == mask) {
+			pISR_EINT8_23 = (unsigned)EINT8_23_ISR;
+			rSRCPND = BIT_EINT8_23; rINTPND = BIT_EINT8_23;
+			SET_IRQFIQ(); rINTMSK &= ~BIT_EINT8_23; CLR_IRQFIQ();
+//cprintf("BIT_EINT8_23 Opened...\n");
+		}
+		rEINTPEND = BIT_EINT11 | BIT_EINT12; rEINTMASK &= ~(BIT_EINT11 | BIT_EINT12);
+		wg1Bits = 0; wg1RetVal = 0; wg1Timer = 0;
+		pISR_TIMER3 = (int)Timer3Done;
+		rSRCPND = BIT_TIMER3; rINTPND = BIT_TIMER3;
+		SET_IRQFIQ(); rINTMSK &= ~BIT_TIMER3; CLR_IRQFIQ();
+/*
+StartTimer3(); uDelay(100); StopTimer3();
+cprintf("rTCNTO3=%x\n", rTCNTO3);	// 5c9(1481)
+wg1Timer = 0;
+cprintf("%d\n", wg1Timer-rTCNTO3);	// -1481
+if((short)(wg1Timer-rTCNTO3) > WG_TCNT_NOISE) cprintf("plus\n");
+else	cprintf("minus\n");
+*/
+	}
+cprintf("Wiegand(%d) Opened\n", port);
+}
+
+void wiegandClose(int port)
+{
+	int		mask;
+
+	if(port) {
+		SET_IRQFIQ(); rEINTMASK |= BIT_EINT19 | BIT_EINT20; rINTMSK |= BIT_TIMER4; CLR_IRQFIQ();
+		wg2Bits = 0; wg2Timer = 0;
+	} else {
+		SET_IRQFIQ(); rEINTMASK |= BIT_EINT11 | BIT_EINT12; rINTMSK |= BIT_TIMER3; CLR_IRQFIQ();
+		wg1Bits = 0; wg1Timer = 0;
+	}
+	mask = BIT_EINT11 | BIT_EINT12 | BIT_EINT13 | BIT_EINT19 | BIT_EINT20;	
+	if((rEINTMASK & mask) == mask) {
+		SET_IRQFIQ(); rINTMSK |= BIT_EINT8_23; CLR_IRQFIQ();
+//cprintf("BIT_EINT8_23 Closed...\n");
+	}
+cprintf("wiegand(%d) closed\n", port);
+}
+
+int wiegandPeek(int port)
+{
+	int		rval;
+
+	if(port) rval = wg2RetVal;
+	else	 rval = wg1RetVal;
+//cprintf("Wiegand(%d) RVAL=%d %d\n", port, rval, ddd);
+	return rval;
+}	
+
+// -1=Length error(not 26/34)  0=Paraty error  24=Wiegand 26  34=Wiegand 34
+int wiegandRead(int port, unsigned char *pData)
+{
+	int		rval;
+
+	if(port) {
+		rval = wg2RetVal;
+		if(rval > 0 && pData) memcpy(pData, wg2Data, (rval+7)>>3);
+		wg2RetVal = 0;
+	} else {
+		rval = wg1RetVal;
+		if(rval > 0 && pData) memcpy(pData, wg1Data, (rval+7)>>3);
+		wg1RetVal = 0;
+	}
+	return rval;
+}
+
+static int Wg1_0_Bits, Wg1_1_Bits, Wg2_0_Bits, Wg2_1_Bits;		
+
+void __irq EINT8_23_TEST_ISR(void)
+{
+	int		c;
+
+	c = rSRCPND; c = rINTPND; c = rEINTPEND;
+	if(c & BIT_EINT11) Wg1_0_Bits++;
+	if(c & BIT_EINT12) Wg1_1_Bits++;
+	if(c & BIT_EINT19) Wg2_0_Bits++;
+	if(c & BIT_EINT20) Wg2_1_Bits++;
+	rEINTPEND = c & (BIT_EINT11 | BIT_EINT12 | BIT_EINT19 | BIT_EINT20);
+	rSRCPND = BIT_EINT8_23; rINTPND = BIT_EINT8_23; 
+}
+
+void wiegandOpenTest(int port)
+{
+	if(port) {
+		rGPGCON  = (rGPGCON  & 0xfc3fffff) | 0x02800000; // GPG12[25:24]=10(EINT20):Data1 GPG11[23:22]=10(EINT19)Data0 	
+		rEXTINT2 = (rEXTINT2 & 0xfff00fff) | 0x00066000; // EINT20[18:16]=11x(Both edge triggered) EINT19[14:12]=11x(Both edge triggered)
+		pISR_EINT8_23 = (unsigned)EINT8_23_TEST_ISR;
+		rSRCPND = BIT_EINT8_23; rINTPND = BIT_EINT8_23;
+		SET_IRQFIQ(); rINTMSK &= ~BIT_EINT8_23; CLR_IRQFIQ();
+		rEINTPEND = BIT_EINT19 | BIT_EINT20; rEINTMASK &= ~(BIT_EINT19 | BIT_EINT20);
+	} else {
+		rGPGCON  = (rGPGCON  & 0xfffffc3f) | 0x00000280; // GPG4[9:8]=10(EINT12):Data1 GPG3[7:6]=10(EINT11)Data0 
+		rEXTINT1 = (rEXTINT1 & 0xfff00fff) | 0x00022000; // EINT12[18:16]=11x(Both edge triggered) EINT11[14:12]=11x(Both edge triggered)	
+		pISR_EINT8_23 = (unsigned)EINT8_23_TEST_ISR;
+		rSRCPND = BIT_EINT8_23; rINTPND = BIT_EINT8_23;
+		SET_IRQFIQ(); rINTMSK &= ~BIT_EINT8_23; CLR_IRQFIQ();
+		rEINTPEND = BIT_EINT11 | BIT_EINT12; rEINTMASK &= ~(BIT_EINT11 | BIT_EINT12);
+	}
+//cprintf("Wiegand(%d) Opened\n", port);
+}
+
+void wiegandCloseTest(int port)
+{
+	if(port) {
+		SET_IRQFIQ(); rEINTMASK |= BIT_EINT19 | BIT_EINT20; rINTMSK |= BIT_TIMER4; CLR_IRQFIQ();
+		wg2Bits = 0;
+	} else {
+		SET_IRQFIQ(); rEINTMASK |= BIT_EINT11 | BIT_EINT12; rINTMSK |= BIT_TIMER3; CLR_IRQFIQ();
+		wg1Bits = 0;
+	}
+	SET_IRQFIQ(); rINTMSK |= BIT_EINT8_23; CLR_IRQFIQ();
+}
+
+void wiegandStartTest(int port)
+{
+	if(port) {
+		Wg2_0_Bits = Wg2_1_Bits = 0;
+	} else {	
+		Wg1_0_Bits = Wg1_1_Bits = 0;
+	}
+}
+
+void wiegandEndTest(int port, int *ZeroCount, int *OneCount)
+{
+	if(port) {
+		*ZeroCount = Wg2_0_Bits; *OneCount = Wg2_1_Bits;
+	} else {	
+		*ZeroCount = Wg1_0_Bits; *OneCount = Wg1_1_Bits;
+	}
+}
+
+#ifdef STAND_ALONE
+
+#define	WIG_DATA0_H		(rGPDDAT |= 0x00000080)		// GPD7=1
+#define	WIG_DATA0_L		(rGPDDAT &= 0xffffff7f)		// GPD7=0
+#define	WIG_DATA1_H		(rGPDDAT |= 0x00000100)		// GPD8=1
+#define	WIG_DATA1_L		(rGPDDAT &= 0xfffffeff)		// GPD8=0
+
+static int WiegandTxOpened;
+
+static void _WiegandOpenTx(void)
+{
+rGPGCON  = (rGPGCON  & 0xffffff3f) | 0x00000000; // GPG3[7:6]=00(Input) 
+	rGPDCON  = (rGPDCON  & 0xfffc3fff) | 0x00014000; // GPD8[17:16]=01(Output):Data1 GPD7[15:14]=01(Output):Data0
+	WIG_DATA0_H; WIG_DATA1_H;
+	WiegandTxOpened = 1;
+}
+
+int _WiegandResult(void)
+{
+	return rGPGDAT & 0x00000008;
+}
+
+#include "wiegand_tx.c"
+
+#endif

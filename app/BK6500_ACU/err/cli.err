@@ -1,0 +1,3 @@
+"cli.c", line 68: Warning: C2207W: inventing 'extern int cprintf();'
+"cli.c", line 237: Warning: C2914W: out-of-bound offset 5 in address
+cli.c: 2 warnings, 0 errors, 0 serious errors

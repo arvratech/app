@@ -1,0 +1,5 @@
+"fsuser.c", line 309: Warning: C2870W: variable 'size' declared but not used
+"fsuser.c", line 309: Warning: C2870W: variable 'f' declared but not used
+"fsuser.c", line 394: Warning: C2870W: variable 'i' declared but not used
+"fsuser_ar.c", line 140: Warning: C2207W: inventing 'extern int cprintf();'
+fsuser.c: 4 warnings, 0 errors, 0 serious errors

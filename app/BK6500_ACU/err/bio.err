@@ -1,0 +1,3 @@
+"bio.c", line 166: Warning: C2207W: inventing 'extern int cprintf();'
+"bio.c", line 246: Warning: C2807W: undefined behaviour: 'val' written twice without intervening sequence point
+bio.c: 2 warnings, 0 errors, 0 serious errors

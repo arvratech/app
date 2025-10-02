@@ -1,0 +1,3 @@
+"unit.c", line 41: Warning: C2207W: inventing 'extern int cprintf();'
+"unit.c", line 192: Warning: C2207W: inventing 'extern int taGetState();'
+unit.c: 2 warnings, 0 errors, 0 serious errors

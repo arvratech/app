@@ -1,0 +1,3 @@
+"acad.c", line 166: Warning: C2870W: variable 'ctm' declared but not used
+"acad.c", line 198: Warning: C2207W: inventing 'extern int cprintf();'
+acad.c: 2 warnings, 0 errors, 0 serious errors

@@ -1,0 +1,5 @@
+"fpimage_sg.c", line 28: Warning: C2870W: variable 'j' declared but not used
+"fpimage_sg.c", line 28: Warning: C2870W: variable 'i' declared but not used
+"fpimage_sg.c", line 47: Warning: C2870W: variable 'c' declared but not used
+"fpimage_sg.c", line 47: Warning: C2870W: variable 'uval' declared but not used
+fpimage_sg.c: 4 warnings, 0 errors, 0 serious errors

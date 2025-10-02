@@ -1,0 +1,5 @@
+"topprim.c", line 440: Warning: C2207W: inventing 'extern int DesktopIconsIsVisible();'
+"topprim.c", line 460: Warning: C2207W: inventing 'extern int unitsResetSystem();'
+"topprim.c", line 463: Warning: C2207W: inventing 'extern int fsCloseFiles();'
+"topprim.c", line 464: Warning: C2207W: inventing 'extern int fsCloseScheFiles();'
+topprim.c: 4 warnings, 0 errors, 0 serious errors

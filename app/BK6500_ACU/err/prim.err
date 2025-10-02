@@ -1,0 +1,22 @@
+"prim.c", line 376: Warning: C2916W: use of '=' in condition context
+"prim.c", line 1027: Warning: C2916W: use of '=' in condition context
+"prim.c", line 1083: Warning: C2916W: use of '=' in condition context
+"prim.c", line 1144: Warning: C2916W: use of '=' in condition context
+"prim.c", line 1156: Warning: C2916W: use of '=' in condition context
+"prim.c", line 1194: Warning: C2916W: use of '=' in condition context
+"prim.c", line 1199: Warning: C2916W: use of '=' in condition context
+"prim.c", line 1214: Warning: C2916W: use of '=' in condition context
+"prim.c", line 1217: Warning: C2916W: use of '=' in condition context
+"prim.c", line 1222: Warning: C2916W: use of '=' in condition context
+"prim.c", line 1227: Warning: C2916W: use of '=' in condition context
+"prim.c", line 1232: Warning: C2916W: use of '=' in condition context
+"prim.c", line 1237: Warning: C2916W: use of '=' in condition context
+"prim.c", line 1245: Warning: C2916W: use of '=' in condition context
+"prim.c", line 1251: Warning: C2916W: use of '=' in condition context
+"prim.c", line 1946: Warning: C2916W: use of '=' in condition context
+"prim.c", line 1949: Warning: C2916W: use of '=' in condition context
+"prim.c", line 1962: Warning: C2916W: use of '=' in condition context
+"prim.c", line 1966: Warning: C2916W: use of '=' in condition context
+"prim.c", line 1967: Warning: C2916W: use of '=' in condition context
+"prim.c", line 1983: Warning: C2916W: use of '=' in condition context
+prim.c: 21 warnings, 0 errors, 0 serious errors

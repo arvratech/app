@@ -1,0 +1,1961 @@
+
+================================================================================
+
+Section Cross References
+
+    2440init.o(Init) refers to BK6000.o(.text) for Main
+    BK6000.o(.text) refers to unit.o(.text) for unitsInit
+    BK6000.o(.text) refers to acad.o(.text) for adsInit
+    BK6000.o(.text) refers to cr.o(.text) for crsInit
+    BK6000.o(.text) refers to acap.o(.text) for apsInit
+    BK6000.o(.text) refers to bio.o(.text) for bisInit
+    BK6000.o(.text) refers to fire.o(.text) for fpsInit
+    BK6000.o(.text) refers to alm.o(.text) for actsInit
+    BK6000.o(.text) refers to 2440lib.o(.text) for cprintf
+    BK6000.o(.text) refers to BK6000.o(.bss) for .bss$2
+    BK6000.o(.text) refers to adm_ac.o(.text) for UpdateDoorPV
+    BK6000.o(.text) refers to rtc.o(.bss) for DS_TIMER
+    BK6000.o(.text) refers to mmu.o(.text) for MMU_Init
+    BK6000.o(.text) refers to rtc.o(.text) for rtcOpen
+    BK6000.o(.text) refers to flash.o(.text) for flashOpen
+    BK6000.o(.text) refers to iodev.o(.text) for ioInit
+    BK6000.o(.text) refers to lcdc.o(.text) for lcdInit
+    BK6000.o(.text) refers to gfont.o(.text) for SetLanguage
+    BK6000.o(.text) refers to key.o(.text) for keyInit
+    BK6000.o(.text) refers to topprim.o(.text) for OnBackLight
+    BK6000.o(.text) refers to bmpc.o(.text) for RGB
+    BK6000.o(.text) refers to sysdep.o(.text) for GetMainBuffer
+    BK6000.o(.text) refers to fsuser.o(.text) for fsOpenFiles
+    BK6000.o(.text) refers to fsar.o(.text) for fsOpenScheFiles
+    BK6000.o(.text) refers to syscfg.o(.text) for syscfgInitialize
+    BK6000.o(.text) refers to lang.o(.text) for InitializeLanguage
+    BK6000.o(.text) refers to fpapi_new.o(.text) for sfpInitTemplate
+    BK6000.o(.text) refers to fpimage.o(.text) for FPImageInitialize
+    BK6000.o(.text) refers to sdi.o(.text) for sdiOpen
+    BK6000.o(.text) refers to event.o(.text) for EventInit
+    BK6000.o(.text) refers to gmenu.o(.text) for menuInit
+    BK6000.o(.text) refers to menuprim.o(.text) for MenuSetAdminConsole
+    BK6000.o(.text) refers to wnds.o(.text) for WndsInitialize
+    BK6000.o(.text) refers to desktop.o(.text) for DesktopInitialize
+    BK6000.o(.text) refers to prim.o(.text) for simSeed
+    BK6000.o(.text) refers to toptask.o(.text) for ctMainInit
+    BK6000.o(.text) refers to cotask.o(.text) for taskInit
+    BK6000.o(.text) refers to syscfg.o(.bss) for sys_cfg
+    2440lib.o(.text) refers to vsprintf.o(.text) for vsprintf
+    2440lib.o(.text) refers to 2440lib.o(.bss) for .bss$2
+    2440lib.o(.text) refers to 2440slib.o(C$$code) for MMU_SetFastBusMode
+    2440lib.o(.text) refers to fflt.o(x$fpl$fflt) for _ffltu
+    2440lib.o(.text) refers to faddsub.o(x$fpl$fadd) for _fadd
+    2440lib.o(.text) refers to fmul_mull.o(x$fpl$fmul) for _fmul
+    2440lib.o(.text) refers to f2d.o(x$fpl$f2d) for _f2d
+    2440lib.o(.text) refers to dmul_mull.o(x$fpl$dmul) for _dmul
+    2440lib.o(.text) refers to ddiv.o(x$fpl$ddiv) for _drdiv
+    2440lib.o(.text) refers to dfixu.o(x$fpl$dfixu) for _dfixu
+    2440lib.o(.text) refers to fdiv.o(x$fpl$fdiv) for _frdiv
+    2440lib.o(.text) refers to ffixu.o(x$fpl$ffixu) for _ffixu
+    mmu.o(.text) refers to 2440slib.o(C$$code) for MMU_DisableDCache
+    flash.o(.text) refers to flash.o(.bss) for .bss$2
+    flash.o(.text) refers to 2440lib.o(.text) for cprintf
+    flashprim.o(.text) refers to flash.o(.text) for flashGetPagesPerBlock
+    flashprim.o(.text) refers to rt_sdiv.o(.text) for __rt_sdiv
+    flashprim.o(.text) refers to rt_memcpy.o(.text) for __rt_memcpy
+    flashprim.o(.text) refers to rt_memset.o(.text) for __rt_memset
+    flashprim.o(.text) refers to 2440lib.o(.text) for rs_putraw
+    flashprim.o(.text) refers to fs.o(.bss) for fs_pagebuf
+    flashprim.o(.text) refers to flashprim.o(.bss) for .bss$2
+    bmoncmd0.o(.text) refers to flash.o(.text) for flashGetBytesPerPage
+    bmoncmd0.o(.text) refers to rt_sdiv.o(.text) for __rt_sdiv
+    bmoncmd0.o(.text) refers to 2440lib.o(.text) for rs_printf
+    bmoncmd0.o(.text) refers to bmoncmd0.o(.data) for pgm_run
+    bmoncmd0.o(.text) refers to flashprim.o(.text) for FlashFormatBlocks
+    toptask.o(.text) refers to acap.o(.text) for apsGetAt
+    toptask.o(.text) refers to iodev.o(.text) for wdtReset
+    toptask.o(.text) refers to desktop.o(.text) for DesktopIconsIsVisible
+    toptask.o(.text) refers to rtccpu.o(.text) for rtcGetDateTime
+    toptask.o(.text) refers to prim.o(.text) for n_memcmp
+    toptask.o(.text) refers to fsuser.o(.text) for userfsRemoveAllTransaction
+    toptask.o(.text) refers to rt_memcpy.o(.text) for __rt_memcpy
+    toptask.o(.text) refers to cotask.o(.text) for taskDelay
+    toptask.o(.text) refers to devprim.o(.text) for ProcessDoorsLockSchedule
+    toptask.o(.text) refers to ta.o(.text) for taCalculateState
+    toptask.o(.text) refers to sdi.o(.text) for sdiGetState
+    toptask.o(.text) refers to 2440lib.o(.text) for cprintf
+    toptask.o(.text) refers to ff.o(.text) for f_mount
+    toptask.o(.text) refers to event.o(.text) for SDCardOpenEvtFile
+    toptask.o(.text) refers to syscfg.o(.bss) for sys_cfg
+    toptask.o(.text) refers to toptask.o(.bss) for .bss$2
+    toptask.o(.text) refers to BK6000.o(.bss) for taState
+    toptask.o(.text) refers to adm_ac.o(.text) for MenuSetViewPage
+    toptask.o(.text) refers to rt_memset.o(.text) for __rt_memset
+    toptask.o(.text) refers to topprim.o(.text) for OnBackLight
+    toptask.o(.text) refers to key.o(.text) for keyGet
+    toptask.o(.text) refers to adm_top.o(.text) for MenuAdminAuth
+    toptask.o(.text) refers to evt.o(.text) for evtRead
+    toptask.o(.text) refers to net.o(.text) for netCodeConfRequest
+    toptask.o(.text) refers to unit.o(.text) for acunitsEncodeStatus
+    toptask.o(.text) refers to cr.o(.text) for crsEncodeStatus
+    toptask.o(.text) refers to acad.o(.text) for adsEncodeStatus
+    toptask.o(.text) refers to bio.o(.text) for bisEncodeStatus
+    toptask.o(.text) refers to fire.o(.text) for fzsEncodeStatus
+    toptask.o(.text) refers to BK6000.o(.bss) for gTouch
+    toptask.o(.text) refers to rtc.o(.bss) for DS_TIMER
+    toptask.o(.text) refers to svrcmd.o(.text) for SvrProcessAck
+    toptask.o(.text) refers to syscfg.o(.text) for syscfgGetMACAddress
+    toptask.o(.text) refers to rt_memclr.o(.text) for __rt_memclr
+    toptask.o(.text) refers to sin.o(.text) for sockGetMACAddress
+    toptask.o(.text) refers to dhcp.o(.text) for dhcpOpen
+    toptask.o(.text) refers to cbuf.o(.text) for cbuf_init
+    toptask.o(.text) refers to sio.o(.text) for SlaveSinClose
+    toptask.o(.text) refers to usbd.o(.text) for usbdOpen
+    toptask.o(.text) refers to console.o(.text) for SetConsoleSioPort
+    toptask.o(.text) refers to gmenuc.o(.text) for menucInit
+    toptask.o(.text) refers to admcon.o(.text) for MenuConsoleLogin
+    toptask.o(.text) refers to gmenuc.o(.bss) for menu_errno
+    toptask.o(.text) refers to cli.o(.text) for CliInit
+    toptask.o(.text) refers to fs.o(.text) for fsClean
+    toptask.o(.text) refers to sio.o(.bss) for slvLoop
+    topprim.o(.text) refers to iodev.o(.text) for beepPlay
+    topprim.o(.text) refers to menuprim.o(.text) for MenuGetAdminConsole
+    topprim.o(.text) refers to gmenuc.o(.text) for cPutText
+    topprim.o(.text) refers to gwnd.o(.text) for wndInitialize
+    topprim.o(.text) refers to glabel.o(.text) for labelInitialize
+    topprim.o(.text) refers to lcdc.o(.text) for lcdSetClipRect
+    topprim.o(.text) refers to desktop.o(.text) for DesktopDrawBackGround
+    topprim.o(.text) refers to prim.o(.text) for str_linenum
+    topprim.o(.text) refers to gmenu.o(.text) for menuShow
+    topprim.o(.text) refers to vsprintf.o(.text) for vsprintf
+    topprim.o(.text) refers to _sprintf.o(.text) for _sprintf
+    topprim.o(.text) refers to msg.o(.bss) for xmsgs
+    topprim.o(.text) refers to topprim.o(.bss) for .bss$2
+    topprim.o(.text) refers to msg.o(.data) for xrsp_msgs_icon
+    topprim.o(.text) refers to strcpy.o(.text) for strcpy
+    topprim.o(.text) refers to acad.o(.text) for adGetPresentValue
+    topprim.o(.text) refers to unit.o(.text) for unitsResetSystem
+    topprim.o(.text) refers to cotask.o(.text) for taskDelay
+    topprim.o(.text) refers to fsuser.o(.text) for fsCloseFiles
+    topprim.o(.text) refers to fsar.o(.text) for fsCloseScheFiles
+    topprim.o(.text) refers to syscfg.o(.bss) for sys_cfg
+    topprim.o(.text) refers to rtc.o(.bss) for DS_TIMER
+    topprim.o(.text) refers to toptask.o(.bss) for ServerNetState
+    topprim.o(.text) refers to BK6000.o(.bss) for gIOStatus
+    menuprim.o(.text) refers to strcpy.o(.text) for strcpy
+    menuprim.o(.text) refers to gmenu.o(.text) for menuInitialize
+    menuprim.o(.text) refers to lcdc.o(.text) for lcdGetHeight
+    menuprim.o(.text) refers to gmenuc.o(.text) for menucShow
+    menuprim.o(.text) refers to gwnd.o(.text) for _DrawLowerButtons
+    menuprim.o(.text) refers to topprim.o(.text) for ResultMsg
+    menuprim.o(.text) refers to gfont.o(.text) for GetFontHeight
+    menuprim.o(.text) refers to _sprintf.o(.text) for _sprintf
+    menuprim.o(.text) refers to strlen.o(.text) for strlen
+    menuprim.o(.text) refers to user.o(.text) for userDecodeID
+    menuprim.o(.text) refers to bmpc.o(.text) for RGB
+    menuprim.o(.text) refers to menuprim.o(.bss) for .bss$2
+    menuprim.o(.text) refers to gmenuc.o(.bss) for menu_errno
+    menuprim.o(.text) refers to wnds.o(.text) for WndSaveByte
+    menuprim.o(.text) refers to prim.o(.text) for n_utoa
+    menuprim.o(.text) refers to msg.o(.bss) for xmenu_noyes
+    menuprim.o(.text) refers to gedit.o(.text) for editProcessWindow
+    menuprim.o(.text) refers to gdate.o(.text) for dateProcessWindow
+    menuprim.o(.text) refers to gchkradio.o(.text) for radioGroupProcessWindow
+    adm_top.o(.text) refers to strcpy.o(.text) for strcpy
+    adm_top.o(.text) refers to menuprim.o(.text) for MenuGetAdminConsole
+    adm_top.o(.text) refers to gmenuc.o(.text) for menucInputPassword
+    adm_top.o(.text) refers to desktop.o(.text) for DesktopEnterPassword
+    adm_top.o(.text) refers to strcmp.o(.text) for strcmp
+    adm_top.o(.text) refers to topprim.o(.text) for ResultMsg
+    adm_top.o(.text) refers to gmenu.o(.text) for menuSetWindowText
+    adm_top.o(.text) refers to adm_usr.o(.text) for MenuAdm_User
+    adm_top.o(.text) refers to adm_ac.o(.text) for MenuAdm_AccessControl
+    adm_top.o(.text) refers to adm_net.o(.text) for MenuAdm_Network
+    adm_top.o(.text) refers to adm_set.o(.text) for MenuAdm_Setup
+    adm_top.o(.text) refers to adm_sys.o(.text) for MenuAdm_System
+    adm_top.o(.text) refers to _sprintf.o(.text) for _sprintf
+    adm_top.o(.text) refers to msg.o(.bss) for xmenu_top_title
+    adm_top.o(.text) refers to syscfg.o(.bss) for sys_cfg
+    adm_usr.o(.text) refers to fsuser.o(.text) for userfsGetCount
+    adm_usr.o(.text) refers to _sprintf.o(.text) for _sprintf
+    adm_usr.o(.text) refers to menuprim.o(.text) for MenuAddItem
+    adm_usr.o(.text) refers to msg.o(.bss) for xmenu_other
+    adm_usr.o(.text) refers to strlen.o(.text) for strlen
+    adm_usr.o(.text) refers to strcpy.o(.text) for strcpy
+    adm_usr.o(.text) refers to gmenu.o(.text) for menuShow
+    adm_usr.o(.text) refers to gwnd.o(.text) for wndMessageBox
+    adm_usr.o(.text) refers to topprim.o(.text) for ResultMsgNoWait
+    adm_usr.o(.text) refers to iodev.o(.text) for wdtResetLong
+    adm_usr.o(.text) refers to gmenuc.o(.bss) for menu_errno
+    adm_usr.o(.text) refers to wnds.o(.text) for WndEnterID
+    adm_usr.o(.text) refers to gfont.o(.text) for GetBidi
+    adm_usr.o(.text) refers to admenroll.o(.text) for EnrollWizardUser
+    adm_usr.o(.text) refers to user.o(.text) for userSetDefault
+    adm_usr.o(.text) refers to BK6000.o(.bss) for gUser
+    adm_ac.o(.text) refers to ta.o(.text) for taGetItemSize
+    adm_ac.o(.text) refers to gfont.o(.text) for GetBidi
+    adm_ac.o(.text) refers to rt_memcpy.o(.text) for __rt_memcpy
+    adm_ac.o(.text) refers to _sprintf.o(.text) for _sprintf
+    adm_ac.o(.text) refers to strcpy.o(.text) for strcpy
+    adm_ac.o(.text) refers to strlen.o(.text) for strlen
+    adm_ac.o(.text) refers to bmpc.o(.text) for bmpcInit
+    adm_ac.o(.text) refers to lcdc.o(.text) for lcdPut
+    adm_ac.o(.text) refers to unit.o(.text) for boGetIOUnit
+    adm_ac.o(.text) refers to menuprim.o(.text) for MenuInitialize
+    adm_ac.o(.text) refers to wnds.o(.text) for MakeGuideNumberSecond
+    adm_ac.o(.text) refers to admprim.o(.text) for GetBinaryInputName
+    adm_ac.o(.text) refers to prim.o(.text) for n_memcmp
+    adm_ac.o(.text) refers to gwnd.o(.text) for wndDrawClientArea
+    adm_ac.o(.text) refers to glabel.o(.text) for labelInitialize
+    adm_ac.o(.text) refers to gedit.o(.text) for editInitialize
+    adm_ac.o(.text) refers to topprim.o(.text) for GetPromptMsg
+    adm_ac.o(.text) refers to alm.o(.text) for ocRemove
+    adm_ac.o(.text) refers to symbol.o(.data) for digits_8x16
+    adm_ac.o(.text) refers to adm_ac.o(.bss) for .bss$2
+    adm_ac.o(.text) refers to syscfg.o(.bss) for sys_cfg
+    adm_ac.o(.text) refers to msg.o(.bss) for xmenu_binary_output
+    adm_ac.o(.text) refers to cotask.o(.text) for taskYield
+    adm_ac.o(.text) refers to gmenu.o(.text) for menuDarken
+    adm_ac.o(.text) refers to fire.o(.text) for fpIsEnable
+    adm_ac.o(.text) refers to gdate.o(.text) for dateModifyStyle
+    adm_ac.o(.text) refers to gchkradio.o(.text) for radioGroupInitialize
+    adm_ac.o(.text) refers to fsuser.o(.text) for userfsRemoveAllTransaction
+    adm_ac.o(.text) refers to acaz.o(.text) for azExist
+    adm_ac.o(.text) refers to rtsdiv10.o(.text) for __rt_sdiv10
+    adm_ac.o(.text) refers to syscfg.o(.text) for syscfgCopy
+    adm_ac.o(.text) refers to bio.o(.text) for biGetAssignedFirePoint
+    adm_ac.o(.text) refers to cli.o(.text) for CliCRConfigChanged
+    adm_ac.o(.text) refers to cr.o(.text) for crGetWiegandReaderEnable
+    adm_ac.o(.text) refers to svrcmd.o(.bss) for _tmp_cfg
+    adm_ac.o(.text) refers to adm_net.o(.text) for _ProcessServerSetup
+    adm_ac.o(.text) refers to key.o(.text) for keyGet
+    adm_ac.o(.text) refers to sche.o(.text) for tmsIsNull
+    adm_ac.o(.text) refers to rtc.o(.bss) for DS_TIMER
+    adm_ac.o(.text) refers to eng16.o(.text) for lcdPutEng16Char
+    adm_ac.o(.text) refers to desktop.o(.text) for DesktopGetColor
+    adm_ac.o(.text) refers to sio.o(.text) for SlaveSinGetIPAddress
+    adm_ac.o(.text) refers to acap.o(.text) for apsGetAt
+    adm_ac.o(.text) refers to evt.o(.text) for evtIsGranted
+    adm_ac.o(.text) refers to acad.o(.text) for adsGetAt
+    adm_ac.o(.text) refers to rt_sdiv.o(.text) for __rt_sdiv
+    adm_net.o(.text) refers to _sprintf.o(.text) for _sprintf
+    adm_net.o(.text) refers to menuprim.o(.text) for MenuAddItem
+    adm_net.o(.text) refers to strlen.o(.text) for strlen
+    adm_net.o(.text) refers to syscfg.o(.text) for syscfgGetMACAddress
+    adm_net.o(.text) refers to prim.o(.text) for MACAddr2Str
+    adm_net.o(.text) refers to adm_top.o(.text) for _SetOptionYesNo
+    adm_net.o(.text) refers to strcpy.o(.text) for strcpy
+    adm_net.o(.text) refers to syscfg.o(.bss) for sys_cfg
+    adm_net.o(.text) refers to msg.o(.bss) for xmenu_network
+    adm_net.o(.text) refers to lcdc.o(.text) for lcdGetHeight
+    adm_net.o(.text) refers to gwnd.o(.text) for wndInitialize
+    adm_net.o(.text) refers to rt_memcpy.o(.text) for __rt_memcpy
+    adm_net.o(.text) refers to rt_memcpy_w.o(.text) for __rt_memcpy_w
+    adm_net.o(.text) refers to wnds.o(.text) for WndInputIPString
+    adm_net.o(.text) refers to topprim.o(.text) for ResultMsg
+    adm_net.o(.text) refers to sin.o(.text) for sinSocket
+    adm_net.o(.text) refers to ping.o(.text) for SendPing
+    adm_net.o(.text) refers to cotask.o(.text) for taskDelay
+    adm_net.o(.text) refers to key.o(.text) for keyGet
+    adm_net.o(.text) refers to adm_net.o(.bss) for .bss$2
+    adm_net.o(.text) refers to rtc.o(.bss) for DS_TIMER
+    adm_net.o(.text) refers to toptask.o(.text) for ServerSinChanged
+    adm_net.o(.text) refers to glabel.o(.text) for labelInitialize
+    adm_net.o(.text) refers to gipaddr.o(.text) for ipaddrInitialize
+    adm_net.o(.text) refers to gedit.o(.text) for editInitialize
+    adm_net.o(.text) refers to BK6000.o(.bss) for gRequest
+    adm_net.o(.text) refers to rt_memclr.o(.text) for __rt_memclr
+    adm_net.o(.text) refers to gmenu.o(.text) for menuSetType
+    adm_set.o(.text) refers to _sprintf.o(.text) for _sprintf
+    adm_set.o(.text) refers to menuprim.o(.text) for MenuAddItem
+    adm_set.o(.text) refers to adm_top.o(.text) for _SetOptionYesNo
+    adm_set.o(.text) refers to syscfg.o(.bss) for sys_cfg
+    adm_set.o(.text) refers to msg.o(.bss) for xmenu_monitor
+    adm_set.o(.text) refers to topprim.o(.text) for ResultMsg
+    adm_set.o(.text) refers to lang.o(.text) for ChangeLanguage
+    adm_set.o(.text) refers to wnds.o(.text) for WndInputAnalog
+    adm_set.o(.text) refers to desktop.o(.text) for DesktopSetColorMode
+    adm_set.o(.text) refers to rtccpu.o(.text) for rtcSetTime
+    adm_set.o(.text) refers to cli.o(.text) for ClisLocalDateTimeChanged
+    adm_set.o(.text) refers to gwnd.o(.text) for wndDrawWindow
+    adm_set.o(.text) refers to prim.o(.text) for string2bcd
+    adm_set.o(.text) refers to admenroll.o(.text) for _EnrollPINStage
+    adm_set.o(.text) refers to strcmp.o(.text) for strcmp
+    adm_set.o(.text) refers to strcpy.o(.text) for strcpy
+    adm_set.o(.text) refers to cotask.o(.text) for taskYield
+    adm_set.o(.text) refers to gmenuc.o(.text) for menucInputPassword
+    adm_set.o(.text) refers to strlen.o(.text) for strlen
+    adm_set.o(.text) refers to gmenu.o(.text) for menuSetType
+    adm_set.o(.text) refers to lcdc.o(.text) for lcdSetContrast
+    adm_set.o(.text) refers to gmenuc.o(.bss) for menu_errno
+    adm_sys.o(.text) refers to gwnd.o(.text) for _DrawLowerButtons
+    adm_sys.o(.text) refers to lcdc.o(.text) for lcdPutText
+    adm_sys.o(.text) refers to key.o(.text) for keyGet
+    adm_sys.o(.text) refers to cotask.o(.text) for taskYield
+    adm_sys.o(.text) refers to sio.o(.text) for sioClose
+    adm_sys.o(.text) refers to rt_memcpy_w.o(.text) for __rt_memcpy_w
+    adm_sys.o(.text) refers to topprim.o(.text) for PromptMsg
+    adm_sys.o(.text) refers to prim.o(.text) for n_memcmp
+    adm_sys.o(.text) refers to rtc.o(.bss) for DS_TIMER
+    adm_sys.o(.text) refers to wiegand.o(.text) for wiegandOpenTest
+    adm_sys.o(.text) refers to _sprintf.o(.text) for _sprintf
+    adm_sys.o(.text) refers to rt_memcpy.o(.text) for __rt_memcpy
+    adm_sys.o(.text) refers to gfont.o(.text) for GetFontHeight
+    adm_sys.o(.text) refers to menuprim.o(.text) for MenuGetAdminConsole
+    adm_sys.o(.text) refers to wnds.o(.text) for WizardWndInitialize
+    adm_sys.o(.text) refers to gmenu.o(.text) for menuSetType
+    adm_sys.o(.text) refers to unit.o(.text) for unitGetType
+    adm_sys.o(.text) refers to admprim.o(.text) for GetUnitName
+    adm_sys.o(.text) refers to strlen.o(.text) for strlen
+    adm_sys.o(.text) refers to msg.o(.bss) for xmenu_comm_stats
+    adm_sys.o(.text) refers to sdi.o(.text) for sdiGetState
+    adm_sys.o(.text) refers to event.o(.text) for SDCardCloseEvtFile
+    adm_sys.o(.text) refers to ff.o(.text) for f_mount
+    adm_sys.o(.text) refers to strcpy.o(.text) for strcpy
+    adm_sys.o(.text) refers to sysdep.o(.text) for GetMainBuffer
+    adm_sys.o(.text) refers to syscfg.o(.text) for syscfgBackup
+    adm_sys.o(.text) refers to adm_sys.o(.data) for dir_backup
+    adm_sys.o(.text) refers to fs.o(.text) for fsOpenAlreadyOpened
+    adm_sys.o(.text) refers to cli.o(.text) for CliGetXferLastTime
+    adm_sys.o(.text) refers to cr.o(.text) for crsGetAt
+    adm_sys.o(.text) refers to rt_sdiv.o(.text) for __rt_sdiv
+    adm_sys.o(.text) refers to 2440lib.o(.text) for cprintf
+    adm_sys.o(.text) refers to flash.o(.text) for flashWriteEnable
+    adm_sys.o(.text) refers to fsuser.o(.text) for userfsRemoveAll
+    adm_sys.o(.text) refers to fsar.o(.text) for calfsRemoveAll
+    adm_sys.o(.text) refers to iodev.o(.text) for wdtResetLong
+    adm_sys.o(.text) refers to fpapi_new.o(.text) for sfpExitTemplate
+    adm_sys.o(.text) refers to ta.o(.text) for taGetTextSize
+    adm_sys.o(.text) refers to strcmp.o(.text) for strcmp
+    adm_sys.o(.text) refers to svrcmd.o(.bss) for _tmp_cfg
+    adm_sys.o(.text) refers to syscfg.o(.bss) for sys_cfg
+    adm_sys.o(.text) refers to glabel.o(.text) for labelDrawBackGround
+    adm_sys.o(.text) refers to adm_usr.o(.text) for _AddAdmUserStatistics
+    adm_sys.o(.text) refers to adm_ac.o(.text) for _AddAdmAccessControlSettings
+    adm_sys.o(.text) refers to adm_net.o(.text) for _AddAdmNetworkSettings
+    adm_sys.o(.text) refers to adm_set.o(.text) for _AddAdmSetupSettings
+    admprim.o(.text) refers to strcpy.o(.text) for strcpy
+    admprim.o(.text) refers to strlen.o(.text) for strlen
+    admprim.o(.text) refers to rtsdiv10.o(.text) for __rt_sdiv10
+    admprim.o(.text) refers to unit.o(.text) for biGetUnit
+    admprim.o(.text) refers to rt_memcpy.o(.text) for __rt_memcpy
+    admprim.o(.text) refers to rt_sdiv.o(.text) for __rt_sdiv
+    admprim.o(.text) refers to msg.o(.bss) for xmenu_hw_config
+    admprim.o(.text) refers to fire.o(.text) for fzGetEnable
+    admprim.o(.text) refers to syscfg.o(.text) for syscfgWrite
+    admprim.o(.text) refers to cli.o(.text) for CliCRConfigChanged
+    admprim.o(.text) refers to cr.o(.text) for sckeyCompare
+    admprim.o(.text) refers to syscfg.o(.bss) for sys_cfg
+    admenroll.o(.text) refers to gwnd.o(.text) for wndDrawClientArea
+    admenroll.o(.text) refers to menuprim.o(.text) for MenuCheckWizard
+    admenroll.o(.text) refers to gfont.o(.text) for GetFontHeight
+    admenroll.o(.text) refers to lcdc.o(.text) for lcdPutText
+    admenroll.o(.text) refers to devprim.o(.text) for ConsoleCatptureCardStart
+    admenroll.o(.text) refers to topprim.o(.text) for PromptMsg
+    admenroll.o(.text) refers to gmenuc.o(.text) for cPutText
+    admenroll.o(.text) refers to cotask.o(.text) for taskYield
+    admenroll.o(.text) refers to gmenu.o(.text) for menuGetGlobalExit
+    admenroll.o(.text) refers to key.o(.text) for keyGet
+    admenroll.o(.text) refers to fsuser.o(.text) for userfsGetCardData
+    admenroll.o(.text) refers to rt_memcpy_w.o(.text) for __rt_memcpy_w
+    admenroll.o(.text) refers to msg.o(.bss) for xmenu_access_mode
+    admenroll.o(.text) refers to gmenuc.o(.bss) for menu_errno
+    admenroll.o(.text) refers to rtc.o(.bss) for DS_TIMER
+    admenroll.o(.text) refers to glabel.o(.text) for labelInitialize
+    admenroll.o(.text) refers to gedit.o(.text) for editInitialize
+    admenroll.o(.text) refers to prim.o(.text) for bcd2string
+    admenroll.o(.text) refers to strcpy.o(.text) for strcpy
+    admenroll.o(.text) refers to strlen.o(.text) for strlen
+    admenroll.o(.text) refers to strcmp.o(.text) for strcmp
+    admenroll.o(.text) refers to user.o(.text) for userIsCard
+    admenroll.o(.text) refers to rt_memcpy.o(.text) for __rt_memcpy
+    admenroll.o(.text) refers to _sprintf.o(.text) for _sprintf
+    admenroll.o(.text) refers to wnds.o(.text) for WizardWndInitialize
+    admenroll.o(.text) refers to BK6000.o(.bss) for _gCredentialReaders
+    auth.o(.text) refers to user.o(.text) for userDecodeID
+    auth.o(.text) refers to fsuser.o(.text) for userfsGet
+    auth.o(.text) refers to rtccpu.o(.text) for rtcGetDateTime
+    auth.o(.text) refers to acap.o(.text) for apGetAuthorizationMode
+    auth.o(.text) refers to authprim.o(.text) for _AccessGranted
+    auth.o(.text) refers to cr.o(.text) for crIdentifyMatchCard
+    auth.o(.text) refers to iodev.o(.text) for wdtReset
+    auth.o(.text) refers to cotask.o(.text) for taskYield
+    auth.o(.text) refers to userauth.o(.text) for userIdentifyMatchFP
+    auth.o(.text) refers to devprim.o(.text) for ProcessAuthResult
+    auth.o(.text) refers to sio.o(.text) for SlaveNetGetTxRspData
+    auth.o(.text) refers to rtc.o(.bss) for DS_TIMER
+    auth.o(.text) refers to iodev.o(.bss) for WdtResetTimer
+    authprim.o(.text) refers to unit.o(.text) for unitGetType
+    authprim.o(.text) refers to cr.o(.text) for crGetCardReaderEnable
+    authprim.o(.text) refers to acap.o(.text) for apGetAuthorizationMode
+    authprim.o(.text) refers to prim.o(.text) for date_validate
+    authprim.o(.text) refers to user.o(.text) for userEvaluateAccessRights
+    authprim.o(.text) refers to acad.o(.text) for adGetPresentValue
+    authprim.o(.text) refers to fsuser.o(.text) for userfsGetTransaction
+    authprim.o(.text) refers to rt_memcpy.o(.text) for __rt_memcpy
+    authprim.o(.text) refers to alm.o(.text) for actGetOutputCommand
+    authprim.o(.text) refers to event.o(.text) for EventAdd
+    authprim.o(.text) refers to _sprintf.o(.text) for _sprintf
+    authprim.o(.text) refers to syscfg.o(.bss) for sys_cfg
+    admcon.o(.text) refers to gmenuc.o(.text) for cPutText
+    admcon.o(.text) refers to strcmp.o(.text) for strcmp
+    admcon.o(.text) refers to gmenuc.o(.bss) for menu_errno
+    admcon.o(.text) refers to syscfg.o(.bss) for sys_cfg
+    admcon.o(.text) refers to cotask.o(.text) for taskYield
+    admcon.o(.text) refers to rtc.o(.bss) for DS_TIMER
+    admcon.o(.text) refers to topprim.o(.text) for OnBackLight
+    admcon.o(.text) refers to lcdc.o(.text) for lcdBacklight
+    admcon.o(.text) refers to desktop.o(.text) for DesktopRemoteLogin
+    admcon.o(.text) refers to gfont.o(.text) for GetLanguage
+    admcon.o(.text) refers to msg.o(.text) for msgInitialize
+    admcon.o(.text) refers to menuprim.o(.text) for MenuSetAdminConsole
+    admcon.o(.text) refers to adm_top.o(.text) for MenuAdm
+    admcon.o(.text) refers to toptask.o(.text) for ctMainInit
+    admcon.o(.text) refers to BK6000.o(.bss) for t_main
+    desktop.o(.text) refers to bmpc.o(.text) for RGB
+    desktop.o(.text) refers to gwnd.o(.text) for wndSetBackGroundColor
+    desktop.o(.text) refers to gedit.o(.text) for editSetBackGroundColor
+    desktop.o(.text) refers to glabel.o(.text) for labelSetForeGroundColor
+    desktop.o(.text) refers to devprim.o(.text) for IsBlackWhiteMode
+    desktop.o(.text) refers to lcdc.o(.text) for lcdGetHeight
+    desktop.o(.text) refers to desktop.o(.bss) for .bss$2
+    desktop.o(.text) refers to adm_ac.o(.text) for MenuSetViewEnable
+    desktop.o(.text) refers to sdi.o(.text) for sdiGetState
+    desktop.o(.text) refers to toptask.o(.text) for niGetState
+    desktop.o(.text) refers to prim.o(.text) for utoa02
+    desktop.o(.text) refers to rtccpu.o(.text) for rtcGetDateTime
+    desktop.o(.text) refers to topprim.o(.text) for GetPromptMsg
+    desktop.o(.text) refers to wnds.o(.text) for _DrawInputDigitDesp
+    desktop.o(.text) refers to strcpy.o(.text) for strcpy
+    desktop.o(.text) refers to rtc.o(.bss) for DS_TIMER
+    desktop.o(.text) refers to syscfg.o(.bss) for sys_cfg
+    desktop.o(.text) refers to toptask.o(.bss) for ServerNetState
+    desktop.o(.text) refers to BK6000.o(.bss) for gRequest
+    desktop.o(.text) refers to desktop.o(.data) for remote_login
+    desktop.o(.text) refers to msg.o(.data) for xrsp_msgs_icon
+    wnds.o(.text) refers to gwnd.o(.text) for wndInitialize
+    wnds.o(.text) refers to glabel.o(.text) for labelInitialize
+    wnds.o(.text) refers to gedit.o(.text) for editInitialize
+    wnds.o(.text) refers to gdate.o(.text) for dateInitialize
+    wnds.o(.text) refers to gipaddr.o(.text) for ipaddrInitialize
+    wnds.o(.text) refers to lcdc.o(.text) for lcdGetHeight
+    wnds.o(.text) refers to syscfg.o(.text) for syscfgWrite
+    wnds.o(.text) refers to topprim.o(.text) for ResultMsg
+    wnds.o(.text) refers to prim.o(.text) for GetIntValue
+    wnds.o(.text) refers to rt_memcpy.o(.text) for __rt_memcpy
+    wnds.o(.text) refers to strcpy.o(.text) for strcpy
+    wnds.o(.text) refers to strcmp.o(.text) for strcmp
+    wnds.o(.text) refers to user.o(.text) for userValidateID
+    wnds.o(.text) refers to fsuser.o(.text) for userfsExist
+    wnds.o(.text) refers to _sprintf.o(.text) for _sprintf
+    wnds.o(.text) refers to wnds.o(.bss) for .bss$2
+    wnds.o(.text) refers to syscfg.o(.bss) for sys_cfg
+    wnds.o(.text) refers to gmenuc.o(.bss) for menu_errno
+    wnds.o(.text) refers to gfont.o(.text) for GetBidi
+    wnds.o(.text) refers to msg.o(.bss) for xmenu_other
+    wnds.o(.text) refers to strcat.o(.text) for strcat
+    wnds.o(.text) refers to menuprim.o(.text) for MenuGetAdminConsole
+    wnds.o(.text) refers to gmenuc.o(.text) for menucInputString
+    wnds.o(.text) refers to gipstring.o(.text) for ipstringInitialize
+    wnds.o(.text) refers to strlen.o(.text) for strlen
+    wnds.o(.text) refers to bmpc.o(.text) for RGB
+    wnds.o(.text) refers to rt_sdiv.o(.text) for __rt_sdiv
+    wnds.o(.text) refers to key.o(.text) for keyGetWithExternalCancel
+    wnds.o(.text) refers to gmenu.o(.text) for menuGetGlobalExit
+    wnds.o(.text) refers to rtccpu.o(.text) for rtcGetDate
+    wnds.o(.text) refers to sche.o(.text) for tmsIsNull
+    wnds.o(.text) refers to pno.o(.text) for pnoValidatePhoneNo
+    fpimage.o(.text) refers to bmpc.o(.text) for bmpcInit
+    fpimage.o(.text) refers to lcdc.o(.text) for lcdFillRect
+    fpimage.o(.text) refers to rt_memset.o(.text) for __rt_memset
+    fpimage.o(.text) refers to fpimage.o(.bss) for .bss$2
+    sinport.o(.text) refers to sin.o(.text) for sinSocket
+    sinport.o(.text) refers to 2440lib.o(.text) for cprintf
+    sinport.o(.text) refers to rtc.o(.bss) for TICK_TIMER
+    svrcmd.o(.text) refers to net.o(.text) for netCodeReject
+    svrcmd.o(.text) refers to unit.o(.text) for unitGetType
+    svrcmd.o(.text) refers to cli.o(.text) for CliIsBusy
+    svrcmd.o(.text) refers to cr.o(.text) for crsGetAt
+    svrcmd.o(.text) refers to 2440lib.o(.text) for cprintf
+    svrcmd.o(.text) refers to svrcmd.o(.bss) for .bss$2
+    svrcmd.o(.text) refers to sysdep.o(.text) for GetXferBuffer
+    svrcmd.o(.text) refers to rt_memcpy.o(.text) for __rt_memcpy
+    svrcmd.o(.text) refers to cotask.o(.text) for taskDelay
+    svrcmd.o(.text) refers to flash.o(.text) for flashWriteEnable
+    svrcmd.o(.text) refers to fs.o(.text) for fsDelete
+    svrcmd.o(.text) refers to toptask.o(.bss) for RspTSMs
+    svrcmd.o(.text) refers to lcdc.o(.text) for lcdGetHeight
+    svrcmd.o(.text) refers to bmpc.o(.text) for bmpcInit
+    svrcmd.o(.text) refers to fs.o(.bss) for fsErrno
+    svrcmd.o(.text) refers to fsuser.o(.text) for userfsRemoveAllAccessRights
+    svrcmd.o(.text) refers to fpapi_new.o(.text) for sfpRemoveAllTemplate
+    svrcmd.o(.text) refers to rt_sdiv.o(.text) for __rt_sdiv
+    svrcmd.o(.text) refers to iodev.o(.text) for wdtReset
+    svrcmd.o(.text) refers to fsar.o(.text) for arfsRemoveAll
+    svrcmd.o(.text) refers to bio.o(.text) for biEncodeStatus
+    svrcmd.o(.text) refers to prim.o(.text) for PACK3toID
+    svrcmd.o(.text) refers to acaz.o(.text) for azRemoveAll
+    svrcmd.o(.text) refers to alm.o(.text) for ocRemoveAll
+    svrcmd.o(.text) refers to sche.o(.text) for calValidateID
+    svrcmd.o(.text) refers to user.o(.text) for userValidateID
+    svrcmd.o(.text) refers to acar.o(.text) for arValidateID
+    svrcmd.o(.text) refers to syscfg.o(.bss) for sys_cfg
+    svrcmd.o(.text) refers to fire.o(.text) for fzGetSilenced
+    svrcmd.o(.text) refers to rtccpu.o(.text) for rtcGetDateTime
+    svrcmd.o(.text) refers to event.o(.text) for EventAdd
+    svrcmd.o(.text) refers to rtc.o(.bss) for DS_TIMER
+    svrcmd.o(.text) refers to acad.o(.text) for adsGetAt
+    svrcmd.o(.text) refers to topprim.o(.text) for DoorSetByCommand
+    svrcmd.o(.text) refers to BK6000.o(.bss) for gRequest
+    svrcmd.o(.text) refers to admprim.o(.text) for CruSaveSCKey
+    svrcmd.o(.text) refers to fprocess.o(.text) for HFP_DecryptTamplate
+    svrcmd.o(.text) refers to syscfg.o(.text) for syscfgCompare
+    svrcmd.o(.text) refers to acap.o(.text) for apDecode
+    svrcmd.o(.text) refers to lang.o(.text) for ChangeLanguage
+    svrcmd.o(.text) refers to adm_ac.o(.text) for UpdateViewMain
+    svrcmd.o(.text) refers to rt_memclr.o(.text) for __rt_memclr
+    svrcmd.o(.text) refers to sio.o(.text) for SlaveSinGetIPAddress
+    svr.o(.text) refers to prim.o(.text) for BYTEtoSHORT
+    svr.o(.text) refers to sin.o(.text) for sinRead
+    svr.o(.text) refers to sio.o(.text) for sioWrite
+    svr.o(.text) refers to msgsvr.o(.text) for CodeResult
+    svr.o(.text) refers to 2440lib.o(.text) for cprintf
+    svr.o(.text) refers to BK6000.o(.bss) for gSvrSioPort
+    svr.o(.text) refers to cotask.o(.text) for taskYield
+    svr.o(.text) refers to strlen.o(.text) for strlen
+    svr.o(.text) refers to rtc.o(.bss) for DS_TIMER
+    msgsvr.o(.text) refers to prim.o(.text) for addr2term
+    net.o(.text) refers to prim.o(.text) for SHORTtoBYTE
+    net.o(.text) refers to 2440lib.o(.text) for cprintf
+    net.o(.text) refers to net.o(.bss) for .bss$2
+    net.o(.text) refers to rtc.o(.bss) for DS_TIMER
+    cli.o(.text) refers to cr.o(.text) for crsGetAt
+    cli.o(.text) refers to rt_memclr.o(.text) for __rt_memclr
+    cli.o(.text) refers to unit.o(.text) for unitGetType
+    cli.o(.text) refers to 2440lib.o(.text) for cprintf
+    cli.o(.text) refers to cli.o(.bss) for .bss$2
+    cli.o(.text) refers to rtc.o(.bss) for DS_TIMER
+    cli.o(.text) refers to _printf.o(.text) for _printf
+    cli.o(.text) refers to sio.o(.text) for SlaveNetGetTxReqData
+    cli.o(.text) refers to prim.o(.text) for LONGtoBYTE
+    cli.o(.text) refers to syscfg.o(.bss) for sys_cfg
+    cli.o(.text) refers to ta.o(.text) for taEncodeItems
+    cli.o(.text) refers to svrcmd.o(.text) for scPrintKey
+    cli.o(.text) refers to rtccpu.o(.text) for rtcGetDateTime
+    cli.o(.text) refers to acap.o(.text) for apsGetAt
+    cli.o(.text) refers to slave.o(.text) for SlaveProcessRequest
+    cli.o(.text) refers to auth.o(.text) for ApCaptureCredential
+    cli.o(.text) refers to BK6000.o(.bss) for _gCredentialReaders
+    cli.o(.text) refers to net.o(.text) for netCodeError
+    cli.o(.text) refers to rt_memcpy.o(.text) for __rt_memcpy
+    slave.o(.text) refers to prim.o(.text) for PACK3toID
+    slave.o(.text) refers to fsuser.o(.text) for userfsGetCount
+    slave.o(.text) refers to user.o(.text) for userGetNewID
+    slave.o(.text) refers to cr.o(.text) for crEncodeAll
+    slave.o(.text) refers to ta.o(.text) for taEncodeItems
+    slave.o(.text) refers to rtccpu.o(.text) for rtcGetDateTime
+    slave.o(.text) refers to iodev.o(.text) for wdtResetLong
+    slave.o(.text) refers to evt.o(.text) for evtAddRaw
+    slave.o(.text) refers to 2440lib.o(.text) for cprintf
+    slave.o(.text) refers to syscfg.o(.bss) for sys_cfg
+    slave.o(.text) refers to BK6000.o(.bss) for gLocalDateTimeVersion
+    slave.o(.text) refers to unit.o(.text) for unitGetBinaryOutput
+    slave.o(.text) refers to bio.o(.text) for bosGetAt
+    slave.o(.text) refers to sysdep.o(.text) for GetMaxUserSize
+    slave.o(.text) refers to acad.o(.text) for adsGetAt
+    slave.o(.text) refers to syscfg.o(.text) for syscfgWrite
+    slave.o(.text) refers to fpapi_new.o(.text) for sfpGetTemplate
+    slave.o(.text) refers to rt_memcpy.o(.text) for __rt_memcpy
+    slave.o(.text) refers to admprim.o(.text) for CruSaveCfg
+    slave.o(.text) refers to sio.o(.text) for SlaveNetGetRxReqData
+    user.o(.text) refers to rt_memclr.o(.text) for __rt_memclr
+    user.o(.text) refers to rt_memset.o(.text) for __rt_memset
+    user.o(.text) refers to prim.o(.text) for bin2bcd
+    user.o(.text) refers to rt_memcpy.o(.text) for __rt_memcpy
+    user.o(.text) refers to 2440lib.o(.text) for cprintf
+    user.o(.text) refers to acar.o(.text) for aruleValidate
+    user.o(.text) refers to acap.o(.text) for apsGetAt
+    user.o(.text) refers to sche.o(.text) for schePresentValue
+    user.o(.text) refers to unit.o(.text) for apGetAssignedDoor
+    user.o(.text) refers to fsuser.o(.text) for userfsGet
+    user.o(.text) refers to cotask.o(.text) for taskYield
+    user.o(.text) refers to rt_memcpy_w.o(.text) for __rt_memcpy_w
+    user.o(.text) refers to syscfg.o(.bss) for sys_cfg
+    userauth.o(.text) refers to prim.o(.text) for n_memcmp
+    userauth.o(.text) refers to fsuser.o(.text) for userfsGetCardData
+    userauth.o(.text) refers to user.o(.text) for userID2FPID
+    userauth.o(.text) refers to fpapi_new.o(.text) for sfpVerifyMatch
+    userauth.o(.text) refers to 2440lib.o(.text) for cprintf
+    userauth.o(.text) refers to syscfg.o(.bss) for sys_cfg
+    fsuser.o(.text) refers to user.o(.text) for userEncodeID
+    fsuser.o(.text) refers to fs.o(.text) for fsSeek
+    fsuser.o(.text) refers to prim.o(.text) for n_memcmp
+    fsuser.o(.text) refers to sysdep.o(.text) for GetUserStartBlock
+    fsuser.o(.text) refers to sio.o(.text) for InitCRC8
+    fsuser.o(.text) refers to flash.o(.text) for flashWriteEnable
+    fsuser.o(.text) refers to fsuser.o(.bss) for .bss$2
+    fsuser.o(.text) refers to rt_memcpy.o(.text) for __rt_memcpy
+    fsuser.o(.text) refers to fpapi_new.o(.text) for sfpRemoveTemplate
+    fsuser.o(.text) refers to dbmgr.o(.text) for DB_GetRecord
+    fsuser.o(.text) refers to fprocess.o(.text) for HFP_EncryptTamplate
+    fsuser.o(.text) refers to rt_memset.o(.text) for __rt_memset
+    fsuser.o(.text) refers to 2440lib.o(.text) for cprintf
+    fsuser.o(.text) refers to rt_memclr_w.o(.text) for __rt_memclr_w
+    fsuser.o(.text) refers to pno.o(.text) for pnoDecodeID
+    fsuser.o(.text) refers to rt_sdiv.o(.text) for __rt_sdiv
+    fsuser.o(.text) refers to sio.o(.bss) for crc16tab_l
+    acar.o(.text) refers to prim.o(.text) for IDtoPACK3
+    acar.o(.text) refers to rt_memcpy.o(.text) for __rt_memcpy
+    acar.o(.text) refers to rt_memset.o(.text) for __rt_memset
+    acar.o(.text) refers to unit.o(.text) for unitsGetMaxPointID
+    acar.o(.text) refers to fsar.o(.text) for arfsGet
+    acar.o(.text) refers to acap.o(.text) for apsGetAt
+    acar.o(.text) refers to sche.o(.text) for schePresentValue
+    fsar.o(.text) refers to flash.o(.text) for flashWriteEnable
+    fsar.o(.text) refers to fsuser.o(.text) for _OpenFile
+    fsar.o(.text) refers to fs.o(.text) for fsClose
+    fsar.o(.text) refers to acar.o(.text) for arEncodeID
+    fsar.o(.text) refers to prim.o(.text) for IDtoPACK3
+    fsar.o(.text) refers to rt_memcpy.o(.text) for __rt_memcpy
+    fsar.o(.text) refers to sche.o(.text) for calEncodeID
+    fsar.o(.text) refers to 2440lib.o(.text) for cprintf
+    fsar.o(.text) refers to fsar.o(.bss) for .bss$2
+    event.o(.text) refers to evt.o(.text) for evtInit
+    event.o(.text) refers to ff.o(.text) for f_sync
+    event.o(.text) refers to desktop.o(.text) for DesktopSetStat
+    event.o(.text) refers to 2440lib.o(.text) for cprintf
+    event.o(.text) refers to event.o(.bss) for .bss$2
+    event.o(.text) refers to strcpy.o(.text) for strcpy
+    event.o(.text) refers to strlen.o(.text) for strlen
+    event.o(.text) refers to _sprintf.o(.text) for _sprintf
+    event.o(.text) refers to topprim.o(.text) for GetResultMsg
+    event.o(.text) refers to event.o(.data) for .data$0
+    event.o(.text) refers to sdi.o(.text) for sdiGetState
+    event.o(.text) refers to prim.o(.text) for string_co2db
+    event.o(.text) refers to rt_memset.o(.text) for __rt_memset
+    event.o(.text) refers to syscfg.o(.bss) for sys_cfg
+    evt.o(.text) refers to 2440lib.o(.text) for cprintf
+    evt.o(.text) refers to prim.o(.text) for datetime2longtime
+    evt.o(.text) refers to rt_memcpy.o(.text) for __rt_memcpy
+    evt.o(.text) refers to rt_memclr.o(.text) for __rt_memclr
+    evt.o(.text) refers to fsuser.o(.text) for fsAddEvent
+    evt.o(.text) refers to evt.o(.bss) for .bss$2
+    evt.o(.text) refers to syscfg.o(.bss) for sys_cfg
+    sche.o(.text) refers to prim.o(.text) for IDtoPACK1
+    sche.o(.text) refers to rt_memcpy.o(.text) for __rt_memcpy
+    sche.o(.text) refers to rt_memset.o(.text) for __rt_memset
+    sche.o(.text) refers to fsar.o(.text) for calfsGet
+    devprim.o(.text) refers to unit.o(.text) for unitGetType
+    devprim.o(.text) refers to cr.o(.text) for crCapture
+    devprim.o(.text) refers to rt_memcpy.o(.text) for __rt_memcpy
+    devprim.o(.text) refers to iodev.o(.text) for ioOffAuth
+    devprim.o(.text) refers to acap.o(.text) for apsGetAt
+    devprim.o(.text) refers to auth.o(.text) for ApIdentifyCredential
+    devprim.o(.text) refers to acad.o(.text) for adProcessLocal
+    devprim.o(.text) refers to bio.o(.text) for biProcessLocal
+    devprim.o(.text) refers to sio.o(.text) for SlaveNetGetRxReqData
+    devprim.o(.text) refers to 2440lib.o(.text) for cprintf
+    devprim.o(.text) refers to slave.o(.text) for SlaveProcessRequest
+    devprim.o(.text) refers to BK6000.o(.bss) for _gCredentialReaders
+    devprim.o(.text) refers to devprim.o(.bss) for .bss$2
+    devprim.o(.text) refers to rtc.o(.bss) for TICK_TIMER
+    devprim.o(.text) refers to user.o(.text) for userEncodeID
+    devprim.o(.text) refers to prim.o(.text) for memcpy_pad
+    devprim.o(.text) refers to evt.o(.text) for evtIsGranted
+    devprim.o(.text) refers to adm_ac.o(.text) for UpdateReaderEvent
+    devprim.o(.text) refers to rtccpu.o(.text) for rtcGetDateTime
+    devprim.o(.text) refers to alm.o(.text) for actProcess
+    devprim.o(.text) refers to cli.o(.text) for CliDownload
+    devprim.o(.text) refers to cli.o(.bss) for CliID
+    devprim.o(.text) refers to syscfg.o(.bss) for sys_cfg
+    unit.o(.text) refers to rt_memcpy.o(.text) for __rt_memcpy
+    unit.o(.text) refers to strlen.o(.text) for strlen
+    unit.o(.text) refers to rtsdiv10.o(.text) for __rt_sdiv10
+    unit.o(.text) refers to rt_sdiv.o(.text) for __rt_sdiv
+    unit.o(.text) refers to unit.o(.bss) for .bss$2
+    unit.o(.text) refers to rt_memclr.o(.text) for __rt_memclr
+    unit.o(.text) refers to sio.o(.text) for SlaveSioWriteBuffer
+    unit.o(.text) refers to 2440lib.o(.text) for cprintf
+    unit.o(.text) refers to rtccpu.o(.text) for rtcGetDateTime
+    unit.o(.text) refers to cr.o(.text) for crGetReliability
+    unit.o(.text) refers to acad.o(.text) for adsGetAt
+    unit.o(.text) refers to toptask.o(.text) for taGetState
+    unit.o(.text) refers to cli.o(.text) for CliIOConfigChanged
+    unit.o(.text) refers to prim.o(.text) for n_memcmp
+    unit.o(.text) refers to acad.o(.bss) for adState
+    unit.o(.text) refers to syscfg.o(.bss) for sys_cfg
+    unit.o(.text) refers to BK6000.o(.bss) for gLocalDateTimeVersion
+    unit.o(.text) refers to rtc.o(.bss) for DS_TIMER
+    unit.o(.text) refers to bio.o(.text) for biRemotePVChanged
+    unit.o(.text) refers to net.o(.text) for netCodeUnconfRequest
+    unit.o(.text) refers to bio.o(.bss) for biPV
+    acad.o(.text) refers to rtccpu.o(.text) for rtcGetDateTime
+    acad.o(.text) refers to rt_memcpy.o(.text) for __rt_memcpy
+    acad.o(.text) refers to unit.o(.text) for adIsEnable
+    acad.o(.text) refers to bio.o(.text) for boSetPresentValue
+    acad.o(.text) refers to prim.o(.text) for datetime2longtime
+    acad.o(.text) refers to net.o(.text) for netCodeUnconfRequest
+    acad.o(.text) refers to toptask.o(.text) for _SendNet
+    acad.o(.text) refers to 2440lib.o(.text) for cprintf
+    acad.o(.text) refers to event.o(.text) for EventAdd
+    acad.o(.text) refers to alm.o(.text) for actGetOutputCommand
+    acad.o(.text) refers to acad.o(.bss) for .bss$2
+    acad.o(.text) refers to syscfg.o(.bss) for sys_cfg
+    acad.o(.text) refers to rtc.o(.bss) for DS_TIMER
+    acad.o(.text) refers to toptask.o(.bss) for ServerNetState
+    acad.o(.text) refers to rtc.o(.text) for rtcSecond2Tick
+    acad.o(.text) refers to bio.o(.bss) for biPV
+    acad.o(.text) refers to sche.o(.text) for schePresentValue
+    acad.o(.text) refers to _sprintf.o(.text) for _sprintf
+    acad.o(.text) refers to cr.o(.text) for digits2card
+    acap.o(.text) refers to cr.o(.text) for crsGetAt
+    acap.o(.text) refers to rt_memcpy.o(.text) for __rt_memcpy
+    acap.o(.text) refers to acap.o(.bss) for .bss$2
+    acap.o(.text) refers to syscfg.o(.bss) for sys_cfg
+    acaz.o(.text) refers to rt_memcpy.o(.text) for __rt_memcpy
+    acaz.o(.text) refers to syscfg.o(.text) for syscfgWrite
+    acaz.o(.text) refers to prim.o(.text) for n_memcmp
+    acaz.o(.text) refers to syscfg.o(.bss) for sys_cfg
+    bio.o(.text) refers to unit.o(.text) for biGetUnit
+    bio.o(.text) refers to rtccpu.o(.text) for rtcGetDateTime
+    bio.o(.text) refers to rt_memcpy.o(.text) for __rt_memcpy
+    bio.o(.text) refers to cr.o(.text) for crGetReliability
+    bio.o(.text) refers to prim.o(.text) for datetime2longtime
+    bio.o(.text) refers to net.o(.text) for netCodeUnconfRequest
+    bio.o(.text) refers to toptask.o(.text) for _SendNet
+    bio.o(.text) refers to fire.o(.text) for fpIsEnable
+    bio.o(.text) refers to 2440lib.o(.text) for cprintf
+    bio.o(.text) refers to event.o(.text) for EventAdd
+    bio.o(.text) refers to alm.o(.text) for actGetOutputCommand
+    bio.o(.text) refers to bio.o(.bss) for .bss$2
+    bio.o(.text) refers to syscfg.o(.bss) for sys_cfg
+    bio.o(.text) refers to toptask.o(.bss) for ServerNetState
+    bio.o(.text) refers to rtc.o(.bss) for DS_TIMER
+    bio.o(.text) refers to acad.o(.text) for adsGetAt
+    bio.o(.text) refers to rtc.o(.text) for rtcSecond2Tick
+    bio.o(.text) refers to iodev.o(.text) for ioOnLock
+    alm.o(.text) refers to prim.o(.text) for IDtoPACK1
+    alm.o(.text) refers to unit.o(.text) for actGetAlarmOutput
+    alm.o(.text) refers to 2440lib.o(.text) for cprintf
+    alm.o(.text) refers to bio.o(.text) for boSetPresentValue
+    alm.o(.text) refers to rtc.o(.text) for rtcDS2Tick
+    alm.o(.text) refers to alm.o(.bss) for .bss$2
+    alm.o(.text) refers to syscfg.o(.bss) for sys_cfg
+    alm.o(.text) refers to rtc.o(.bss) for DS_TIMER
+    alm.o(.text) refers to rt_memcpy.o(.text) for __rt_memcpy
+    alm.o(.text) refers to syscfg.o(.text) for syscfgWrite
+    fire.o(.text) refers to rtccpu.o(.text) for rtcGetDateTime
+    fire.o(.text) refers to unit.o(.text) for fpIsUsable
+    fire.o(.text) refers to prim.o(.text) for BitMaskGet
+    fire.o(.text) refers to cr.o(.text) for crGetReliability
+    fire.o(.text) refers to rt_memcpy.o(.text) for __rt_memcpy
+    fire.o(.text) refers to acad.o(.text) for adGetPresentValue
+    fire.o(.text) refers to 2440lib.o(.text) for cprintf
+    fire.o(.text) refers to alm.o(.text) for actGetOutputCommand
+    fire.o(.text) refers to fire.o(.bss) for .bss$2
+    fire.o(.text) refers to syscfg.o(.bss) for sys_cfg
+    fire.o(.text) refers to net.o(.text) for netCodeUnconfRequest
+    fire.o(.text) refers to toptask.o(.text) for _SendNet
+    syscfg.o(.text) refers to unit.o(.text) for unitscfgGet
+    syscfg.o(.text) refers to rt_memcpy.o(.text) for __rt_memcpy
+    syscfg.o(.text) refers to rt_memset.o(.text) for __rt_memset
+    syscfg.o(.text) refers to prim.o(.text) for memcpy_pad
+    syscfg.o(.text) refers to acad.o(.text) for adEncode
+    syscfg.o(.text) refers to acap.o(.text) for apEncode
+    syscfg.o(.text) refers to acaz.o(.text) for azEncode
+    syscfg.o(.text) refers to bio.o(.text) for biEncode
+    syscfg.o(.text) refers to cr.o(.text) for crEncodeAll
+    syscfg.o(.text) refers to alm.o(.text) for actEncode
+    syscfg.o(.text) refers to fire.o(.text) for fzEncode
+    syscfg.o(.text) refers to ta.o(.text) for taEncodeItems
+    syscfg.o(.text) refers to flash.o(.text) for flashWriteEnable
+    syscfg.o(.text) refers to fs.o(.text) for fsClean
+    syscfg.o(.text) refers to 2440lib.o(.text) for cprintf
+    syscfg.o(.text) refers to syscfg.o(.bss) for .bss$2
+    syscfg.o(.text) refers to syscfg.o(.data) for .data$0
+    syscfg.o(.text) refers to strcmp.o(.text) for strcmp
+    syscfg.o(.text) refers to strcpy.o(.text) for strcpy
+    syscfg.o(.text) refers to fs.o(.bss) for fsErrno
+    syscfg.o(.text) refers to rt_memclr.o(.text) for __rt_memclr
+    syscfg.o(.text) refers to msg.o(.text) for syscfgSetDefaultByLanguage
+    syscfg.o(.text) refers to sysdep.o(.text) for GetMACAddress
+    syscfg.o(.data) refers to syscfg.o(.constdata) for .constdata$1
+    sysdep.o(.text) refers to flashprim.o(.text) for FlashReadMACAddress
+    sysdep.o(.text) refers to bmoncmd0.o(.text) for _GetAppProgramBlockSize
+    sysdep.o(.text) refers to sysdep.o(.bss) for .bss$2
+    console.o(.text) refers to sio.o(.text) for sioGetc
+    console.o(.text) refers to strlen.o(.text) for strlen
+    console.o(.text) refers to sin.o(.text) for sinRead
+    console.o(.text) refers to console.o(.bss) for .bss$2
+    console.o(.text) refers to gmenuc.o(.bss) for menu_errno
+    lang.o(.text) refers to gfont.o(.text) for InitFont
+    lang.o(.text) refers to msg.o(.text) for msgInitialize
+    lang.o(.text) refers to syscfg.o(.text) for syscfgWrite
+    lang.o(.text) refers to syscfg.o(.bss) for sys_cfg
+    msg.o(.text) refers to gfont.o(.text) for GetLanguage
+    msg.o(.text) refers to msg.o(.data) for _xmenu_null
+    msg.o(.text) refers to msg.o(.bss) for .bss$2
+    msg.o(.text) refers to strcpy.o(.text) for strcpy
+    msg.o(.text) refers to ta.o(.text) for taGetTextSize
+    ta.o(.text) refers to rtccpu.o(.text) for rtcGetTime
+    ta.o(.text) refers to sche.o(.text) for tmsValidateEx
+    ta.o(.text) refers to rt_memcpy.o(.text) for __rt_memcpy
+    ta.o(.text) refers to prim.o(.text) for memcpy_pad
+    ta.o(.text) refers to strcmp.o(.text) for strcmp
+    ta.o(.text) refers to syscfg.o(.bss) for sys_cfg
+    prim.o(.text) refers to rtsdiv10.o(.text) for __rt_sdiv10
+    prim.o(.text) refers to rtudiv10.o(.text) for __rt_udiv10
+    prim.o(.text) refers to strcpy.o(.text) for strcpy
+    prim.o(.text) refers to rt_sdiv.o(.text) for __rt_sdiv
+    prim.o(.text) refers to _sprintf.o(.text) for _sprintf
+    prim.o(.text) refers to strlen.o(.text) for strlen
+    prim.o(.text) refers to rt_memcpy.o(.text) for __rt_memcpy
+    prim.o(.text) refers to rt_memset.o(.text) for __rt_memset
+    prim.o(.text) refers to rt_memclr.o(.text) for __rt_memclr
+    prim.o(.text) refers to prim.o(.bss) for .bss$2
+    prim.o(.text) refers to rtccpu.o(.text) for rtcGetDateTime
+    prim.o(.text) refers to rand.o(.text) for srand
+    prim.o(.text) refers to prim.o(.data) for .data$0
+    prim.o(.text) refers to rt_udiv.o(.text) for __rt_udiv
+    prim.o(.text) refers to strstr.o(.text) for strstr
+    prim.o(.text) refers to prim.o(.constdata) for .constdata$1
+    cotask.o(.text) refers to setjmp.o(.text) for setjmp
+    cotask.o(.text) refers to rt_memcpy_w.o(.text) for __rt_memcpy_w
+    cotask.o(.text) refers to cotask.o(.bss) for .bss$2
+    cotask.o(.text) refers to rtc.o(.bss) for DS_TIMER
+    cbuf.o(.text) refers to rt_memclr.o(.text) for __rt_memclr
+    gwnd.o(.text) refers to bmpc.o(.text) for RGB
+    gwnd.o(.text) refers to gfont.o(.text) for GetFontHeight
+    gwnd.o(.text) refers to lcdc.o(.text) for lcdFillRect
+    gwnd.o(.text) refers to key.o(.text) for keyGet
+    gwnd.o(.text) refers to cotask.o(.text) for taskYield
+    gwnd.o(.text) refers to glabel.o(.text) for labelInitialize
+    gwnd.o(.text) refers to gmenu.o(.text) for menuShow
+    gwnd.o(.text) refers to rtc.o(.bss) for DS_TIMER
+    gmenu.o(.text) refers to bmpc.o(.text) for RGB
+    gmenu.o(.text) refers to gfont.o(.text) for GetFontHeight
+    gmenu.o(.text) refers to gwnd.o(.text) for wndSetSize
+    gmenu.o(.text) refers to rt_sdiv.o(.text) for __rt_sdiv
+    gmenu.o(.text) refers to strcpy.o(.text) for strcpy
+    gmenu.o(.text) refers to lcdc.o(.text) for lcdFillRect
+    gmenu.o(.text) refers to rtsdiv10.o(.text) for __rt_sdiv10
+    gmenu.o(.text) refers to gmenu.o(.bss) for .bss$2
+    gmenu.o(.text) refers to symbol.o(.data) for digits_8x16
+    gmenu.o(.text) refers to key.o(.text) for keyGetWithExternalCancel
+    gmenu.o(.text) refers to rtc.o(.bss) for DS_TIMER
+    gmenuc.o(.text) refers to usbd.o(.text) for usbdClearRead
+    gmenuc.o(.text) refers to rt_memcpy.o(.text) for __rt_memcpy
+    gmenuc.o(.text) refers to strcpy.o(.text) for strcpy
+    gmenuc.o(.text) refers to strlen.o(.text) for strlen
+    gmenuc.o(.text) refers to vsprintf.o(.text) for vsprintf
+    gmenuc.o(.text) refers to _sprintf.o(.text) for _sprintf
+    gmenuc.o(.text) refers to gmenuc.o(.bss) for .bss$2
+    gmenuc.o(.text) refers to console.o(.text) for u_getc
+    gmenuc.o(.text) refers to cotask.o(.text) for taskYield
+    gmenuc.o(.text) refers to prim.o(.text) for n_atoi
+    gmenuc.o(.text) refers to gmenu.o(.text) for menuGetItemChecked
+    gmenuc.o(.text) refers to rtc.o(.bss) for DS_TIMER
+    gmenuc.o(.text) refers to strcat.o(.text) for strcat
+    glabel.o(.text) refers to bmpc.o(.text) for RGB
+    glabel.o(.text) refers to strcpy.o(.text) for strcpy
+    glabel.o(.text) refers to gwnd.o(.text) for wndGetClientArea
+    glabel.o(.text) refers to strlen.o(.text) for strlen
+    glabel.o(.text) refers to gfont.o(.text) for GetFontHeight
+    glabel.o(.text) refers to lcdc.o(.text) for lcdPut16x32Digits
+    gedit.o(.text) refers to bmpc.o(.text) for RGB
+    gedit.o(.text) refers to strcpy.o(.text) for strcpy
+    gedit.o(.text) refers to gwnd.o(.text) for wndGetClientArea
+    gedit.o(.text) refers to strlen.o(.text) for strlen
+    gedit.o(.text) refers to gfont.o(.text) for GetFontHeight
+    gedit.o(.text) refers to lcdc.o(.text) for lcdFillRect
+    gedit.o(.text) refers to key.o(.text) for keyGet
+    gedit.o(.text) refers to cotask.o(.text) for taskYield
+    gedit.o(.text) refers to gedit.o(.bss) for .bss$2
+    gedit.o(.text) refers to rtc.o(.bss) for TICK_TIMER
+    gedit.o(.text) refers to symbol.o(.data) for digits_16x32
+    gchkradio.o(.text) refers to bmpc.o(.text) for RGB
+    gchkradio.o(.text) refers to strcpy.o(.text) for strcpy
+    gchkradio.o(.text) refers to gwnd.o(.text) for wndGetClientArea
+    gchkradio.o(.text) refers to lcdc.o(.text) for lcdPutIconFile
+    gchkradio.o(.text) refers to key.o(.text) for keyGet
+    gchkradio.o(.text) refers to cotask.o(.text) for taskYield
+    gchkradio.o(.text) refers to glabel.o(.text) for labelDrawWindow
+    gchkradio.o(.text) refers to rtc.o(.bss) for DS_TIMER
+    gipstring.o(.text) refers to gedit.o(.text) for editInitialize
+    gipstring.o(.text) refers to gwnd.o(.text) for _GetF1Button
+    gipstring.o(.text) refers to strcpy.o(.text) for strcpy
+    gipstring.o(.text) refers to strlen.o(.text) for strlen
+    gipstring.o(.text) refers to key.o(.text) for keyGet
+    gipstring.o(.text) refers to bmpc.o(.text) for GetStringWidth
+    gipstring.o(.text) refers to lcdc.o(.text) for lcdFillRect
+    gipstring.o(.text) refers to cotask.o(.text) for taskYield
+    gipstring.o(.text) refers to rtc.o(.bss) for DS_TIMER
+    gipstring.o(.text) refers to symbol.o(.data) for digits_16x32
+    gdate.o(.text) refers to gedit.o(.text) for editInitialize
+    gdate.o(.text) refers to gfont.o(.text) for GetFontHeight
+    gdate.o(.text) refers to gwnd.o(.text) for wndGetBackGroundColor
+    gdate.o(.text) refers to lcdc.o(.text) for lcdFillRect
+    gdate.o(.text) refers to prim.o(.text) for utoa02
+    gdate.o(.text) refers to key.o(.text) for keyGet
+    gdate.o(.text) refers to cotask.o(.text) for taskYield
+    gdate.o(.text) refers to rtc.o(.bss) for DS_TIMER
+    gipaddr.o(.text) refers to gedit.o(.text) for editInitialize
+    gipaddr.o(.text) refers to rtsdiv10.o(.text) for __rt_sdiv10
+    gipaddr.o(.text) refers to gfont.o(.text) for GetFontHeight
+    gipaddr.o(.text) refers to gwnd.o(.text) for wndGetBackGroundColor
+    gipaddr.o(.text) refers to strlen.o(.text) for strlen
+    gipaddr.o(.text) refers to lcdc.o(.text) for lcdFillRect
+    gipaddr.o(.text) refers to bmpc.o(.text) for RGB
+    gipaddr.o(.text) refers to prim.o(.text) for n_atol
+    gipaddr.o(.text) refers to key.o(.text) for keyGet
+    gipaddr.o(.text) refers to cotask.o(.text) for taskYield
+    gipaddr.o(.text) refers to rtc.o(.bss) for DS_TIMER
+    gfont.o(.text) refers to strcpy.o(.text) for strcpy
+    gfont.o(.text) refers to gfont.o(.data) for font_eng_20
+    gfont.o(.text) refers to gfont.o(.constdata) for .constdata$1
+    gfont.o(.text) refers to gfont.o(.bss) for .bss$2
+    bmpc.o(.text) refers to rect.o(.text) for rectClipRect
+    bmpc.o(.text) refers to fs.o(.text) for fsOpen
+    bmpc.o(.text) refers to bmpc.o(.bss) for .bss$2
+    bmpc.o(.text) refers to rt_sdiv.o(.text) for __rt_sdiv
+    bmpc.o(.text) refers to gfont.o(.text) for GetFont
+    bmpc.o(.text) refers to symbol.o(.data) for digits_8x16
+    bmpc.o(.text) refers to symbol.o(.data) for digits_16x32
+    bmpc.o(.text) refers to symbol.o(.data) for digits_32x48
+    bmpc.o(.text) refers to symbol.o(.data) for period_24x48
+    bmpc.o(.text) refers to bmpc.o(.data) for R_Cr_Tbl
+    eng16.o(.text) refers to bmpc.o(.text) for bmpcInit
+    eng16.o(.text) refers to lcdc.o(.text) for lcdGetBmp
+    eng16.o(.text) refers to eng16.o(.data) for font_eng_16
+    eng16.o(.text) refers to gfont.o(.data) for font_eng_20
+    fs_flash.o(.text) refers to flash.o(.text) for flashGetBlocksPerDevice
+    fs_flash.o(.text) refers to fs_flash.o(.bss) for .bss$2
+    fs.o(.text) refers to rt_memset.o(.text) for __rt_memset
+    fs.o(.text) refers to fs_flash.o(.text) for fs_write_header
+    fs.o(.text) refers to flashprim.o(.text) for set_wear_level
+    fs.o(.text) refers to rtsdiv10.o(.text) for __rt_sdiv10
+    fs.o(.text) refers to rt_udiv.o(.text) for __rt_udiv
+    fs.o(.text) refers to 2440lib.o(.text) for cprintf
+    fs.o(.text) refers to fs.o(.bss) for .bss$2
+    fs.o(.text) refers to fs.o(.constdata) for .constdata$1
+    fs.o(.text) refers to flash.o(.text) for flashGetBytesPerPage
+    fs.o(.text) refers to rt_memcpy.o(.text) for __rt_memcpy
+    fs.o(.text) refers to rt_sdiv.o(.text) for __rt_sdiv
+    sdi.o(.text) refers to rt_udiv.o(.text) for __rt_udiv
+    sdi.o(.text) refers to 2440lib.o(.text) for uDelay
+    sdi.o(.text) refers to 2440slib.o(C$$code) for SET_IRQFIQ
+    sdi.o(.text) refers to cotask.o(.text) for taskYield
+    sdi.o(.text) refers to 2440lib.o(.bss) for Pclk
+    sdi.o(.text) refers to sdi.o(.bss) for .bss$2
+    diskio.o(.text) refers to sdi.o(.text) for sdiGetState
+    diskio.o(.text) refers to rtccpu.o(.text) for rtcGetDateTime
+    ff.o(.text) refers to diskio.o(.text) for disk_write
+    ff.o(.text) refers to rtudiv10.o(.text) for __rt_udiv10
+    ff.o(.text) refers to rt_udiv.o(.text) for __rt_udiv
+    ff.o(.text) refers to ff.o(.constdata) for .constdata$1
+    ff.o(.text) refers to ff.o(.bss) for .bss$2
+    rtc.o(.text) refers to 2440slib.o(C$$code) for SET_IRQFIQ
+    rtc.o(.text) refers to rtccpu.o(.text) for rtcGetDateTime
+    rtc.o(.text) refers to rt_memclr.o(.text) for __rt_memclr
+    rtc.o(.text) refers to rt_sdiv.o(.text) for __rt_sdiv
+    rtc.o(.text) refers to rtsdiv10.o(.text) for __rt_sdiv10
+    rtc.o(.text) refers to rtc.o(.bss) for .bss$2
+    rtc.o(.text) refers to rtc.o(.data) for dsinc_tbl
+    rtccpu.o(.text) refers to rtsdiv10.o(.text) for __rt_sdiv10
+    rtccpu.o(.text) refers to rtudiv10.o(.text) for __rt_udiv10
+    iodev.o(.text) refers to bio.o(.text) for biLocalPVChanged
+    iodev.o(.text) refers to cr.o(.text) for crLocalTamperPVChanged
+    iodev.o(.text) refers to rt_udiv.o(.text) for __rt_udiv
+    iodev.o(.text) refers to 2440slib.o(C$$code) for SET_IRQFIQ
+    iodev.o(.text) refers to iodev.o(.bss) for .bss$2
+    iodev.o(.text) refers to rtc.o(.bss) for TICK_TIMER
+    iodev.o(.text) refers to bio.o(.bss) for biPV
+    iodev.o(.text) refers to 2440lib.o(.bss) for Pclk
+    wiegand.o(.text) refers to 2440lib.o(.text) for cprintf
+    wiegand.o(.text) refers to wiegand.o(.constdata) for .constdata$1
+    wiegand.o(.text) refers to rt_memcpy.o(.text) for __rt_memcpy
+    wiegand.o(.text) refers to 2440slib.o(C$$code) for SET_IRQFIQ
+    wiegand.o(.text) refers to wiegand.o(.bss) for .bss$2
+    wiegand.o(.text) refers to wiegand.o(.data) for .data$0
+    key.o(.text) refers to cotask.o(.text) for taskDelayTick
+    key.o(.text) refers to key.o(.bss) for .bss$2
+    key.o(.text) refers to key.o(.constdata) for .constdata$1
+    key.o(.text) refers to rtc.o(.bss) for TICK_TIMER
+    lcdc.o(.text) refers to 2440lib.o(.text) for uDelay
+    lcdc.o(.text) refers to bmpc.o(.text) for bmpcInit
+    lcdc.o(.text) refers to lcdc.o(.bss) for .bss$2
+    sio.o(.text) refers to cbuf.o(.text) for cbuf_peek
+    sio.o(.text) refers to cotask.o(.text) for taskYield
+    sio.o(.text) refers to prim.o(.text) for BYTEtoSHORT
+    sio.o(.text) refers to 2440slib.o(C$$code) for SET_IRQFIQ
+    sio.o(.text) refers to sio.o(.bss) for .bss$2
+    sio.o(.text) refers to rtc.o(.bss) for DS_TIMER
+    sio.o(.text) refers to rt_memcpy.o(.text) for __rt_memcpy
+    sio.o(.text) refers to syscfg.o(.bss) for sys_cfg
+    sio.o(.text) refers to rt_memclr.o(.text) for __rt_memclr
+    sio.o(.text) refers to sinport.o(.text) for sinportOpen
+    sio.o(.text) refers to 2440lib.o(.text) for cprintf
+    sio.o(.text) refers to sin.o(.text) for sinRecvFrom
+    sio.o(.text) refers to rtccpu.o(.text) for rtcGetDateTime
+    sio.o(.text) refers to cr.o(.text) for bin2card
+    sio.o(.text) refers to event.o(.text) for EventAdd
+    sio.o(.text) refers to sio.o(.constdata) for .constdata$1
+    sio.o(.text) refers to rt_udiv.o(.text) for __rt_udiv
+    sio.o(.text) refers to 2440lib.o(.bss) for Pclk
+    sin.o(.text) refers to 2440lib.o(.text) for uDelay
+    sin.o(.text) refers to cotask.o(.text) for taskYield
+    sin.o(.text) refers to prim.o(.text) for IPSetNull
+    sin.o(.text) refers to sin.o(.bss) for .bss$2
+    sin.o(.text) refers to rtc.o(.bss) for DS_TIMER
+    sin.o(.text) refers to cbuf.o(.text) for cbuf_get_sin
+    ping.o(.text) refers to prim.o(.text) for SHORTtoBYTE
+    ping.o(.text) refers to rt_sdiv.o(.text) for __rt_sdiv
+    ping.o(.text) refers to sin.o(.text) for sinSendToRaw
+    ping.o(.text) refers to ping.o(.bss) for .bss$2
+    dhcp.o(.text) refers to rt_memclr_w.o(.text) for __rt_memclr_w
+    dhcp.o(.text) refers to flashprim.o(.text) for n_htonl
+    dhcp.o(.text) refers to prim.o(.text) for n_htons
+    dhcp.o(.text) refers to rt_memcpy.o(.text) for __rt_memcpy
+    dhcp.o(.text) refers to sin.o(.text) for sinSendTo
+    dhcp.o(.text) refers to rt_memcpy_w.o(.text) for __rt_memcpy_w
+    dhcp.o(.text) refers to dhcp.o(.bss) for .bss$2
+    dhcp.o(.text) refers to rtc.o(.bss) for SEC_TIMER
+    dhcp.o(.text) refers to 2440lib.o(.text) for uDelay
+    cr.o(.text) refers to syscfg.o(.text) for SetDefaultIPAddress
+    cr.o(.text) refers to rt_memcpy.o(.text) for __rt_memcpy
+    cr.o(.text) refers to prim.o(.text) for SHORTtoBYTE
+    cr.o(.text) refers to rt_memset.o(.text) for __rt_memset
+    cr.o(.text) refers to rt_memclr.o(.text) for __rt_memclr
+    cr.o(.text) refers to rtccpu.o(.text) for rtcGetDateTime
+    cr.o(.text) refers to 2440lib.o(.text) for cprintf
+    cr.o(.text) refers to rtc.o(.text) for rtcSecond2Tick
+    cr.o(.text) refers to cr.o(.bss) for .bss$2
+    cr.o(.text) refers to syscfg.o(.bss) for sys_cfg
+    cr.o(.text) refers to rtc.o(.bss) for DS_TIMER
+    cr.o(.text) refers to bio.o(.bss) for biTimeout
+    cr.o(.text) refers to unit.o(.text) for crGetTamperPresentValue
+    cr.o(.text) refers to net.o(.text) for netCodeUnconfRequest
+    cr.o(.text) refers to toptask.o(.text) for _SendNet
+    cr.o(.text) refers to event.o(.text) for EventAdd
+    cr.o(.text) refers to toptask.o(.bss) for ServerNetState
+    cr.o(.text) refers to acad.o(.text) for adEncodeStatus
+    cr.o(.text) refers to bio.o(.text) for biGetAssignedFirePoint
+    cr.o(.text) refers to wiegand.o(.text) for wiegandCheck35Data
+    cr.o(.text) refers to rtsdiv10.o(.text) for __rt_sdiv10
+    cr.o(.text) refers to fsuser.o(.text) for userfsSeek
+    cr.o(.text) refers to strlen.o(.text) for strlen
+    fpapi_new.o(.text) refers to dbmgr.o(.text) for DB_InitFPRecord
+    fpapi_new.o(.text) refers to fs.o(.text) for fsSetNoRemove
+    fpapi_new.o(.text) refers to fprocess.o(.text) for HFP_Match
+    fpapi_new.o(.text) refers to rt_memcpy.o(.text) for __rt_memcpy
+    fpapi_new.o(.text) refers to fpapi_new.o(.bss) for .bss$2
+    fpapi_new.o(.text) refers to fprocess.o(.data) for g_LevelTable
+    pno.o(.text) refers to prim.o(.text) for string2bcd
+    pno.o(.text) refers to rt_memcpy.o(.text) for __rt_memcpy
+    pno.o(.text) refers to rt_memset.o(.text) for __rt_memset
+    pno.o(.text) refers to rt_memcpy_w.o(.text) for __rt_memcpy_w
+    pno.o(.text) refers to fsuser.o(.text) for pnofsGet
+    pno.o(.text) refers to cotask.o(.text) for taskYield
+    dbmgr.o(.text) refers to fprocess.o(.text) for HFP_RegisterFP
+    dbmgr.o(.text) refers to filectrl.o(.text) for FS_Close
+    dbmgr.o(.text) refers to 2440lib.o(.text) for cprintf
+    dbmgr.o(.text) refers to dbmgr.o(.bss) for .bss$2
+    dbmgr.o(.text) refers to dbmgr.o(.data) for .data$0
+    dbmgr.o(.text) refers to fs.o(.text) for fsFileLength
+    dbmgr.o(.text) refers to rt_memset.o(.text) for __rt_memset
+    fprocess.o(.text) refers to encrypt.o(.text) for ENC_EncryptFPTemplate
+    fprocess.o(.text) refers to extract.o(.text) for EXT_CreateTemplate
+    fprocess.o(.text) refers to rt_memclr.o(.text) for __rt_memclr
+    fprocess.o(.text) refers to tcodec.o(.text) for TCD_DecodeTemplate
+    fprocess.o(.text) refers to verify.o(.text) for VRF_MatchTwoFingers
+    fprocess.o(.text) refers to memcmp.o(.text) for memcmp
+    fprocess.o(.text) refers to rt_memcpy.o(.text) for __rt_memcpy
+    fprocess.o(.text) refers to srch.o(.text) for SRCH_InitGlobal
+    fprocess.o(.text) refers to srchmem.o(.text) for InitMemPools
+    fprocess.o(.text) refers to rt_memset.o(.text) for __rt_memset
+    fprocess.o(.text) refers to fprocess.o(.data) for .data$0
+    fprocess.o(.text) refers to fprocess.o(.bss) for .bss$2
+    filectrl.o(.text) refers to 2440lib.o(.text) for cprintf
+    filectrl.o(.text) refers to fs.o(.text) for fsInit
+    filectrl.o(.text) refers to fs.o(.bss) for fsErrno
+    filectrl.o(.text) refers to flash.o(.text) for flashWriteEnable
+    encrypt.o(.text) refers to encrypt.o(.data) for .data$0
+    encrypt.o(.text) refers to rt_memcpy.o(.text) for __rt_memcpy
+    encrypt.o(.text) refers to mutil.o(.text) for mmalloc
+    encrypt.o(.text) refers to rt_memclr_w.o(.text) for __rt_memclr_w
+    encrypt.o(.text) refers to memcmp.o(.text) for memcmp
+    encrypt.o(.text) refers to encrypt.o(.bss) for .bss$2
+    extract.o(.text) refers to mutil.o(.text) for mmalloc
+    extract.o(.text) refers to binarize.o(.text) for AverageFilter
+    extract.o(.text) refers to rt_memcpy.o(.text) for __rt_memcpy
+    extract.o(.text) refers to rt_memclr.o(.text) for __rt_memclr
+    extract.o(.text) refers to rt_sdiv.o(.text) for __rt_sdiv
+    extract.o(.text) refers to findmin.o(.text) for ThinImage
+    extract.o(.text) refers to tcodec.o(.text) for TCD_EncodeTemplate
+    extract.o(.text) refers to extract.o(.bss) for .bss$2
+    extract.o(.text) refers to fprocess.o(.bss) for g_FPInfoS
+    tcodec.o(.text) refers to rt_memcpy.o(.text) for __rt_memcpy
+    tcodec.o(.text) refers to malloc.o(.text) for malloc
+    tcodec.o(.text) refers to free.o(.text) for free
+    tcodec.o(.text) refers to rt_memclr_w.o(.text) for __rt_memclr_w
+    tcodec.o(.text) refers to rt_sdiv.o(.text) for __rt_sdiv
+    tcodec.o(.text) refers to rt_memclr.o(.text) for __rt_memclr
+    tcodec.o(.text) refers to memcmp.o(.text) for memcmp
+    tcodec.o(.text) refers to rt_udiv.o(.text) for __rt_udiv
+    tcodec.o(.text) refers to mutil.o(.text) for mmalloc
+    tcodec.o(.text) refers to tcodec.o(.data) for g_MinType
+    tcodec.o(.text) refers to rt_memset.o(.text) for __rt_memset
+    verify.o(.text) refers to rtsdiv10.o(.text) for __rt_sdiv10
+    verify.o(.text) refers to rt_sdiv.o(.text) for __rt_sdiv
+    verify.o(.text) refers to verify.o(.bss) for .bss$2
+    verify.o(.text) refers to table.o(.data) for DistTbl
+    verify.o(.text) refers to table.o(.data) for AtanTbl
+    verify.o(.text) refers to table.o(.data) for Dthreshold
+    verify.o(.text) refers to rt_memcpy.o(.text) for __rt_memcpy
+    verify.o(.text) refers to rt_memclr_w.o(.text) for __rt_memclr_w
+    verify.o(.text) refers to rt_memclr.o(.text) for __rt_memclr
+    verify.o(.text) refers to dflt.o(x$fpl$dflt) for _dflt
+    verify.o(.text) refers to dmul_mull.o(x$fpl$dmul) for _dmul
+    verify.o(.text) refers to ddiv.o(x$fpl$ddiv) for _drdiv
+    verify.o(.text) refers to daddsub.o(x$fpl$dadd) for _dadd
+    verify.o(.text) refers to dfix.o(x$fpl$dfix) for _dfix
+    verify.o(.text) refers to table.o(.data) for Oscale
+    verify.o(.text) refers to table.o(.data) for Yscale
+    verify.o(.text) refers to table.o(.data) for FTscaleO
+    verify.o(.text) refers to rt_memset.o(.text) for __rt_memset
+    verify.o(.text) refers to mutil.o(.text) for mmalloc
+    verify.o(.text) refers to table.o(.data) for cosTable
+    verify.o(.text) refers to table.o(.data) for sinTable
+    verify.o(.text) refers to fprocess.o(.bss) for g_IsIdentify
+    srch.o(.text) refers to rt_sdiv.o(.text) for __rt_sdiv
+    srch.o(.text) refers to rtsdiv10.o(.text) for __rt_sdiv10
+    srch.o(.text) refers to srch.o(.bss) for .bss$2
+    srch.o(.text) refers to atan.o(.data) for ATAN1
+    srch.o(.text) refers to table.o(.data) for DistTbl
+    srch.o(.text) refers to rt_memclr_w.o(.text) for __rt_memclr_w
+    srch.o(.text) refers to dc.o(.text) for TRI_FindTriangles
+    srch.o(.text) refers to llh.o(.text) for LLH_AddTriangle(tagKEY_*, tagTRIANGLE_ITEM_*)
+    srch.o(.text) refers to rt_udiv.o(.text) for __rt_udiv
+    srch.o(.text) refers to mempool.o(.text) for CMemPool::Alloc()
+    srch.o(.text) refers to rt_memset.o(.text) for __rt_memset
+    srch.o(.text) refers to llh.o(.bss) for g_TriangleBucket
+    srch.o(.text) refers to table.o(.data) for _Sin
+    srch.o(.text) refers to table.o(.data) for _Cos
+    srch.o(.text) refers to srchmem.o(.bss) for g_cPoolTrsPrmItem
+    srchmem.o(.text) refers to mempool.o(.text) for CMemPool::Init(unsigned int, unsigned int)
+    srchmem.o(.text) refers to llh.o(.text) for LLH_ClearTriangleTable()
+    srchmem.o(.text) refers to srchmem.o(C$$pi_ctorvec) for C$$pi_ctorvec
+    srchmem.o(.text) refers to init.o(.text) for __cpp_initialise
+    srchmem.o(.text) refers to srchmem.o(C$$pi_dtorvec) for C$$pi_dtorvec
+    srchmem.o(.text) refers to final.o(.text) for __cpp_finalise
+    srchmem.o(.text) refers to final_dtors.o(.text) for __cpp_finalise_dtors
+    srchmem.o(.text) refers to srchmem.o(.bss) for .bss$2
+    srchmem.o(C$$ctor) refers to mempool.o(.text) for CMemPool::CMemPool()
+    srchmem.o(C$$ctor) refers to srchmem.o(C$$pi_ctorvec) for C$$pi_ctorvec
+    srchmem.o(C$$ctor) refers to init.o(.text) for __cpp_initialise
+    srchmem.o(C$$ctor) refers to srchmem.o(C$$pi_dtorvec) for C$$pi_dtorvec
+    srchmem.o(C$$ctor) refers to final.o(.text) for __cpp_finalise
+    srchmem.o(C$$ctor) refers to final_dtors.o(.text) for __cpp_finalise_dtors
+    srchmem.o(C$$ctor) refers to srchmem.o(.bss) for .bss$2
+    srchmem.o(C$$dtor) refers to mempool.o(.text) for CMemPool::~CMemPool()
+    srchmem.o(C$$dtor) refers to srchmem.o(C$$pi_ctorvec) for C$$pi_ctorvec
+    srchmem.o(C$$dtor) refers to init.o(.text) for __cpp_initialise
+    srchmem.o(C$$dtor) refers to srchmem.o(C$$pi_dtorvec) for C$$pi_dtorvec
+    srchmem.o(C$$dtor) refers to final.o(.text) for __cpp_finalise
+    srchmem.o(C$$dtor) refers to final_dtors.o(.text) for __cpp_finalise_dtors
+    srchmem.o(C$$dtor) refers to srchmem.o(.bss) for .bss$2
+    srchmem.o(C$$pi_ctorvec) refers to srchmem.o(C$$ctor) for __C
+    srchmem.o(C$$pi_ctorvec) refers to init.o(.text) for __cpp_initialise
+    srchmem.o(C$$pi_ctorvec) refers to srchmem.o(C$$pi_dtorvec) for C$$pi_dtorvec
+    srchmem.o(C$$pi_ctorvec) refers to final.o(.text) for __cpp_finalise
+    srchmem.o(C$$pi_ctorvec) refers to final_dtors.o(.text) for __cpp_finalise_dtors
+    srchmem.o(C$$pi_dtorvec) refers to srchmem.o(C$$dtor) for __D
+    srchmem.o(.bss) refers to srchmem.o(C$$pi_ctorvec) for C$$pi_ctorvec
+    srchmem.o(.bss) refers to init.o(.text) for __cpp_initialise
+    srchmem.o(.bss) refers to srchmem.o(C$$pi_dtorvec) for C$$pi_dtorvec
+    srchmem.o(.bss) refers to final.o(.text) for __cpp_finalise
+    srchmem.o(.bss) refers to final_dtors.o(.text) for __cpp_finalise_dtors
+    mutil.o(.text) refers to rt_memclr.o(.text) for __rt_memclr
+    mutil.o(.text) refers to mutil.o(.data) for .data$0
+    mutil.o(.text) refers to mutil.o(.bss) for .bss$2
+    binarize.o(.text) refers to mutil.o(.text) for mmalloc
+    binarize.o(.text) refers to rt_memcpy.o(.text) for __rt_memcpy
+    binarize.o(.text) refers to rt_memclr_w.o(.text) for __rt_memclr_w
+    binarize.o(.text) refers to rt_sdiv.o(.text) for __rt_sdiv
+    binarize.o(.text) refers to binarize.o(.data) for filter_w01
+    findmin.o(.text) refers to rt_sdiv.o(.text) for __rt_sdiv
+    findmin.o(.text) refers to atan.o(.data) for ATAN1
+    findmin.o(.text) refers to rt_memcpy_w.o(.text) for __rt_memcpy_w
+    findmin.o(.text) refers to findmin.o(.constdata) for .constdata$1
+    findmin.o(.text) refers to rt_udiv.o(.text) for __rt_udiv
+    findmin.o(.text) refers to atan.o(.data) for sqrs
+    llh.o(.text) refers to rt_memclr_w.o(.text) for __rt_memclr_w
+    llh.o(.text) refers to rt_udiv.o(.text) for __rt_udiv
+    llh.o(.text) refers to mempool.o(.text) for CMemPool::Alloc()
+    llh.o(.text) refers to llh.o(.bss) for .bss$2
+    llh.o(.text) refers to srch.o(.bss) for g_tri_arg_bit
+    llh.o(.text) refers to srchmem.o(.bss) for g_cPoolBucket
+    dc.o(.text) refers to dc.o(i.lower_tangent__FP4edgeP5pointT1T2PP4edgePP5pointT5T6) for lower_tangent(edge*, point*, edge*, point*, edge**, point**, edge**, point**)
+    dc.o(.text) refers to dc.o(i.join__FP4edgeP5pointT1T24side) for join(edge*, point*, edge*, point*, side)
+    dc.o(.text) refers to rt_sdiv.o(.text) for __rt_sdiv
+    dc.o(.text) refers to dc.o(i.delete_edge__FP4edge) for delete_edge(edge*)
+    dc.o(.text) refers to dc.o(i.make_edge__FP5pointT1) for make_edge(point*, point*)
+    dc.o(.text) refers to dc.o(i.splice__FP4edgeT1P5point) for splice(edge*, edge*, point*)
+    dc.o(.text) refers to mutil.o(.text) for mmalloc
+    dc.o(.text) refers to dc.o(.bss) for .bss$2
+    dc.o(i.make_edge__FP5pointT1) refers to dc.o(.bss) for .bss$2
+    dc.o(i.join__FP4edgeP5pointT1T24side) refers to dc.o(i.make_edge__FP5pointT1) for make_edge(point*, point*)
+    dc.o(i.join__FP4edgeP5pointT1T24side) refers to dc.o(i.splice__FP4edgeT1P5point) for splice(edge*, edge*, point*)
+    dc.o(i.delete_edge__FP4edge) refers to dc.o(.bss) for .bss$2
+    mempool.o(.text) refers to rt_memclr.o(.text) for __rt_memclr
+    mempool.o(.text) refers to opnew.o(.text) for operator new(unsigned int)
+    mempool.o(.text) refers to opdel.o(.text) for operator delete(void*)
+    mempool.o(.text) refers to mempool.o(i.Push__13CAddressStackFPv) for CAddressStack::Push(void*)
+    mempool.o(.text) refers to mempool.o(.data) for MEMHeap_dwFreeBytes
+    mempool.o(.text) refers to mempool.o(.bss) for .bss$2
+    _printf.o(.text) refers to __vfpntf.o(.text) for __vfprintf
+    _printf.o(.text) refers to fputc.o(.text) for fputc
+    _printf.o(.text) refers to ferror.o(.text) for ferror
+    _printf.o(.text) refers to stdio.o(.bss) for __stdout
+    _sprintf.o(.text) refers to __vfpntf.o(.text) for __vfprintf
+    _sprintf.o(.text) refers to _sputc.o(.text) for _sputc
+    final.o(.text) refers (Weak) to final_dtors.o(.text) for __cpp_finalise_dtors
+    free.o(.text) refers to libspace.o(.text) for __user_libspace
+    free.o(.text) refers to h1_free.o(.text) for __Heap_Free
+    free.o(.text) refers (Special) to hguardc.o(.text) for __heap_guard
+    malloc.o(.text) refers to heapext.o(.text) for __heap_extend
+    malloc.o(.text) refers to h1_extend.o(.text) for __Heap_ProvideMemory
+    malloc.o(.text) refers to rt_raise.o(.text) for __rt_raise
+    malloc.o(.text) refers to h1_alloc.o(.text) for __Heap_DescSize
+    malloc.o(.text) refers to libspace.o(.text) for __user_libspace
+    malloc.o(.text) refers (Special) to hguardc.o(.text) for __heap_guard
+    opdel.o(.text) refers to free.o(.text) for free
+    opnew.o(.text) refers to prim_new.o(.text) for __new(unsigned int)
+    rand.o(.text) refers to rand.o(.bss) for .bss$2
+    rt_memclr.o(.text) refers to rt_memclr_w.o(.text) for _memset_w
+    rt_memcpy.o(.text) refers to rt_memcpy_w.o(.text) for _memcpy_lastbytes
+    rt_memset.o(.text) refers to rt_memclr.o(.text) for _memset
+    rt_sdiv.o(.text) refers to rt_div0.o(.text) for __rt_div0
+    rt_udiv.o(.text) refers to rt_div0.o(.text) for __rt_div0
+    vsprintf.o(.text) refers to __vfpntf.o(.text) for __vfprintf
+    vsprintf.o(.text) refers to _sputc.o(.text) for _sputc
+    vsprintf.o(.text) refers (Special) to printf1.o(x$fpl$printf1) for __lib_sel_fp_printf
+    setjmp.o(.text) refers to postlj.o(.text) for __rt_longjmp_cleanup
+    daddsub.o(x$fpl$dadd) refers to except.o(x$fpl$exception) for __fpl_exception
+    daddsub.o(x$fpl$dadd) refers to dcheck.o(x$fpl$dcheck) for __fpl_dcheck_NaN2
+    daddsub.o(x$fpl$dadd) refers to dunder.o(x$fpl$dunder) for __dunder
+    daddsub.o(x$fpl$dadd) refers (Special) to rt_fp_status_addr.o(.text) for __rt_fp_status_addr
+    ddiv.o(x$fpl$ddiv) refers to dunder.o(x$fpl$dunder) for __dunder
+    ddiv.o(x$fpl$ddiv) refers to except.o(x$fpl$exception) for __fpl_exception
+    ddiv.o(x$fpl$ddiv) refers to dcheck.o(x$fpl$dcheck) for __fpl_dcheck_NaN2
+    ddiv.o(x$fpl$ddiv) refers (Special) to rt_fp_status_addr.o(.text) for __rt_fp_status_addr
+    dfix.o(x$fpl$dfix) refers to dcheck1.o(x$fpl$dcheck1) for __fpl_dcheck_NaN1
+    dfix.o(x$fpl$dfix) refers to except.o(x$fpl$exception) for __fpl_exception
+    dfix.o(x$fpl$dfix) refers (Special) to rt_fp_status_addr.o(.text) for __rt_fp_status_addr
+    dfix.o(x$fpl$dfixr) refers to dcheck1.o(x$fpl$dcheck1) for __fpl_dcheck_NaN1
+    dfix.o(x$fpl$dfixr) refers to except.o(x$fpl$exception) for __fpl_exception
+    dfix.o(x$fpl$dfixr) refers (Special) to rt_fp_status_addr.o(.text) for __rt_fp_status_addr
+    dfixu.o(x$fpl$dfixu) refers to dcheck1.o(x$fpl$dcheck1) for __fpl_dcheck_NaN1
+    dfixu.o(x$fpl$dfixu) refers to except.o(x$fpl$exception) for __fpl_exception
+    dfixu.o(x$fpl$dfixu) refers (Special) to rt_fp_status_addr.o(.text) for __rt_fp_status_addr
+    dfixu.o(x$fpl$dfixur) refers to dcheck1.o(x$fpl$dcheck1) for __fpl_dcheck_NaN1
+    dfixu.o(x$fpl$dfixur) refers to except.o(x$fpl$exception) for __fpl_exception
+    dfixu.o(x$fpl$dfixur) refers (Special) to rt_fp_status_addr.o(.text) for __rt_fp_status_addr
+    dmul_mull.o(x$fpl$dmul) refers to dunder.o(x$fpl$dunder) for __dunder
+    dmul_mull.o(x$fpl$dmul) refers to except.o(x$fpl$exception) for __fpl_exception
+    dmul_mull.o(x$fpl$dmul) refers to dcheck.o(x$fpl$dcheck) for __fpl_dcheck_NaN2
+    dmul_mull.o(x$fpl$dmul) refers (Special) to rt_fp_status_addr.o(.text) for __rt_fp_status_addr
+    f2d.o(x$fpl$f2d) refers to dflt.o(x$fpl$dflt) for __dflt_normalise
+    f2d.o(x$fpl$f2d) refers to fcheck1.o(x$fpl$fcheck1) for __fpl_fcheck_NaN1
+    f2d.o(x$fpl$f2d) refers (Special) to except.o(x$fpl$exception) for __fpl_exception
+    faddsub.o(x$fpl$fadd) refers to except.o(x$fpl$exception) for __fpl_exception
+    faddsub.o(x$fpl$fadd) refers to funder.o(x$fpl$funder) for __funder_d
+    faddsub.o(x$fpl$fadd) refers to fcheck.o(x$fpl$fcheck) for __fpl_fcheck_NaN2
+    faddsub.o(x$fpl$fadd) refers (Special) to rt_fp_status_addr.o(.text) for __rt_fp_status_addr
+    fdiv.o(x$fpl$fdiv) refers to funder.o(x$fpl$funder) for __funder
+    fdiv.o(x$fpl$fdiv) refers to except.o(x$fpl$exception) for __fpl_exception
+    fdiv.o(x$fpl$fdiv) refers to fnorm2.o(x$fpl$fnorm2) for __fpl_normalise2
+    fdiv.o(x$fpl$fdiv) refers to fcheck.o(x$fpl$fcheck) for __fpl_fcheck_NaN2
+    fdiv.o(x$fpl$fdiv) refers (Special) to rt_fp_status_addr.o(.text) for __rt_fp_status_addr
+    ffixu.o(x$fpl$ffixu) refers to fcheck1.o(x$fpl$fcheck1) for __fpl_fcheck_NaN1
+    ffixu.o(x$fpl$ffixu) refers to except.o(x$fpl$exception) for __fpl_exception
+    ffixu.o(x$fpl$ffixu) refers (Special) to rt_fp_status_addr.o(.text) for __rt_fp_status_addr
+    ffixu.o(x$fpl$ffixur) refers to fcheck1.o(x$fpl$fcheck1) for __fpl_fcheck_NaN1
+    ffixu.o(x$fpl$ffixur) refers to except.o(x$fpl$exception) for __fpl_exception
+    ffixu.o(x$fpl$ffixur) refers (Special) to rt_fp_status_addr.o(.text) for __rt_fp_status_addr
+    fflt.o(x$fpl$fflt) refers (Special) to except.o(x$fpl$exception) for __fpl_exception
+    fflt.o(x$fpl$fflt) refers (Special) to rt_fp_status_addr.o(.text) for __rt_fp_status_addr
+    fmul_mull.o(x$fpl$fmul) refers to funder.o(x$fpl$funder) for __funder
+    fmul_mull.o(x$fpl$fmul) refers to except.o(x$fpl$exception) for __fpl_exception
+    fmul_mull.o(x$fpl$fmul) refers to fnorm2.o(x$fpl$fnorm2) for __fpl_normalise2
+    fmul_mull.o(x$fpl$fmul) refers to fcheck.o(x$fpl$fcheck) for __fpl_fcheck_NaN2
+    fmul_mull.o(x$fpl$fmul) refers (Special) to rt_fp_status_addr.o(.text) for __rt_fp_status_addr
+    __vfpntf.o(.text) refers to strlen.o(.text) for strlen
+    __vfpntf.o(.text) refers to printf1.o(x$fpl$printf1) for _fp_display_gate
+    __vfpntf.o(.text) refers to lludiv10.o(.text) for _ll_udiv10
+    __vfpntf.o(.text) refers to rtudiv10.o(.text) for __rt_udiv10
+    fputc.o(.text) refers to flsbuf.o(.text) for __flsbuf
+    h1_alloc.o(.text) refers to malloc.o(.text) for __Heap_Full
+    h1_extend.o(.text) refers to h1_free.o(.text) for __Heap_Free
+    heapext.o(.text) refers to stkheap1.o(.text) for __rt_heap_extend
+    libspace.o(.text) refers to libspace.o(.bss) for __libspace_start
+    prim_new.o(.text) refers to libspace.o(.text) for __user_libspace
+    prim_new.o(.text) refers to malloc.o(.text) for malloc
+    rt_div0.o(.text) refers to rt_raise.o(.text) for __rt_raise
+    rt_fp_status_addr.o(.text) refers to libspace.o(.text) for __user_libspace
+    rt_raise.o(.text) refers to __raise.o(.text) for __raise
+    rt_raise.o(.text) refers to sys_exit.o(.text) for _sys_exit
+    stdio.o(.text) refers to sys_io.o(.text) for _sys_seek
+    stdio.o(.text) refers to fflush.o(.text) for fflush
+    stdio.o(.text) refers to free.o(.text) for free
+    stdio.o(.text) refers to fseek.o(.text) for fseek
+    stdio.o(.text) refers to malloc.o(.text) for malloc
+    stdio.o(.text) refers to rt_memclr_w.o(.text) for __rt_memclr_w
+    stdio.o(.text) refers to rt_raise.o(.text) for __rt_raise
+    stdio.o(.text) refers to setvbuf.o(.text) for setvbuf
+    stdio.o(.text) refers to stdio.o(.bss) for .bss$2
+    stdio.o(.text) refers to sys_io.o(.constdata) for __stdin_name
+    stdio.o(.text) refers to sys_io.o(.constdata) for __stdout_name
+    stdio.o(.text) refers to sys_io.o(.constdata) for __stderr_name
+    printf1.o(x$fpl$printf1) refers to _fp_disp.o(.text) for _fp_display
+    dcheck.o(x$fpl$dcheck) refers to retnan.o(x$fpl$retnan) for __fpl_return_NaN
+    dcheck.o(x$fpl$dcheck) refers to except.o(x$fpl$exception) for __fpl_exception
+    dcheck1.o(x$fpl$dcheck1) refers to except.o(x$fpl$exception) for __fpl_exception
+    dcheck1.o(x$fpl$dcheck1) refers to retnan.o(x$fpl$retnan) for __fpl_return_NaN
+    dunder.o(x$fpl$dunder) refers to rt_fp_status_addr.o(.text) for __rt_fp_status_addr
+    dunder.o(x$fpl$dunder) refers to trapv.o(x$fpl$trapveneer) for _fp_trapveneer
+    dunder.o(x$fpl$dunder) refers (Special) to except.o(x$fpl$exception) for __fpl_exception
+    except.o(x$fpl$exception) refers to rt_fp_status_addr.o(.text) for __rt_fp_status_addr
+    except.o(x$fpl$exception) refers to trapv.o(x$fpl$trapveneer) for _fp_trapveneer
+    except.o(x$fpl$exception) refers to retnan.o(x$fpl$retnan) for __fpl_return_NaN
+    fcheck.o(x$fpl$fcheck) refers to except.o(x$fpl$exception) for __fpl_exception
+    fcheck.o(x$fpl$fcheck) refers to retnan.o(x$fpl$retnan) for __fpl_return_NaN
+    fcheck1.o(x$fpl$fcheck1) refers to except.o(x$fpl$exception) for __fpl_exception
+    fcheck1.o(x$fpl$fcheck1) refers to retnan.o(x$fpl$retnan) for __fpl_return_NaN
+    funder.o(x$fpl$funder) refers to rt_fp_status_addr.o(.text) for __rt_fp_status_addr
+    funder.o(x$fpl$funder) refers to except.o(x$fpl$exception) for __fpl_exception
+    funder.o(x$fpl$funder) refers to trapv.o(x$fpl$trapveneer) for _fp_trapveneer
+    __raise.o(.text) refers to defsig.o(.text) for __default_signal_handler
+    _fp_disp.o(.text) refers to dtoi.o(.text) for __support_dtoi
+    _fp_disp.o(.text) refers to istatus.o(x$fpl$ieeestatus) for __ieee_status
+    _fp_disp.o(.text) refers to bigflt0.o(.text) for _btod_etento
+    _fp_disp.o(.text) refers to btod.o(CL$$btodstuff) for _btod_d2e
+    _fp_disp.o(.text) refers to lludiv10.o(.text) for _ll_udiv10
+    _fp_disp.o(.text) refers to libspace.o(.text) for __user_libspace
+    _fp_disp.o(.text) refers to classify.o(.text) for __mathlib_classify
+    _fp_disp.o(.text) refers to rt_sdiv.o(.text) for __rt_sdiv
+    _fp_disp.o(.text) refers to rtsdiv10.o(.text) for __rt_sdiv10
+    _fp_disp.o(.text) refers (Special) to lc_numeric_c.o(.text) for _get_lc_numeric
+    fflush.o(.text) refers to stdio.o(.text) for _deferredlazyseek
+    fflush.o(.text) refers to fseek.o(.text) for fseek
+    fflush.o(.text) refers to stdio.o(.bss) for __stdin
+    flsbuf.o(.text) refers to stdio.o(.text) for _deferredlazyseek
+    flsbuf.o(.text) refers to fseek.o(.text) for fseek
+    flsbuf.o(.text) refers to sys_io.o(.text) for _sys_istty
+    flsbuf.o(.text) refers to malloc.o(.text) for malloc
+    flsbuf.o(.text) refers (Special) to _main_redirect.o(.text) for _main_redirection
+    flsbuf.o(.text) refers (Special) to fwritefast.o(.constdata) for __select_optimised_fwrite
+    fseek.o(.text) refers to sys_io.o(.text) for _sys_istty
+    fseek.o(.text) refers to stdio.o(.text) for _seterr
+    fseek.o(.text) refers to ftell.o(.text) for ftell
+    stkheap1.o(.text) refers to libspace.o(.text) for __user_libspace
+    stkheap1.o(.text) refers to sys_stackheap.o(.text) for __user_initial_stackheap
+    sys_exit.o(.text) refers to use_semi.o(.text) for __I_use_semihosting_swi
+    sys_io.o(.text) refers to strlen.o(.text) for strlen
+    sys_io.o(.text) refers (Special) to use_semi.o(.text) for __I_use_semihosting_swi
+    sys_io.o(.constdata) refers (Special) to use_semi.o(.text) for __I_use_semihosting_swi
+    sys_io.o(.constdata) refers (Special) to use_semi.o(.text) for __I_use_semihosting_swi
+    sys_io.o(.constdata) refers (Special) to use_semi.o(.text) for __I_use_semihosting_swi
+    retnan.o(x$fpl$retnan) refers to trapv.o(x$fpl$trapveneer) for __fpl_cmpreturn
+    trapv.o(x$fpl$trapveneer) refers to _fptrap.o(.text) for _fp_trap
+    trapv.o(x$fpl$trapveneer) refers to rt_fp_status_addr.o(.text) for __rt_fp_status_addr
+    _fptrap.o(.text) refers to rt_raise.o(.text) for __rt_raise
+    _main_redirect.o(.text) refers to stdio.o(.text) for freopen
+    _main_redirect.o(.text) refers to rt_raise.o(.text) for __rt_raise
+    _main_redirect.o(.text) refers to setvbuf.o(.text) for setvbuf
+    _main_redirect.o(.text) refers to __dup.o(.text) for __dup
+    _main_redirect.o(.text) refers to stdio.o(.bss) for __stderr
+    bigflt0.o(.text) refers to rt_sdiv.o(.text) for __rt_sdiv
+    bigflt0.o(.text) refers to btod.o(CL$$btodstuff) for _btod_emul
+    bigflt0.o(.text) refers to bigflt0.o(.constdata) for .constdata$1
+    btod.o(CL$$btodstuff) refers to istatus.o(x$fpl$ieeestatus) for __32__ieee_status
+    defsig.o(.text) refers to sys_wrch.o(.text) for _ttywrch
+    defsig.o(.text) refers to defsig.o(.constdata) for .constdata$1
+    ftell.o(.text) refers to rt_errno_addr.o(.text) for __rt_errno_addr
+    fwritefast.o(.text) refers to flsbuf.o(.text) for __flsbuf
+    fwritefast.o(.text) refers to rt_memcpy.o(.text) for __rt_memcpy
+    lc_numeric_c.o(.text) refers to strcmp.o(.text) for strcmp
+    lc_numeric_c.o(.text) refers to lc_numeric_c.o(.constdata) for .constdata$1
+    sys_stackheap.o(.text) refers to use_semi.o(.text) for __I_use_semihosting_swi
+    istatus.o(x$fpl$ieeestatus) refers to rt_fp_status_addr.o(.text) for __rt_fp_status_addr
+    dtoi.o(.text) refers to dmul_mull.o(x$fpl$dmul) for _dmul
+    __dup.o(.text) refers to stdio.o(.text) for fclose
+    __dup.o(.text) refers to setvbuf.o(.text) for setvbuf
+    __dup.o(.text) refers to sys_io.o(.text) for _sys_istty
+    rt_errno_addr.o(.text) refers to libspace.o(.text) for __user_libspace
+    sys_wrch.o(.text) refers (Special) to use_semi.o(.text) for __I_use_semihosting_swi
+    mempool.o(i.Push__13CAddressStackFPv) refers to mempool.o(.text) for MEMHeap_Alloc(unsigned int)
+
+
+================================================================================
+
+Memory Map of the image
+
+  Image Entry point : 0x30000000
+
+  Load Region LR_1 (Base: 0x30000000, Size: 0x000a4758, Max: 0xffffffff, ABSOLUTE)
+
+    Execution Region ER_RO (Base: 0x30000000, Size: 0x000673f0, Max: 0xffffffff, ABSOLUTE)
+
+    Base Addr    Size         Type   Attr  Idx  E Section Name        Object
+
+    0x30000000   0x00000130   Code   RO     1   * Init                2440init.o
+    0x30000130   0x0000066c   Code   RO     4     .text               BK6000.o
+    0x3000079c   0x00000598   Code   RO     9     .text               2440lib.o
+    0x30000d34   0x000002a0   Code   RO    12     .text               mmu.o
+    0x30000fd4   0x00000ac4   Code   RO    14     .text               flash.o
+    0x30001a98   0x000008a4   Code   RO    17     .text               flashprim.o
+    0x3000233c   0x00000328   Code   RO    20     .text               bmoncmd0.o
+    0x30002664   0x00002814   Code   RO    23     .text               toptask.o
+    0x30004e78   0x000008fc   Code   RO    28     .text               topprim.o
+    0x30005774   0x000012b0   Code   RO    31     .text               menuprim.o
+    0x30006a24   0x00000220   Code   RO    34     .text               adm_top.o
+    0x30006c44   0x000005cc   Code   RO    36     .text               adm_usr.o
+    0x30007210   0x0000a3fc   Code   RO    38     .text               adm_ac.o
+    0x3001160c   0x00001834   Code   RO    42     .text               adm_net.o
+    0x30012e40   0x00000aac   Code   RO    45     .text               adm_set.o
+    0x300138ec   0x00002f90   Code   RO    47     .text               adm_sys.o
+    0x3001687c   0x00000808   Code   RO    50     .text               admprim.o
+    0x30017084   0x00000c40   Code   RO    52     .text               admenroll.o
+    0x30017cc4   0x00000660   Code   RO    54     .text               auth.o
+    0x30018324   0x000008dc   Code   RO    56     .text               authprim.o
+    0x30018c00   0x0000036c   Code   RO    58     .text               admcon.o
+    0x30018f6c   0x00000bf0   Code   RO    60     .text               desktop.o
+    0x30019b5c   0x00002a70   Code   RO    64     .text               wnds.o
+    0x3001c5cc   0x0000018c   Code   RO    67     .text               fpimage.o
+    0x3001c758   0x00000268   Code   RO    70     .text               sinport.o
+    0x3001c9c0   0x00004470   Code   RO    72     .text               svrcmd.o
+    0x30020e30   0x000005e8   Code   RO    79     .text               net.o
+    0x30021418   0x00001ae8   Code   RO    82     .text               cli.o
+    0x30022f00   0x00000ce0   Code   RO    85     .text               slave.o
+    0x30023be0   0x00000be0   Code   RO    87     .text               user.o
+    0x300247c0   0x00000130   Code   RO    89     .text               userauth.o
+    0x300248f0   0x0000259c   Code   RO    91     .text               fsuser.o
+    0x30026e8c   0x00000254   Code   RO    95     .text               acar.o
+    0x300270e0   0x000007c0   Code   RO    97     .text               fsar.o
+    0x300278a0   0x000003ac   Code   RO   100     .text               event.o
+    0x30027c4c   0x000002ec   Code   RO   104     .text               evt.o
+    0x30027f38   0x00000ce0   Code   RO   107     .text               sche.o
+    0x30028c18   0x00000c74   Code   RO   109     .text               devprim.o
+    0x3002988c   0x000030c4   Code   RO   115     .text               unit.o
+    0x3002c950   0x000014ec   Code   RO   118     .text               acad.o
+    0x3002de3c   0x000001e0   Code   RO   121     .text               acap.o
+    0x3002e01c   0x00000348   Code   RO   124     .text               acaz.o
+    0x3002e364   0x00000d68   Code   RO   126     .text               bio.o
+    0x3002f0cc   0x00000730   Code   RO   129     .text               alm.o
+    0x3002f7fc   0x00000b68   Code   RO   132     .text               fire.o
+    0x30030364   0x000017c0   Code   RO   135     .text               syscfg.o
+    0x30031b24   0x000000dc   Code   RO   140     .text               sysdep.o
+    0x30031c00   0x00000298   Code   RO   143     .text               console.o
+    0x30031e98   0x00000088   Code   RO   146     .text               lang.o
+    0x30031f20   0x00002424   Code   RO   148     .text               msg.o
+    0x30034344   0x000004ac   Code   RO   154     .text               ta.o
+    0x300347f0   0x00002adc   Code   RO   156     .text               prim.o
+    0x300372cc   0x00000424   Code   RO   162     .text               cotask.o
+    0x300376f0   0x00000240   Code   RO   165     .text               cbuf.o
+    0x30037930   0x000000c8   Code   RO   167     .text               rect.o
+    0x300379f8   0x000008b0   Code   RO   169     .text               gwnd.o
+    0x300382a8   0x00000f68   Code   RO   171     .text               gmenu.o
+    0x30039210   0x00000c68   Code   RO   174     .text               gmenuc.o
+    0x30039e78   0x00000718   Code   RO   177     .text               glabel.o
+    0x3003a590   0x00000b10   Code   RO   179     .text               gedit.o
+    0x3003b0a0   0x00000c70   Code   RO   182     .text               gchkradio.o
+    0x3003bd10   0x00000338   Code   RO   184     .text               gipstring.o
+    0x3003c048   0x00000904   Code   RO   186     .text               gdate.o
+    0x3003c94c   0x00000a74   Code   RO   188     .text               gipaddr.o
+    0x3003d3c0   0x00000208   Code   RO   215     .text               gfont.o
+    0x3003d5c8   0x000023e8   Code   RO   220     .text               bmpc.o
+    0x3003f9b0   0x00000210   Code   RO   224     .text               eng16.o
+    0x3003fbc0   0x000000e8   Code   RO   227     .text               fs_flash.o
+    0x3003fca8   0x00003028   Code   RO   230     .text               fs.o
+    0x30042cd0   0x00000920   Code   RO   234     .text               sdi.o
+    0x300435f0   0x00000188   Code   RO   237     .text               diskio.o
+    0x30043778   0x00002d50   Code   RO   239     .text               ff.o
+    0x300464c8   0x000001f8   Code   RO   243     .text               rtc.o
+    0x300466c0   0x00000428   Code   RO   247     .text               rtccpu.o
+    0x30046ae8   0x000004bc   Code   RO   249     .text               iodev.o
+    0x30046fa4   0x00001014   Code   RO   252     .text               wiegand.o
+    0x30047fb8   0x00000304   Code   RO   257     .text               key.o
+    0x300482bc   0x00000e54   Code   RO   261     .text               lcdc.o
+    0x30049110   0x00004778   Code   RO   264     .text               sio.o
+    0x3004d888   0x00001678   Code   RO   268     .text               sin.o
+    0x3004ef00   0x00000220   Code   RO   271     .text               ping.o
+    0x3004f120   0x00000f78   Code   RO   274     .text               dhcp.o
+    0x30050098   0x0000178c   Code   RO   277     .text               cr.o
+    0x30051824   0x000003c8   Code   RO   280     .text               fpapi_new.o
+    0x30051bec   0x00000048   Code   RO   283     .text               usbd.o
+    0x30051c34   0x00000204   Code   RO   286     .text               pno.o
+    0x30051e38   0x00000978   Code   RO   288     .text               dbmgr.o(fpmgr_kdk.a)
+    0x300527b0   0x000005f8   Code   RO   292     .text               fprocess.o(fpmgr_kdk.a)
+    0x30052da8   0x00000240   Code   RO   296     .text               filectrl.o(fpmgr_kdk.a)
+    0x30052fe8   0x00002ab8   Code   RO   298     .text               encrypt.o(fpmgr_kdk.a)
+    0x30055aa0   0x0000031c   Code   RO   305     .text               extract.o(fpmgr_kdk.a)
+    0x30055dbc   0x00000fac   Code   RO   308     .text               tcodec.o(fpmgr_kdk.a)
+    0x30056d68   0x000030b4   Code   RO   311     .text               verify.o(fpmgr_kdk.a)
+    0x30059e1c   0x000014f0   Code   RO   314     .text               srch.o(fpmgr_kdk.a)
+    0x3005b30c   0x000000c0   Code   RO   321     .text               srchmem.o(fpmgr_kdk.a)
+    0x3005b3cc   0x0000007c   Code   RO   330     .text               mutil.o(fpmgr_kdk.a)
+    0x3005b448   0x00001944   Code   RO   336     .text               binarize.o(fpmgr_kdk.a)
+    0x3005cd8c   0x00002da0   Code   RO   339     .text               findmin.o(fpmgr_kdk.a)
+    0x3005fb2c   0x00000354   Code   RO   353     .text               llh.o(fpmgr_kdk.a)
+    0x3005fe80   0x000008f8   Code   RO   356     .text               dc.o(fpmgr_kdk.a)
+    0x30060778   0x00000328   Code   RO   369     .text               mempool.o(fpmgr_kdk.a)
+    0x30060aa0   0x00000054   Code   RO   375     .text               _printf.o(c_a__un.l)
+    0x30060af4   0x00000070   Code   RO   377     .text               _sprintf.o(c_a__un.l)
+    0x30060b64   0x00000010   Code   RO   379     .text               final.o(c_a__un.l)
+    0x30060b74   0x00000040   Code   RO   381     .text               final_dtors.o(c_a__un.l)
+    0x30060bb4   0x00000020   Code   RO   383     .text               free.o(c_a__un.l)
+    0x30060bd4   0x00000044   Code   RO   385     .text               init.o(c_a__un.l)
+    0x30060c18   0x00000100   Code   RO   387     .text               malloc.o(c_a__un.l)
+    0x30060d18   0x00000080   Code   RO   389     .text               memcmp.o(c_a__un.l)
+    0x30060d98   0x00000004   Code   RO   391     .text               opdel.o(c_a__un.l)
+    0x30060d9c   0x00000004   Code   RO   393     .text               opnew.o(c_a__un.l)
+    0x30060da0   0x000000fc   Code   RO   395     .text               rand.o(c_a__un.l)
+    0x30060e9c   0x00000044   Code   RO   398     .text               rt_memclr.o(c_a__un.l)
+    0x30060ee0   0x00000058   Code   RO   400     .text               rt_memclr_w.o(c_a__un.l)
+    0x30060f38   0x000000b4   Code   RO   402     .text               rt_memcpy.o(c_a__un.l)
+    0x30060fec   0x0000006c   Code   RO   404     .text               rt_memcpy_w.o(c_a__un.l)
+    0x30061058   0x00000014   Code   RO   406     .text               rt_memset.o(c_a__un.l)
+    0x3006106c   0x000000d4   Code   RO   408     .text               rt_sdiv.o(c_a__un.l)
+    0x30061140   0x000000c0   Code   RO   410     .text               rt_udiv.o(c_a__un.l)
+    0x30061200   0x00000040   Code   RO   412     .text               rtsdiv10.o(c_a__un.l)
+    0x30061240   0x0000002c   Code   RO   414     .text               rtudiv10.o(c_a__un.l)
+    0x3006126c   0x00000030   Code   RO   416     .text               strcat.o(c_a__un.l)
+    0x3006129c   0x000000a0   Code   RO   418     .text               strcmp.o(c_a__un.l)
+    0x3006133c   0x0000006c   Code   RO   420     .text               strcpy.o(c_a__un.l)
+    0x300613a8   0x00000068   Code   RO   422     .text               strlen.o(c_a__un.l)
+    0x30061410   0x0000003c   Code   RO   424     .text               strstr.o(c_a__un.l)
+    0x3006144c   0x00000058   Code   RO   426     .text               vsprintf.o(c_a__un.l)
+    0x300614a4   0x00000050   Code   RO   428     .text               setjmp.o(f_a_p.l)
+    0x300614f4   0x00000d38   Code   RO   457     .text               __vfpntf.o(c_a__un.l)
+    0x3006222c   0x0000001c   Code   RO   459     .text               _sputc.o(c_a__un.l)
+    0x30062248   0x0000000c   Code   RO   461     .text               ferror.o(c_a__un.l)
+    0x30062254   0x0000002c   Code   RO   463     .text               fputc.o(c_a__un.l)
+    0x30062280   0x000000d0   Code   RO   465     .text               h1_alloc.o(c_a__un.l)
+    0x30062350   0x00000048   Code   RO   467     .text               h1_extend.o(c_a__un.l)
+    0x30062398   0x00000074   Code   RO   469     .text               h1_free.o(c_a__un.l)
+    0x3006240c   0x0000000c   Code   RO   471     .text               heapext.o(c_a__un.l)
+    0x30062418   0x00000008   Code   RO   473     .text               hguardc.o(c_a__un.l)
+    0x30062420   0x0000000c   Code   RO   475     .text               libspace.o(c_a__un.l)
+    0x3006242c   0x0000000c   Code   RO   478     .text               postlj.o(c_a__un.l)
+    0x30062438   0x00000044   Code   RO   480     .text               prim_new.o(c_a__un.l)
+    0x3006247c   0x0000000c   Code   RO   482     .text               rt_div0.o(c_a__un.l)
+    0x30062488   0x00000010   Code   RO   484     .text               rt_fp_status_addr.o(c_a__un.l)
+    0x30062498   0x00000018   Code   RO   486     .text               rt_raise.o(c_a__un.l)
+    0x300624b0   0x000005e0   Code   RO   488     .text               stdio.o(c_a__un.l)
+    0x30062a90   0x00000064   Code   RO   509     .text               __raise.o(c_a__un.l)
+    0x30062af4   0x00000924   Code   RO   511     .text               _fp_disp.o(c_a__un.l)
+    0x30063418   0x0000010c   Code   RO   513     .text               fflush.o(c_a__un.l)
+    0x30063524   0x00000244   Code   RO   515     .text               flsbuf.o(c_a__un.l)
+    0x30063768   0x000001c8   Code   RO   517     .text               fseek.o(c_a__un.l)
+    0x30063930   0x00000098   Code   RO   519     .text               lludiv10.o(c_a__un.l)
+    0x300639c8   0x000000d8   Code   RO   521     .text               setvbuf.o(c_a__un.l)
+    0x30063aa0   0x000000fc   Code   RO   523     .text               stkheap1.o(c_a__un.l)
+    0x30063b9c   0x00000018   Code   RO   525     .text               sys_exit.o(c_a__un.l)
+    0x30063bb4   0x000000d8   Code   RO   527     .text               sys_io.o(c_a__un.l)
+    0x30063c8c   0x00000060   Code   RO   536     .text               _fptrap.o(c_a__un.l)
+    0x30063cec   0x00000228   Code   RO   538     .text               _main_redirect.o(c_a__un.l)
+    0x30063f14   0x0000015c   Code   RO   540     .text               bigflt0.o(c_a__un.l)
+    0x30064070   0x00000160   Code   RO   545     .text               defsig.o(c_a__un.l)
+    0x300641d0   0x00000058   Code   RO   548     .text               ftell.o(c_a__un.l)
+    0x30064228   0x0000003c   Code   RO   553     .text               lc_numeric_c.o(c_a__un.l)
+    0x30064264   0x00000044   Code   RO   557     .text               sys_stackheap.o(c_a__un.l)
+    0x300642a8   0x00000004   Code   RO   559     .text               use_semi.o(c_a__un.l)
+    0x300642ac   0x00000048   Code   RO   563     .text               classify.o(m_a_pu.l)
+    0x300642f4   0x00000054   Code   RO   565     .text               dtoi.o(m_a_pu.l)
+    0x30064348   0x00000088   Code   RO   567     .text               __dup.o(c_a__un.l)
+    0x300643d0   0x0000000c   Code   RO   569     .text               rt_errno_addr.o(c_a__un.l)
+    0x300643dc   0x00000018   Code   RO   571     .text               sys_wrch.o(c_a__un.l)
+    0x300643f4   0x000001d4   Code   RO     2     C$$code             2440slib.o
+    0x300645c8   0x00000020   Code   RO   322     C$$ctor             srchmem.o(fpmgr_kdk.a)
+    0x300645e8   0x00000028   Code   RO   323     C$$dtor             srchmem.o(fpmgr_kdk.a)
+    0x30064610   0x00000004   Code   RO   324     C$$pi_ctorvec       srchmem.o(fpmgr_kdk.a)
+    0x30064614   0x00000004   Code   RO   325     C$$pi_dtorvec       srchmem.o(fpmgr_kdk.a)
+    0x30064618   0x00000898   Code   RO   543     CL$$btodstuff       btod.o(c_a__un.l)
+    0x30064eb0   0x000000b0   Code   RO   370     i.Push__13CAddressStackFPv  mempool.o(fpmgr_kdk.a)
+    0x30064f60   0x000000a4   Code   RO   360     i.delete_edge__FP4edge  dc.o(fpmgr_kdk.a)
+    0x30065004   0x00000090   Code   RO   359     i.join__FP4edgeP5pointT1T24side  dc.o(fpmgr_kdk.a)
+    0x30065094   0x0000010c   Code   RO   361     i.lower_tangent__FP4edgeP5pointT1T2PP4edgePP5pointT5T6  dc.o(fpmgr_kdk.a)
+    0x300651a0   0x00000058   Code   RO   358     i.make_edge__FP5pointT1  dc.o(fpmgr_kdk.a)
+    0x300651f8   0x00000044   Code   RO   357     i.splice__FP4edgeT1P5point  dc.o(fpmgr_kdk.a)
+    0x3006523c   0x0000049c   Code   RO   430     x$fpl$dadd          daddsub.o(f_a_p.l)
+    0x300656d8   0x00000040   Code   RO   493     x$fpl$dcheck        dcheck.o(f_a_p.l)
+    0x30065718   0x00000018   Code   RO   495     x$fpl$dcheck1       dcheck1.o(f_a_p.l)
+    0x30065730   0x000005b0   Code   RO   432     x$fpl$ddiv          ddiv.o(f_a_p.l)
+    0x30065ce0   0x000000a4   Code   RO   434     x$fpl$dfix          dfix.o(f_a_p.l)
+    0x30065d84   0x000000a4   Code   RO   437     x$fpl$dfixu         dfixu.o(f_a_p.l)
+    0x30065e28   0x00000064   Code   RO   440     x$fpl$dflt          dflt.o(f_a_p.l)
+    0x30065e8c   0x000002b4   Code   RO   442     x$fpl$dmul          dmul_mull.o(f_a_p.l)
+    0x30066140   0x00000230   Code   RO   497     x$fpl$dunder        dunder.o(f_a_p.l)
+    0x30066370   0x00000164   Code   RO   499     x$fpl$exception     except.o(f_a_p.l)
+    0x300664d4   0x00000068   Code   RO   444     x$fpl$f2d           f2d.o(f_a_p.l)
+    0x3006653c   0x00000308   Code   RO   446     x$fpl$fadd          faddsub.o(f_a_p.l)
+    0x30066844   0x00000024   Code   RO   501     x$fpl$fcheck        fcheck.o(f_a_p.l)
+    0x30066868   0x00000018   Code   RO   503     x$fpl$fcheck1       fcheck1.o(f_a_p.l)
+    0x30066880   0x00000228   Code   RO   448     x$fpl$fdiv          fdiv.o(f_a_p.l)
+    0x30066aa8   0x0000006c   Code   RO   450     x$fpl$ffixu         ffixu.o(f_a_p.l)
+    0x30066b14   0x00000064   Code   RO   453     x$fpl$fflt          fflt.o(f_a_p.l)
+    0x30066b78   0x00000128   Code   RO   455     x$fpl$fmul          fmul_mull.o(f_a_p.l)
+    0x30066ca0   0x00000094   Code   RO   505     x$fpl$fnorm2        fnorm2.o(f_a_p.l)
+    0x30066d34   0x0000016c   Code   RO   507     x$fpl$funder        funder.o(f_a_p.l)
+    0x30066ea0   0x0000003c   Code   RO   561     x$fpl$ieeestatus    istatus.o(f_a_p.l)
+    0x30066edc   0x00000004   Code   RO   491     x$fpl$printf1       printf1.o(f_a_p.l)
+    0x30066ee0   0x00000098   Code   RO   532     x$fpl$retnan        retnan.o(f_a_p.l)
+    0x30066f78   0x000000a4   Code   RO   534     x$fpl$trapveneer    trapv.o(f_a_p.l)
+    0x3006701c   0x0000001f   Data   RO   137     .constdata          syscfg.o
+    0x3006703b   0x00000010   Data   RO   158     .constdata          prim.o
+    0x3006704b   0x00000048   Data   RO   217     .constdata          gfont.o
+    0x30067093   0x00000001   PAD
+    0x30067094   0x00000048   Data   RO   231     .constdata          fs.o
+    0x300670dc   0x0000008d   Data   RO   240     .constdata          ff.o
+    0x30067169   0x00000010   Data   RO   254     .constdata          wiegand.o
+    0x30067179   0x00000014   Data   RO   258     .constdata          key.o
+    0x3006718d   0x00000003   PAD
+    0x30067190   0x00000044   Data   RO   265     .constdata          sio.o
+    0x300671d4   0x00000034   Data   RO   340     .constdata          findmin.o(fpmgr_kdk.a)
+    0x30067208   0x00000004   Data   RO   528     .constdata          sys_io.o(c_a__un.l)
+    0x3006720c   0x00000004   Data   RO   529     .constdata          sys_io.o(c_a__un.l)
+    0x30067210   0x00000004   Data   RO   530     .constdata          sys_io.o(c_a__un.l)
+    0x30067214   0x00000094   Data   RO   541     .constdata          bigflt0.o(c_a__un.l)
+    0x300672a8   0x0000012b   Data   RO   546     .constdata          defsig.o(c_a__un.l)
+    0x300673d3   0x00000001   Data   RO   551     .constdata          fwritefast.o(c_a__un.l)
+    0x300673d4   0x0000001c   Data   RO   554     .constdata          lc_numeric_c.o(c_a__un.l)
+
+
+    Execution Region ER_RW (Base: 0x300673f0, Size: 0x0003d368, Max: 0xffffffff, ABSOLUTE)
+
+    Base Addr    Size         Type   Attr  Idx  E Section Name        Object
+
+    0x300673f0   0x00000004   Data   RW    21     .data               bmoncmd0.o
+    0x300673f4   0x0000000c   Data   RW    48     .data               adm_sys.o
+    0x30067400   0x00000010   Data   RW    61     .data               desktop.o
+    0x30067410   0x0000000c   Data   RW   101     .data               event.o
+    0x3006741c   0x00000014   Data   RW   136     .data               syscfg.o
+    0x30067430   0x00006ee8   Data   RW   149     .data               msg.o
+    0x3006e318   0x0000003d   Data   RW   152     .data               msg.o
+    0x3006e355   0x00000003   PAD
+    0x3006e358   0x0000003c   Data   RW   157     .data               prim.o
+    0x3006e394   0x00000780   Data   RW   190     .data               symbol.o
+    0x3006eb14   0x00000090   Data   RW   192     .data               symbol.o
+    0x3006eba4   0x00000280   Data   RW   193     .data               symbol.o
+    0x3006ee24   0x000000e0   Data   RW   196     .data               symbol.o
+    0x3006ef04   0x00023d87   Data   RW   216     .data               gfont.o
+    0x30092c8b   0x00000001   PAD
+    0x30092c8c   0x00000800   Data   RW   221     .data               bmpc.o
+    0x3009348c   0x00000c1f   Data   RW   225     .data               eng16.o
+    0x300940ab   0x00000025   Data   RW   244     .data               rtc.o
+    0x300940d0   0x0000000a   Data   RW   253     .data               wiegand.o
+    0x300940da   0x00000002   PAD
+    0x300940dc   0x0000000c   Data   RW   289     .data               dbmgr.o(fpmgr_kdk.a)
+    0x300940e8   0x00000044   Data   RW   293     .data               fprocess.o(fpmgr_kdk.a)
+    0x3009412c   0x00001378   Data   RW   299     .data               encrypt.o(fpmgr_kdk.a)
+    0x300954a4   0x0000000e   Data   RW   309     .data               tcodec.o(fpmgr_kdk.a)
+    0x300954b2   0x00000002   PAD
+    0x300954b4   0x00000004   Data   RW   331     .data               mutil.o(fpmgr_kdk.a)
+    0x300954b8   0x000009c4   Data   RW   334     .data               atan.o(fpmgr_kdk.a)
+    0x30095e7c   0x00000804   Data   RW   335     .data               atan.o(fpmgr_kdk.a)
+    0x30096680   0x00001f00   Data   RW   337     .data               binarize.o(fpmgr_kdk.a)
+    0x30098580   0x00000038   Data   RW   342     .data               table.o(fpmgr_kdk.a)
+    0x300985b8   0x00000078   Data   RW   343     .data               table.o(fpmgr_kdk.a)
+    0x30098630   0x00000004   Data   RW   344     .data               table.o(fpmgr_kdk.a)
+    0x30098634   0x00000200   Data   RW   346     .data               table.o(fpmgr_kdk.a)
+    0x30098834   0x00000200   Data   RW   347     .data               table.o(fpmgr_kdk.a)
+    0x30098a34   0x00000b58   Data   RW   348     .data               table.o(fpmgr_kdk.a)
+    0x3009958c   0x00000100   Data   RW   349     .data               table.o(fpmgr_kdk.a)
+    0x3009968c   0x00000100   Data   RW   350     .data               table.o(fpmgr_kdk.a)
+    0x3009978c   0x000057e4   Data   RW   351     .data               table.o(fpmgr_kdk.a)
+    0x3009ef70   0x000057e4   Data   RW   352     .data               table.o(fpmgr_kdk.a)
+    0x300a4754   0x00000004   Data   RW   371     .data               mempool.o(fpmgr_kdk.a)
+
+
+    Execution Region ER_ZI (Base: 0x300a4758, Size: 0x01d854a0, Max: 0xffffffff, ABSOLUTE)
+
+    Base Addr    Size         Type   Attr  Idx  E Section Name        Object
+
+    0x300a4758   0x00004f18   Zero   RW     5     .bss                BK6000.o
+    0x300a9670   0x00000001   Zero   RW     7     .bss                BK6000.o
+    0x300a9671   0x00000003   PAD
+    0x300a9674   0x00000010   Zero   RW    10     .bss                2440lib.o
+    0x300a9684   0x00000004   Zero   RW    15     .bss                flash.o
+    0x300a9688   0x00000090   Zero   RW    18     .bss                flashprim.o
+    0x300a9718   0x000190bc   Zero   RW    24     .bss                toptask.o
+    0x300c27d4   0x00000120   Zero   RW    29     .bss                topprim.o
+    0x300c28f4   0x0000300c   Zero   RW    32     .bss                menuprim.o
+    0x300c5900   0x00000008   Zero   RW    39     .bss                adm_ac.o
+    0x300c5908   0x00000004   Zero   RW    43     .bss                adm_net.o
+    0x300c590c   0x000000c8   Zero   RW    62     .bss                desktop.o
+    0x300c59d4   0x00000248   Zero   RW    65     .bss                wnds.o
+    0x300c5c1c   0x00004c5c   Zero   RW    68     .bss                fpimage.o
+    0x300ca878   0x00001584   Zero   RW    73     .bss                svrcmd.o
+    0x300cbdfc   0x00000001   Zero   RW    80     .bss                net.o
+    0x300cbdfd   0x00000003   PAD
+    0x300cbe00   0x00155ce0   Zero   RW    83     .bss                cli.o
+    0x30221ae0   0x000d7104   Zero   RW    92     .bss                fsuser.o
+    0x302f8be4   0x0000000c   Zero   RW    98     .bss                fsar.o
+    0x302f8bf0   0x00000230   Zero   RW   102     .bss                event.o
+    0x302f8e20   0x00000008   Zero   RW   105     .bss                evt.o
+    0x302f8e28   0x0000001c   Zero   RW   110     .bss                devprim.o
+    0x302f8e44   0x00000190   Zero   RW   116     .bss                unit.o
+    0x302f8fd4   0x00000030   Zero   RW   119     .bss                acad.o
+    0x302f9004   0x00000004   Zero   RW   122     .bss                acap.o
+    0x302f9008   0x0000006c   Zero   RW   127     .bss                bio.o
+    0x302f9074   0x00000004   Zero   RW   130     .bss                alm.o
+    0x302f9078   0x00000008   Zero   RW   133     .bss                fire.o
+    0x302f9080   0x000014f4   Zero   RW   138     .bss                syscfg.o
+    0x302fa574   0x0024fcc4   Zero   RW   141     .bss                sysdep.o
+    0x3054a238   0x00000002   Zero   RW   144     .bss                console.o
+    0x3054a23a   0x00000002   PAD
+    0x3054a23c   0x00000828   Zero   RW   150     .bss                msg.o
+    0x3054aa64   0x00000010   Zero   RW   159     .bss                prim.o
+    0x3054aa74   0x000014b0   Zero   RW   163     .bss                cotask.o
+    0x3054bf24   0x00000001   Zero   RW   172     .bss                gmenu.o
+    0x3054bf25   0x00000003   PAD
+    0x3054bf28   0x0000001c   Zero   RW   175     .bss                gmenuc.o
+    0x3054bf44   0x00000238   Zero   RW   180     .bss                gedit.o
+    0x3054c17c   0x00000050   Zero   RW   218     .bss                gfont.o
+    0x3054c1cc   0x00000f80   Zero   RW   222     .bss                bmpc.o
+    0x3054d14c   0x00000008   Zero   RW   228     .bss                fs_flash.o
+    0x3054d154   0x00105c34   Zero   RW   232     .bss                fs.o
+    0x30652d88   0x00000010   Zero   RW   235     .bss                sdi.o
+    0x30652d98   0x00000008   Zero   RW   241     .bss                ff.o
+    0x30652da0   0x00000018   Zero   RW   245     .bss                rtc.o
+    0x30652db8   0x0000003c   Zero   RW   250     .bss                iodev.o
+    0x30652df4   0x00000068   Zero   RW   255     .bss                wiegand.o
+    0x30652e5c   0x00000018   Zero   RW   259     .bss                key.o
+    0x30652e74   0x00025838   Zero   RW   262     .bss                lcdc.o
+    0x306786ac   0x0002527c   Zero   RW   266     .bss                sio.o
+    0x3069d928   0x00000002   Zero   RW   269     .bss                sin.o
+    0x3069d92a   0x000005b6   Zero   RW   272     .bss                ping.o
+    0x3069dee0   0x00000844   Zero   RW   275     .bss                dhcp.o
+    0x3069e724   0x00000004   Zero   RW   278     .bss                cr.o
+    0x3069e728   0x00000004   Zero   RW   281     .bss                fpapi_new.o
+    0x3069e72c   0x00013888   Zero   RW   290     .bss                dbmgr.o(fpmgr_kdk.a)
+    0x306b1fb4   0x0000d1c6   Zero   RW   294     .bss                fprocess.o(fpmgr_kdk.a)
+    0x306bf17a   0x0000000d   Zero   RW   300     .bss                encrypt.o(fpmgr_kdk.a)
+    0x306bf187   0x00000001   PAD
+    0x306bf188   0x00000004   Zero   RW   306     .bss                extract.o(fpmgr_kdk.a)
+    0x306bf18c   0x0000b61c   Zero   RW   312     .bss                verify.o(fpmgr_kdk.a)
+    0x306ca7a8   0x00000a88   Zero   RW   315     .bss                srch.o(fpmgr_kdk.a)
+    0x306cb230   0x0000006c   Zero   RW   326     .bss                srchmem.o(fpmgr_kdk.a)
+    0x306cb29c   0x0004b004   Zero   RW   332     .bss                mutil.o(fpmgr_kdk.a)
+    0x307162a0   0x0031372c   Zero   RW   354     .bss                llh.o(fpmgr_kdk.a)
+    0x30a299cc   0x00000018   Zero   RW   362     .bss                dc.o(fpmgr_kdk.a)
+    0x30a299e4   0x01400004   Zero   RW   372     .bss                mempool.o(fpmgr_kdk.a)
+    0x31e299e8   0x000000e4   Zero   RW   396     .bss                rand.o(c_a__un.l)
+    0x31e29acc   0x00000060   Zero   RW   476     .bss                libspace.o(c_a__un.l)
+    0x31e29b2c   0x000000cc   Zero   RW   489     .bss                stdio.o(c_a__un.l)
+
+
+
+  Load Region LR$$Debug (Base: 0x00000000, Size: 0x00000000, Max: 0xffffffff, ABSOLUTE)
+
+    Execution Region ER$$Debug (Base: 0x00000000, Size: 0x00000000, Max: 0xffffffff, ABSOLUTE)
+
+    Base Addr    Size         Type   Attr  Idx  E Section Name        Object
+
+    0x00000000   0x000000f4   Dbug   RW     8     .debug_frame        BK6000.o
+    0x000000f4   0x000001e8   Dbug   RW    11     .debug_frame        2440lib.o
+    0x000002dc   0x000000c0   Dbug   RW    13     .debug_frame        mmu.o
+    0x0000039c   0x00000270   Dbug   RW    16     .debug_frame        flash.o
+    0x0000060c   0x00000200   Dbug   RW    19     .debug_frame        flashprim.o
+    0x0000080c   0x000000d4   Dbug   RW    22     .debug_frame        bmoncmd0.o
+    0x000008e0   0x00000558   Dbug   RW    27     .debug_frame        toptask.o
+    0x00000e38   0x00000488   Dbug   RW    30     .debug_frame        topprim.o
+    0x000012c0   0x00000594   Dbug   RW    33     .debug_frame        menuprim.o
+    0x00001854   0x000000b4   Dbug   RW    35     .debug_frame        adm_top.o
+    0x00001908   0x000001a4   Dbug   RW    37     .debug_frame        adm_usr.o
+    0x00001aac   0x00001c20   Dbug   RW    41     .debug_frame        adm_ac.o
+    0x000036cc   0x000002e0   Dbug   RW    44     .debug_frame        adm_net.o
+    0x000039ac   0x000001e8   Dbug   RW    46     .debug_frame        adm_set.o
+    0x00003b94   0x00000794   Dbug   RW    49     .debug_frame        adm_sys.o
+    0x00004328   0x000002d0   Dbug   RW    51     .debug_frame        admprim.o
+    0x000045f8   0x000001a0   Dbug   RW    53     .debug_frame        admenroll.o
+    0x00004798   0x000000c4   Dbug   RW    55     .debug_frame        auth.o
+    0x0000485c   0x00000254   Dbug   RW    57     .debug_frame        authprim.o
+    0x00004ab0   0x000000c0   Dbug   RW    59     .debug_frame        admcon.o
+    0x00004b70   0x00000444   Dbug   RW    63     .debug_frame        desktop.o
+    0x00004fb4   0x000007a8   Dbug   RW    66     .debug_frame        wnds.o
+    0x0000575c   0x000000c0   Dbug   RW    69     .debug_frame        fpimage.o
+    0x0000581c   0x000000e0   Dbug   RW    71     .debug_frame        sinport.o
+    0x000058fc   0x000006c0   Dbug   RW    74     .debug_frame        svrcmd.o
+    0x00005fbc   0x00000210   Dbug   RW    81     .debug_frame        net.o
+    0x000061cc   0x000006fc   Dbug   RW    84     .debug_frame        cli.o
+    0x000068c8   0x000001f4   Dbug   RW    86     .debug_frame        slave.o
+    0x00006abc   0x00000470   Dbug   RW    88     .debug_frame        user.o
+    0x00006f2c   0x000000b4   Dbug   RW    90     .debug_frame        userauth.o
+    0x00006fe0   0x00000d28   Dbug   RW    94     .debug_frame        fsuser.o
+    0x00007d08   0x00000124   Dbug   RW    96     .debug_frame        acar.o
+    0x00007e2c   0x00000408   Dbug   RW    99     .debug_frame        fsar.o
+    0x00008234   0x00000100   Dbug   RW   103     .debug_frame        event.o
+    0x00008334   0x000001b8   Dbug   RW   106     .debug_frame        evt.o
+    0x000084ec   0x000003a0   Dbug   RW   108     .debug_frame        sche.o
+    0x0000888c   0x00000280   Dbug   RW   114     .debug_frame        devprim.o
+    0x00008b0c   0x000010c0   Dbug   RW   117     .debug_frame        unit.o
+    0x00009bcc   0x00000494   Dbug   RW   120     .debug_frame        acad.o
+    0x0000a060   0x00000134   Dbug   RW   123     .debug_frame        acap.o
+    0x0000a194   0x0000014c   Dbug   RW   125     .debug_frame        acaz.o
+    0x0000a2e0   0x000003e4   Dbug   RW   128     .debug_frame        bio.o
+    0x0000a6c4   0x000002a4   Dbug   RW   131     .debug_frame        alm.o
+    0x0000a968   0x000003f0   Dbug   RW   134     .debug_frame        fire.o
+    0x0000ad58   0x00000444   Dbug   RW   139     .debug_frame        syscfg.o
+    0x0000b19c   0x00000164   Dbug   RW   142     .debug_frame        sysdep.o
+    0x0000b300   0x000001bc   Dbug   RW   145     .debug_frame        console.o
+    0x0000b4bc   0x00000070   Dbug   RW   147     .debug_frame        lang.o
+    0x0000b52c   0x00000104   Dbug   RW   153     .debug_frame        msg.o
+    0x0000b630   0x000002b0   Dbug   RW   155     .debug_frame        ta.o
+    0x0000b8e0   0x00000e80   Dbug   RW   161     .debug_frame        prim.o
+    0x0000c760   0x0000018c   Dbug   RW   164     .debug_frame        cotask.o
+    0x0000c8ec   0x00000170   Dbug   RW   166     .debug_frame        cbuf.o
+    0x0000ca5c   0x00000060   Dbug   RW   168     .debug_frame        rect.o
+    0x0000cabc   0x0000033c   Dbug   RW   170     .debug_frame        gwnd.o
+    0x0000cdf8   0x00000414   Dbug   RW   173     .debug_frame        gmenu.o
+    0x0000d20c   0x00000360   Dbug   RW   176     .debug_frame        gmenuc.o
+    0x0000d56c   0x00000218   Dbug   RW   178     .debug_frame        glabel.o
+    0x0000d784   0x00000314   Dbug   RW   181     .debug_frame        gedit.o
+    0x0000da98   0x00000530   Dbug   RW   183     .debug_frame        gchkradio.o
+    0x0000dfc8   0x00000100   Dbug   RW   185     .debug_frame        gipstring.o
+    0x0000e0c8   0x000001f4   Dbug   RW   187     .debug_frame        gdate.o
+    0x0000e2bc   0x000001f4   Dbug   RW   189     .debug_frame        gipaddr.o
+    0x0000e4b0   0x00000170   Dbug   RW   219     .debug_frame        gfont.o
+    0x0000e620   0x0000066c   Dbug   RW   223     .debug_frame        bmpc.o
+    0x0000ec8c   0x000000fc   Dbug   RW   226     .debug_frame        eng16.o
+    0x0000ed88   0x000000dc   Dbug   RW   229     .debug_frame        fs_flash.o
+    0x0000ee64   0x0000083c   Dbug   RW   233     .debug_frame        fs.o
+    0x0000f6a0   0x00000214   Dbug   RW   236     .debug_frame        sdi.o
+    0x0000f8b4   0x000000f8   Dbug   RW   238     .debug_frame        diskio.o
+    0x0000f9ac   0x00000830   Dbug   RW   242     .debug_frame        ff.o
+    0x000101dc   0x000000cc   Dbug   RW   246     .debug_frame        rtc.o
+    0x000102a8   0x000000f0   Dbug   RW   248     .debug_frame        rtccpu.o
+    0x00010398   0x000001a4   Dbug   RW   251     .debug_frame        iodev.o
+    0x0001053c   0x000002e4   Dbug   RW   256     .debug_frame        wiegand.o
+    0x00010820   0x00000124   Dbug   RW   260     .debug_frame        key.o
+    0x00010944   0x000005c4   Dbug   RW   263     .debug_frame        lcdc.o
+    0x00010f08   0x00000b78   Dbug   RW   267     .debug_frame        sio.o
+    0x00011a80   0x00000650   Dbug   RW   270     .debug_frame        sin.o
+    0x000120d0   0x00000070   Dbug   RW   273     .debug_frame        ping.o
+    0x00012140   0x000002e0   Dbug   RW   276     .debug_frame        dhcp.o
+    0x00012420   0x000008d8   Dbug   RW   279     .debug_frame        cr.o
+    0x00012cf8   0x000001b0   Dbug   RW   282     .debug_frame        fpapi_new.o
+    0x00012ea8   0x000000cc   Dbug   RW   285     .debug_frame        usbd.o
+    0x00012f74   0x00000194   Dbug   RW   287     .debug_frame        pno.o
+    0x00013108   0x000002a0   Dbug   RW   291     .debug_frame        dbmgr.o(fpmgr_kdk.a)
+    0x000133a8   0x000002fc   Dbug   RW   295     .debug_frame        fprocess.o(fpmgr_kdk.a)
+    0x000136a4   0x00000120   Dbug   RW   297     .debug_frame        filectrl.o(fpmgr_kdk.a)
+    0x000137c4   0x000003a4   Dbug   RW   304     .debug_frame        encrypt.o(fpmgr_kdk.a)
+    0x00013b68   0x00000088   Dbug   RW   307     .debug_frame        extract.o(fpmgr_kdk.a)
+    0x00013bf0   0x000002a8   Dbug   RW   310     .debug_frame        tcodec.o(fpmgr_kdk.a)
+    0x00013e98   0x000004ec   Dbug   RW   313     .debug_frame        verify.o(fpmgr_kdk.a)
+    0x00014384   0x0000026c   Dbug   RW   320     .debug_frame        srch.o(fpmgr_kdk.a)
+    0x000145f0   0x000000c8   Dbug   RW   327     .debug_frame        srchmem.o(fpmgr_kdk.a)
+    0x000146b8   0x00000048   Dbug   RW   328     .debug_frame        srchmem.o(fpmgr_kdk.a)
+    0x00014700   0x00000048   Dbug   RW   329     .debug_frame        srchmem.o(fpmgr_kdk.a)
+    0x00014748   0x0000005c   Dbug   RW   333     .debug_frame        mutil.o(fpmgr_kdk.a)
+    0x000147a4   0x000002f0   Dbug   RW   338     .debug_frame        binarize.o(fpmgr_kdk.a)
+    0x00014a94   0x000003d4   Dbug   RW   341     .debug_frame        findmin.o(fpmgr_kdk.a)
+    0x00014e68   0x00000110   Dbug   RW   355     .debug_frame        llh.o(fpmgr_kdk.a)
+    0x00014f78   0x0000013c   Dbug   RW   363     .debug_frame        dc.o(fpmgr_kdk.a)
+    0x000150b4   0x0000003c   Dbug   RW   364     .debug_frame        dc.o(fpmgr_kdk.a)
+    0x000150f0   0x0000003c   Dbug   RW   365     .debug_frame        dc.o(fpmgr_kdk.a)
+    0x0001512c   0x00000058   Dbug   RW   366     .debug_frame        dc.o(fpmgr_kdk.a)
+    0x00015184   0x0000003c   Dbug   RW   367     .debug_frame        dc.o(fpmgr_kdk.a)
+    0x000151c0   0x00000060   Dbug   RW   368     .debug_frame        dc.o(fpmgr_kdk.a)
+    0x00015220   0x00000170   Dbug   RW   373     .debug_frame        mempool.o(fpmgr_kdk.a)
+    0x00015390   0x00000054   Dbug   RW   374     .debug_frame        mempool.o(fpmgr_kdk.a)
+    0x000153e4   0x00000050   Dbug   RW   376     .debug_frame        _printf.o(c_a__un.l)
+    0x00015434   0x0000005c   Dbug   RW   378     .debug_frame        _sprintf.o(c_a__un.l)
+    0x00015490   0x00000048   Dbug   RW   380     .debug_frame        final.o(c_a__un.l)
+    0x000154d8   0x00000054   Dbug   RW   382     .debug_frame        final_dtors.o(c_a__un.l)
+    0x0001552c   0x00000054   Dbug   RW   384     .debug_frame        free.o(c_a__un.l)
+    0x00015580   0x00000054   Dbug   RW   386     .debug_frame        init.o(c_a__un.l)
+    0x000155d4   0x000000e8   Dbug   RW   388     .debug_frame        malloc.o(c_a__un.l)
+    0x000156bc   0x0000003c   Dbug   RW   390     .debug_frame        memcmp.o(c_a__un.l)
+    0x000156f8   0x0000003c   Dbug   RW   392     .debug_frame        opdel.o(c_a__un.l)
+    0x00015734   0x0000003c   Dbug   RW   394     .debug_frame        opnew.o(c_a__un.l)
+    0x00015770   0x00000080   Dbug   RW   397     .debug_frame        rand.o(c_a__un.l)
+    0x000157f0   0x00000044   Dbug   RW   399     .debug_frame        rt_memclr.o(c_a__un.l)
+    0x00015834   0x00000054   Dbug   RW   401     .debug_frame        rt_memclr_w.o(c_a__un.l)
+    0x00015888   0x0000003c   Dbug   RW   403     .debug_frame        rt_memcpy.o(c_a__un.l)
+    0x000158c4   0x00000054   Dbug   RW   405     .debug_frame        rt_memcpy_w.o(c_a__un.l)
+    0x00015918   0x0000003c   Dbug   RW   407     .debug_frame        rt_memset.o(c_a__un.l)
+    0x00015954   0x00000044   Dbug   RW   409     .debug_frame        rt_sdiv.o(c_a__un.l)
+    0x00015998   0x00000044   Dbug   RW   411     .debug_frame        rt_udiv.o(c_a__un.l)
+    0x000159dc   0x00000044   Dbug   RW   413     .debug_frame        rtsdiv10.o(c_a__un.l)
+    0x00015a20   0x00000044   Dbug   RW   415     .debug_frame        rtudiv10.o(c_a__un.l)
+    0x00015a64   0x0000003c   Dbug   RW   417     .debug_frame        strcat.o(c_a__un.l)
+    0x00015aa0   0x00000054   Dbug   RW   419     .debug_frame        strcmp.o(c_a__un.l)
+    0x00015af4   0x00000050   Dbug   RW   421     .debug_frame        strcpy.o(c_a__un.l)
+    0x00015b44   0x0000003c   Dbug   RW   423     .debug_frame        strlen.o(c_a__un.l)
+    0x00015b80   0x0000004c   Dbug   RW   425     .debug_frame        strstr.o(c_a__un.l)
+    0x00015bcc   0x00000054   Dbug   RW   427     .debug_frame        vsprintf.o(c_a__un.l)
+    0x00015c20   0x00000064   Dbug   RW   429     .debug_frame        setjmp.o(f_a_p.l)
+    0x00015c84   0x00000160   Dbug   RW   431     .debug_frame        daddsub.o(f_a_p.l)
+    0x00015de4   0x000000f0   Dbug   RW   433     .debug_frame        ddiv.o(f_a_p.l)
+    0x00015ed4   0x00000074   Dbug   RW   436     .debug_frame        dfix.o(f_a_p.l)
+    0x00015f48   0x00000074   Dbug   RW   439     .debug_frame        dfixu.o(f_a_p.l)
+    0x00015fbc   0x00000058   Dbug   RW   441     .debug_frame        dflt.o(f_a_p.l)
+    0x00016014   0x00000078   Dbug   RW   443     .debug_frame        dmul_mull.o(f_a_p.l)
+    0x0001608c   0x00000054   Dbug   RW   445     .debug_frame        f2d.o(f_a_p.l)
+    0x000160e0   0x000000e4   Dbug   RW   447     .debug_frame        faddsub.o(f_a_p.l)
+    0x000161c4   0x0000007c   Dbug   RW   449     .debug_frame        fdiv.o(f_a_p.l)
+    0x00016240   0x00000064   Dbug   RW   452     .debug_frame        ffixu.o(f_a_p.l)
+    0x000162a4   0x00000058   Dbug   RW   454     .debug_frame        fflt.o(f_a_p.l)
+    0x000162fc   0x00000064   Dbug   RW   456     .debug_frame        fmul_mull.o(f_a_p.l)
+    0x00016360   0x000000b0   Dbug   RW   458     .debug_frame        __vfpntf.o(c_a__un.l)
+    0x00016410   0x0000004c   Dbug   RW   460     .debug_frame        _sputc.o(c_a__un.l)
+    0x0001645c   0x0000003c   Dbug   RW   462     .debug_frame        ferror.o(c_a__un.l)
+    0x00016498   0x0000003c   Dbug   RW   464     .debug_frame        fputc.o(c_a__un.l)
+    0x000164d4   0x0000007c   Dbug   RW   466     .debug_frame        h1_alloc.o(c_a__un.l)
+    0x00016550   0x00000048   Dbug   RW   468     .debug_frame        h1_extend.o(c_a__un.l)
+    0x00016598   0x0000003c   Dbug   RW   470     .debug_frame        h1_free.o(c_a__un.l)
+    0x000165d4   0x0000004c   Dbug   RW   472     .debug_frame        heapext.o(c_a__un.l)
+    0x00016620   0x0000004c   Dbug   RW   474     .debug_frame        hguardc.o(c_a__un.l)
+    0x0001666c   0x00000044   Dbug   RW   477     .debug_frame        libspace.o(c_a__un.l)
+    0x000166b0   0x00000044   Dbug   RW   479     .debug_frame        postlj.o(c_a__un.l)
+    0x000166f4   0x00000058   Dbug   RW   481     .debug_frame        prim_new.o(c_a__un.l)
+    0x0001674c   0x0000003c   Dbug   RW   483     .debug_frame        rt_div0.o(c_a__un.l)
+    0x00016788   0x0000004c   Dbug   RW   485     .debug_frame        rt_fp_status_addr.o(c_a__un.l)
+    0x000167d4   0x00000050   Dbug   RW   487     .debug_frame        rt_raise.o(c_a__un.l)
+    0x00016824   0x00000238   Dbug   RW   490     .debug_frame        stdio.o(c_a__un.l)
+    0x00016a5c   0x0000003c   Dbug   RW   492     .debug_frame        printf1.o(f_a_p.l)
+    0x00016a98   0x00000054   Dbug   RW   494     .debug_frame        dcheck.o(f_a_p.l)
+    0x00016aec   0x0000003c   Dbug   RW   496     .debug_frame        dcheck1.o(f_a_p.l)
+    0x00016b28   0x000000a8   Dbug   RW   498     .debug_frame        dunder.o(f_a_p.l)
+    0x00016bd0   0x00000078   Dbug   RW   500     .debug_frame        except.o(f_a_p.l)
+    0x00016c48   0x0000003c   Dbug   RW   502     .debug_frame        fcheck.o(f_a_p.l)
+    0x00016c84   0x0000003c   Dbug   RW   504     .debug_frame        fcheck1.o(f_a_p.l)
+    0x00016cc0   0x00000044   Dbug   RW   506     .debug_frame        fnorm2.o(f_a_p.l)
+    0x00016d04   0x00000080   Dbug   RW   508     .debug_frame        funder.o(f_a_p.l)
+    0x00016d84   0x0000005c   Dbug   RW   510     .debug_frame        __raise.o(c_a__un.l)
+    0x00016de0   0x00000134   Dbug   RW   512     .debug_frame        _fp_disp.o(c_a__un.l)
+    0x00016f14   0x00000058   Dbug   RW   514     .debug_frame        fflush.o(c_a__un.l)
+    0x00016f6c   0x00000078   Dbug   RW   516     .debug_frame        flsbuf.o(c_a__un.l)
+    0x00016fe4   0x00000090   Dbug   RW   518     .debug_frame        fseek.o(c_a__un.l)
+    0x00017074   0x00000058   Dbug   RW   520     .debug_frame        lludiv10.o(c_a__un.l)
+    0x000170cc   0x00000088   Dbug   RW   522     .debug_frame        setvbuf.o(c_a__un.l)
+    0x00017154   0x00000080   Dbug   RW   524     .debug_frame        stkheap1.o(c_a__un.l)
+    0x000171d4   0x00000044   Dbug   RW   526     .debug_frame        sys_exit.o(c_a__un.l)
+    0x00017218   0x00000110   Dbug   RW   531     .debug_frame        sys_io.o(c_a__un.l)
+    0x00017328   0x0000005c   Dbug   RW   533     .debug_frame        retnan.o(f_a_p.l)
+    0x00017384   0x00000084   Dbug   RW   535     .debug_frame        trapv.o(f_a_p.l)
+    0x00017408   0x00000064   Dbug   RW   537     .debug_frame        _fptrap.o(c_a__un.l)
+    0x0001746c   0x000000bc   Dbug   RW   539     .debug_frame        _main_redirect.o(c_a__un.l)
+    0x00017528   0x00000080   Dbug   RW   542     .debug_frame        bigflt0.o(c_a__un.l)
+    0x000175a8   0x00000218   Dbug   RW   544     .debug_frame        btod.o(c_a__un.l)
+    0x000177c0   0x0000004c   Dbug   RW   547     .debug_frame        defsig.o(c_a__un.l)
+    0x0001780c   0x0000004c   Dbug   RW   549     .debug_frame        ftell.o(c_a__un.l)
+    0x00017858   0x0000004c   Dbug   RW   555     .debug_frame        lc_numeric_c.o(c_a__un.l)
+    0x000178a4   0x0000004c   Dbug   RW   558     .debug_frame        sys_stackheap.o(c_a__un.l)
+    0x000178f0   0x00000044   Dbug   RW   560     .debug_frame        use_semi.o(c_a__un.l)
+    0x00017934   0x00000050   Dbug   RW   562     .debug_frame        istatus.o(f_a_p.l)
+    0x00017984   0x0000003c   Dbug   RW   564     .debug_frame        classify.o(m_a_pu.l)
+    0x000179c0   0x0000004c   Dbug   RW   566     .debug_frame        dtoi.o(m_a_pu.l)
+    0x00017a0c   0x00000074   Dbug   RW   568     .debug_frame        __dup.o(c_a__un.l)
+    0x00017a80   0x0000004c   Dbug   RW   570     .debug_frame        rt_errno_addr.o(c_a__un.l)
+    0x00017acc   0x00000048   Dbug   RW   572     .debug_frame        sys_wrch.o(c_a__un.l)
+

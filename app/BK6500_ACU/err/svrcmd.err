@@ -1,0 +1,9 @@
+"svrcmd_read.c", line 16: Warning: C2207W: inventing 'extern int cprintf();'
+"svrcmd_read.c", line 299: Warning: C2870W: variable 'i' declared but not used
+"svrcmd_write.c", line 202: Warning: C2207W: inventing 'extern int UpdateViewMain();'
+"svrcmd_write.c", line 205: Warning: C2207W: inventing 'extern int _SetupIOUnits();'
+"svrcmd_wrlist.c", line 165: Warning: C2870W: variable 'data' declared but not used
+"svrcmd_wrlist.c", line 275: Warning: C2870W: variable 'i' declared but not used
+"svrcmd_etc.c", line 55: Warning: C2914W: out-of-bound offset 5 in address
+"svrcmd_etc.c", line 79: Warning: C2914W: out-of-bound offset 5 in address
+svrcmd.c: 8 warnings, 0 errors, 0 serious errors

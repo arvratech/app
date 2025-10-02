@@ -1,0 +1,2 @@
+"adm_set.c", line 84: Warning: C2870W: variable 'p1' declared but not used
+adm_set.c: 1 warning, 0 errors, 0 serious errors

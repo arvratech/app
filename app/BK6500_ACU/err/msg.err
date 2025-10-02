@@ -1,0 +1,2 @@
+"msg.c", line 463: Warning: C2207W: inventing 'extern int taGetTextSize();'
+msg.c: 1 warning, 0 errors, 0 serious errors

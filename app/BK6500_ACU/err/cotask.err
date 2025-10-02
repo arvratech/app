@@ -1,0 +1,2 @@
+"cotask.c", line 211: Warning: C2871W: static '_check_deadlock' declared but not used
+cotask.c: 1 warning, 0 errors, 0 serious errors
