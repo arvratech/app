@@ -1,0 +1,609 @@
+ROOT = /usr/local/arm_linux_4.2/
+LIB = $(ROOT)/lib/gcc/arm-linux/4.2.1
+LIB1 =$(ROOT)/arm-linux/lib
+LIBMY = ./
+INC :=$(ROOT)/arm-linux/include
+INCMY = ./
+UIKIT = /home/secu/app/uikit_uv
+FREETYPE = /home/secu/freelib/freetype-2.9/include
+LIBUV = /home/secu/app/libuv
+MYLIB = /home/secu/app/mylib
+OBJ = ./obj
+
+CC=arm-linux-gcc
+CCFLAGS=-O2 -c -I$(INCMY) -I-$(INC) -I$(UIKIT) -I$(MYLIB) -I$(FREETYPE) -I$(LIBUV)/include -D_GNU_SOURCE
+LDFLAGS=-static -L$(LIBMY) -L$(LIB) -L$(LIB1)
+STRIP=arm-linux-strip
+
+TARGET = t35s
+OBJS := $(OBJ)/main.o $(OBJ)/mainapp.o \
+	$(OBJ)/modwr.o $(OBJ)/modrd.o $(OBJ)/modunit.o $(OBJ)/modsubdev.o $(OBJ)/fpm.o \
+	$(OBJ)/syscfg.o $(OBJ)/sysdep.o $(OBJ)/schecfg.o $(OBJ)/tacfg.o  \
+	$(OBJ)/mainact.o $(OBJ)/authreq.o $(OBJ)/authcap.o $(OBJ)/authres.o $(OBJ)/authdone.o \
+	$(OBJ)/acureq.o $(OBJ)/topmsg.o $(OBJ)/statbar.o $(OBJ)/actvideo.o \
+	$(OBJ)/authmst.o $(OBJ)/authprim.o $(OBJ)/acu.o $(OBJ)/acuobj.o \
+	$(OBJ)/admprim.o $(OBJ)/topprim.o $(OBJ)/aaprim.o $(OBJ)/cfprim.o $(OBJ)/pfprim.o \
+	$(OBJ)/adm.o $(OBJ)/adm_usr.o $(OBJ)/adm_usrrd.o $(OBJ)/adm_usrwr.o \
+	$(OBJ)/adm_usrcred.o $(OBJ)/usrprim.o \
+	$(OBJ)/adm_hw.o $(OBJ)/adm_vf.o $(OBJ)/adm_ac.o $(OBJ)/adm_net.o $(OBJ)/adm_netwifi.o \
+	$(OBJ)/adm_netwifidlg.o $(OBJ)/adm_set.o $(OBJ)/adm_setdt.o $(OBJ)/adm_sys.o \
+	$(OBJ)/netsvc.o $(OBJ)/net.o $(OBJ)/nettsm.o $(OBJ)/svrnet.o \
+	$(OBJ)/msgsvr.o $(OBJ)/svr.o $(OBJ)/slvnet.o \
+	$(OBJ)/user_sg.o $(OBJ)/fsuser.o $(OBJ)/event.o $(OBJ)/evt.o $(OBJ)/sche.o $(OBJ)/sclib.o \
+	$(OBJ)/dev.o $(OBJ)/unit.o $(OBJ)/cr.o $(OBJ)/crcred.o $(OBJ)/subdev.o $(OBJ)/bio.o $(OBJ)/ad.o \
+	$(OBJ)/hwprim.o $(OBJ)/aa.o $(OBJ)/cfcfg.o $(OBJ)/cf.o $(OBJ)/wglib.o $(OBJ)/msg.o $(OBJ)/lang.o \
+	$(OBJ)/ta.o $(OBJ)/func.o \
+	$(OBJ)/async.o $(OBJ)/core.o $(OBJ)/fs.o $(OBJ)/fs-poll.o \
+	$(OBJ)/getaddrinfo.o $(OBJ)/getnameinfo.o $(OBJ)/inet.o \
+	$(OBJ)/linux-core.o $(OBJ)/linux-inotify.o $(OBJ)/linux-syscalls.o \
+	$(OBJ)/loop.o $(OBJ)/loop-watcher.o $(OBJ)/pipe.o $(OBJ)/poll.o \
+	$(OBJ)/process.o $(OBJ)/procfs-exepath.o $(OBJ)/proctitle.o $(OBJ)/pthread-fixes.o \
+	$(OBJ)/signal.o $(OBJ)/stream.o $(OBJ)/sysinfo-loadavg.o $(OBJ)/sysinfo-memory.o \
+	$(OBJ)/tcp.o $(OBJ)/thread.o $(OBJ)/threadpool.o $(OBJ)/timer.o $(OBJ)/tty.o $(OBJ)/udp.o \
+	$(OBJ)/uv-common.o $(OBJ)/uv-data-getter-setters.o $(OBJ)/version.o \
+	$(OBJ)/actprim.o $(OBJ)/psmem.o $(OBJ)/viewprim.o $(OBJ)/wallpaper.o \
+	$(OBJ)/pref.o $(OBJ)/prefrd.o $(OBJ)/dlgalert.o $(OBJ)/dlgfldalert.o \
+	$(OBJ)/dlginput.o $(OBJ)/dlgdigit.o $(OBJ)/dlgpassword.o $(OBJ)/dlguuid.o \
+	$(OBJ)/dlgspinner.o $(OBJ)/dlgcheck.o $(OBJ)/dlgslider.o $(OBJ)/dlgpicker.o \
+	$(OBJ)/dlgdatepicker.o $(OBJ)/dlgtimepicker.o \
+	$(OBJ)/dlgprogress.o \
+	$(OBJ)/cgtext.o $(OBJ)/cgrect.o $(OBJ)/bmpc.o $(OBJ)/lcdc.o \
+	$(OBJ)/jpegdev.o $(OBJ)/ctfont.o $(OBJ)/ksc5601.o \
+	$(OBJ)/prefspec.o $(OBJ)/nsobject.o $(OBJ)/uikit.o $(OBJ)/uiimage.o $(OBJ)/uiview.o \
+	$(OBJ)/uiwindow.o $(OBJ)/uilabel.o $(OBJ)/uiimageview.o $(OBJ)/uiscrollview.o \
+	$(OBJ)/uitableviewcell.o $(OBJ)/uitableview.o $(OBJ)/uipickerview.o \
+	$(OBJ)/uidatepicker.o $(OBJ)/uitimepicker.o \
+	$(OBJ)/uicontrol.o $(OBJ)/uitextfield.o $(OBJ)/uibutton.o $(OBJ)/uiswitch.o \
+	$(OBJ)/uislider.o $(OBJ)/uistepper.o \
+	$(OBJ)/uitimer.o $(OBJ)/gactivity.o $(OBJ)/gapp.o $(OBJ)/gesture.o \
+	$(OBJ)/rtctime.o $(OBJ)/prim.o $(OBJ)/cbuf.o \
+	$(OBJ)/epolllib.o $(OBJ)/inputlib.o $(OBJ)/spilib.o $(OBJ)/vox.o \
+	$(OBJ)/exec.o $(OBJ)/sysprim.o $(OBJ)/audio.o $(OBJ)/file.o \
+	$(OBJ)/wpaprim.o $(OBJ)/wpactrl.o $(OBJ)/wpanet.o $(OBJ)/wpalib.o \
+	$(OBJ)/niprim.o $(OBJ)/sin.o \
+
+LIBS= -lpthread -lrt -lz -lfreetype
+
+all: $(TARGET)
+
+clean:
+	rm -f $(OBJ)/*.o 
+	rm -f *.x 
+	rm -f *.flat
+	rm -f *.map
+	rm -f temp
+	rm -f *.img
+	rm -f $(TARGET)	
+	rm -f *.gdb
+	rm -f *.bak
+
+$(TARGET): $(OBJS)
+	$(CC) $(LDFLAGS) $(OBJS) /home/secu/freelib/zlib-1.2.11/inflate.o -o $(TARGET) $(LIBS)
+	$(STRIP) $(TARGET) 
+	cp $(TARGET) /home/secu/tftpboot
+
+$(OBJ)/main.o:  main.c
+	$(CC) $(CCFLAGS) main.c -o $(OBJ)/main.o
+ 
+$(OBJ)/mainapp.o:  mainapp.c
+	$(CC) $(CCFLAGS) mainapp.c -o $(OBJ)/mainapp.o
+
+$(OBJ)/modwr.o:  modwr.c mod.h
+	$(CC) $(CCFLAGS) modwr.c -o $(OBJ)/modwr.o
+
+$(OBJ)/modrd.o:  modrd.c mod.h
+	$(CC) $(CCFLAGS) modrd.c -o $(OBJ)/modrd.o
+
+$(OBJ)/modunit.o:  modunit.c mod.h
+	$(CC) $(CCFLAGS) modunit.c -o $(OBJ)/modunit.o
+
+$(OBJ)/modsubdev.o:  modsubdev.c mod.h
+	$(CC) $(CCFLAGS) modsubdev.c -o $(OBJ)/modsubdev.o
+
+$(OBJ)/fpm.o:  fpm.c fpm.h
+	$(CC) $(CCFLAGS) fpm.c -o $(OBJ)/fpm.o
+
+$(OBJ)/syscfg.o:  syscfg.c syscfg.h
+	$(CC) $(CCFLAGS) syscfg.c -o $(OBJ)/syscfg.o
+
+$(OBJ)/sysdep.o:  sysdep.c sysdep.h
+	$(CC) $(CCFLAGS) sysdep.c -o $(OBJ)/sysdep.o
+
+$(OBJ)/schecfg.o:  schecfg.c schecfg.h
+	$(CC) $(CCFLAGS) schecfg.c -o $(OBJ)/schecfg.o
+
+$(OBJ)/tacfg.o:  tacfg.c tacfg.h
+	$(CC) $(CCFLAGS) tacfg.c -o $(OBJ)/tacfg.o
+
+$(OBJ)/mainact.o:  mainact.c appact.h
+	$(CC) $(CCFLAGS) mainact.c -o $(OBJ)/mainact.o
+
+$(OBJ)/authreq.o:  authreq.c appact.h
+	$(CC) $(CCFLAGS) authreq.c -o $(OBJ)/authreq.o
+
+$(OBJ)/authcap.o:  authcap.c appact.h
+	$(CC) $(CCFLAGS) authcap.c -o $(OBJ)/authcap.o
+
+$(OBJ)/authres.o:  authres.c appact.h
+	$(CC) $(CCFLAGS) authres.c -o $(OBJ)/authres.o
+
+$(OBJ)/authdone.o:  authdone.c appact.h
+	$(CC) $(CCFLAGS) authdone.c -o $(OBJ)/authdone.o
+
+$(OBJ)/acureq.o:  acureq.c appact.h
+	$(CC) $(CCFLAGS) acureq.c -o $(OBJ)/acureq.o
+
+$(OBJ)/topmsg.o:  topmsg.c appact.h
+	$(CC) $(CCFLAGS) topmsg.c -o $(OBJ)/topmsg.o
+
+$(OBJ)/statbar.o:  statbar.c appact.h
+	$(CC) $(CCFLAGS) statbar.c -o $(OBJ)/statbar.o
+
+$(OBJ)/actvideo.o:  actvideo.c appact.h
+	$(CC) $(CCFLAGS) actvideo.c -o $(OBJ)/actvideo.o
+
+$(OBJ)/authmst.o:  authmst.c appact.h
+	$(CC) $(CCFLAGS) authmst.c -o $(OBJ)/authmst.o
+
+$(OBJ)/authprim.o:  authprim.c
+	$(CC) $(CCFLAGS) authprim.c -o $(OBJ)/authprim.o
+
+$(OBJ)/acu.o:  acu.c acu.h acu_com.c acu_wr.c acu_xfer.c acu_req.c
+	$(CC) $(CCFLAGS) acu.c -o $(OBJ)/acu.o
+
+$(OBJ)/acuobj.o:  acuobj.c acuobj.h
+	$(CC) $(CCFLAGS) -D_HYNIX acuobj.c -o $(OBJ)/acuobj.o
+
+#$(OBJ)/acuobj.o:  acuobj.c acuobj.h
+#	$(CC) $(CCFLAGS) acuobj.c -o $(OBJ)/acuobj.o
+
+$(OBJ)/admprim.o:  admprim.c admprim.h
+	$(CC) $(CCFLAGS) admprim.c -o $(OBJ)/admprim.o
+
+$(OBJ)/topprim.o:  topprim.c topprim.h
+	$(CC) $(CCFLAGS) topprim.c -o $(OBJ)/topprim.o
+
+$(OBJ)/aaprim.o:  aaprim.c aaprim.h
+	$(CC) $(CCFLAGS) aaprim.c -o $(OBJ)/aaprim.o
+
+$(OBJ)/cfprim.o:  cfprim.c cfprim.h
+	$(CC) $(CCFLAGS) cfprim.c -o $(OBJ)/cfprim.o
+
+$(OBJ)/pfprim.o:  pfprim.c pfprim.h
+	$(CC) $(CCFLAGS) pfprim.c -o $(OBJ)/pfprim.o
+
+$(OBJ)/adm.o:  adm.c appact.h
+	$(CC) $(CCFLAGS) adm.c -o $(OBJ)/adm.o
+
+$(OBJ)/adm_usr.o:  adm_usr.c appact.h
+	$(CC) $(CCFLAGS) adm_usr.c -o $(OBJ)/adm_usr.o
+
+$(OBJ)/adm_usrrd.o:  adm_usrrd.c appact.h
+	$(CC) $(CCFLAGS) adm_usrrd.c -o $(OBJ)/adm_usrrd.o
+
+$(OBJ)/adm_usrwr.o:  adm_usrwr.c appact.h
+	$(CC) $(CCFLAGS) adm_usrwr.c -o $(OBJ)/adm_usrwr.o
+
+$(OBJ)/adm_usrcred.o:  adm_usrcred.c appact.h
+	$(CC) $(CCFLAGS) adm_usrcred.c -o $(OBJ)/adm_usrcred.o
+
+$(OBJ)/usrprim.o:  usrprim.c usrprim.h
+	$(CC) $(CCFLAGS) usrprim.c -o $(OBJ)/usrprim.o
+
+$(OBJ)/adm_hw.o:  adm_hw.c adm_hwdev.c adm_hwnwp.c adm_hwunit.c adm_hwsubdev.c adm_hwch.c adm_hwbi.c adm_hwbo.c adm_hwad.c adm_hwcr.c adm_hwcred.c appact.h
+	$(CC) $(CCFLAGS) adm_hw.c -o $(OBJ)/adm_hw.o
+
+$(OBJ)/adm_vf.o:  adm_vf.c appact.h
+	$(CC) $(CCFLAGS) adm_vf.c -o $(OBJ)/adm_vf.o
+
+$(OBJ)/adm_ac.o:  adm_ac.c adm_accf.c adm_acwf.c adm_acpf.c adm_acpwf.c adm_acaa.c appact.h
+	$(CC) $(CCFLAGS) adm_ac.c -o $(OBJ)/adm_ac.o
+
+$(OBJ)/adm_net.o:  adm_net.c appact.h
+	$(CC) $(CCFLAGS) adm_net.c -o $(OBJ)/adm_net.o
+
+$(OBJ)/adm_netwifi.o:  adm_netwifi.c appact.h
+	$(CC) $(CCFLAGS) adm_netwifi.c -o $(OBJ)/adm_netwifi.o
+
+$(OBJ)/adm_netwifidlg.o:  adm_netwifidlg.c appact.h
+	$(CC) $(CCFLAGS) adm_netwifidlg.c -o $(OBJ)/adm_netwifidlg.o
+
+$(OBJ)/adm_set.o:  adm_set.c appact.h
+	$(CC) $(CCFLAGS) adm_set.c -o $(OBJ)/adm_set.o
+
+$(OBJ)/adm_setdt.o:  adm_setdt.c appact.h
+	$(CC) $(CCFLAGS) adm_setdt.c -o $(OBJ)/adm_setdt.o
+
+$(OBJ)/adm_sys.o:  adm_sys.c appact.h
+	$(CC) $(CCFLAGS) adm_sys.c -o $(OBJ)/adm_sys.o
+
+$(OBJ)/netsvc.o:  netsvc.c netsvc.h
+	$(CC) $(CCFLAGS) netsvc.c -o $(OBJ)/netsvc.o
+
+$(OBJ)/net.o:  net.c net.h
+	$(CC) $(CCFLAGS) net.c -o $(OBJ)/net.o
+
+$(OBJ)/nettsm.o:  nettsm.c netsvc.h
+	$(CC) $(CCFLAGS) nettsm.c -o $(OBJ)/nettsm.o
+
+$(OBJ)/svrnet.o:  svrnet_hymo.c svrnet.h
+	$(CC) $(CCFLAGS) svrnet_hymo.c -o $(OBJ)/svrnet.o
+
+$(OBJ)/svrcmd.o:  svrcmd.c svrcmd.h
+	$(CC) $(CCFLAGS) svrcmd.c -o $(OBJ)/svrcmd.o
+
+$(OBJ)/xfer.o:  xfer.c xfer.h
+	$(CC) $(CCFLAGS) xfer.c -o $(OBJ)/xfer.o
+
+$(OBJ)/msgsvr.o:  msgsvr.c msgsvr.h
+	$(CC) $(CCFLAGS) msgsvr.c -o $(OBJ)/msgsvr.o
+
+$(OBJ)/svr.o:  svr.c svr.h
+	$(CC) $(CCFLAGS) svr.c -o $(OBJ)/svr.o
+
+$(OBJ)/slvnet.o:  slvnet.c slvnet.h slvnet_udp.c
+	$(CC) $(CCFLAGS) slvnet.c -o $(OBJ)/slvnet.o
+
+$(OBJ)/user_sg.o:  user_sg.c user.h usercfg.c
+	$(CC) $(CCFLAGS) user_sg.c -o $(OBJ)/user_sg.o
+
+$(OBJ)/fsuser.o:  fsuser.c fsprim.c fsuser.h fsuser_ex.c fsevt.c
+	$(CC) $(CCFLAGS) fsuser.c -o $(OBJ)/fsuser.o
+
+$(OBJ)/event.o:  event.c event.h
+	$(CC) $(CCFLAGS) event.c -o $(OBJ)/event.o
+
+$(OBJ)/evt.o:  evt.c evt.h
+	$(CC) $(CCFLAGS) evt.c -o $(OBJ)/evt.o
+
+$(OBJ)/sche.o:  sche.c sche.h
+	$(CC) $(CCFLAGS) sche.c -o $(OBJ)/sche.o
+
+$(OBJ)/sclib.o:  sclib.c sclib.h
+	$(CC) $(CCFLAGS) sclib.c -o $(OBJ)/sclib.o
+
+$(OBJ)/dev.o:  dev.c dev.h
+	$(CC) $(CCFLAGS) dev.c -o $(OBJ)/dev.o
+
+$(OBJ)/unit.o:  unit.c unit.h
+	$(CC) $(CCFLAGS) unit.c -o $(OBJ)/unit.o
+
+$(OBJ)/cr.o:  cr.c cr.h
+	$(CC) $(CCFLAGS) cr.c -o $(OBJ)/cr.o
+
+$(OBJ)/crcred.o:  crcred.c cr.h
+	$(CC) $(CCFLAGS) crcred.c -o $(OBJ)/crcred.o
+
+$(OBJ)/subdev.o:  subdev.c subdev.h
+	$(CC) $(CCFLAGS) subdev.c -o $(OBJ)/subdev.o
+
+$(OBJ)/bio.o:  bio.c bio.h
+	$(CC) $(CCFLAGS) bio.c -o $(OBJ)/bio.o
+
+$(OBJ)/ad.o:  ad.c ad.h
+	$(CC) $(CCFLAGS) ad.c -o $(OBJ)/ad.o
+
+$(OBJ)/hwprim.o:  hwprim.c hwprim.h
+	$(CC) $(CCFLAGS) hwprim.c -o $(OBJ)/hwprim.o
+
+$(OBJ)/aa.o:  aa.c aa.h
+	$(CC) $(CCFLAGS) aa.c -o $(OBJ)/aa.o
+
+$(OBJ)/cfcfg.o:  cfcfg.c cfcfg.h
+	$(CC) $(CCFLAGS) cfcfg.c -o $(OBJ)/cfcfg.o
+
+$(OBJ)/cf.o:  cf.c cf.h
+	$(CC) $(CCFLAGS) cf.c -o $(OBJ)/cf.o
+
+$(OBJ)/wglib.o:  wglib.c wglib.h
+	$(CC) $(CCFLAGS) wglib.c -o $(OBJ)/wglib.o
+
+$(OBJ)/msg.o:  msg.c msgeng.c msgkor.c msg.h
+	$(CC) $(CCFLAGS) msg.c -o $(OBJ)/msg.o
+
+$(OBJ)/lang.o:  lang.c $(UIKIT)/lang.h
+	$(CC) $(CCFLAGS) lang.c -o $(OBJ)/lang.o
+
+$(OBJ)/ta.o:  ta.c tacfg.h
+	$(CC) $(CCFLAGS) ta.c -o $(OBJ)/ta.o
+
+$(OBJ)/func.o:  func.c func.h
+	$(CC) $(CCFLAGS) func.c -o $(OBJ)/func.o
+
+$(OBJ)/async.o:  $(LIBUV)/async.c
+	$(CC) $(CCFLAGS) $(LIBUV)/async.c -o $(OBJ)/async.o
+
+$(OBJ)/core.o:  $(LIBUV)/core.c
+	$(CC) $(CCFLAGS) $(LIBUV)/core.c -o $(OBJ)/core.o
+
+$(OBJ)/dl.o:  $(LIBUV)/dl.c
+	$(CC) $(CCFLAGS) $(LIBUV)/dl.c -o $(OBJ)/dl.o
+
+$(OBJ)/fs.o:  $(LIBUV)/fs.c
+	$(CC) $(CCFLAGS) $(LIBUV)/fs.c -o $(OBJ)/fs.o
+
+$(OBJ)/fs-poll.o:  $(LIBUV)/fs-poll.c
+	$(CC) $(CCFLAGS) $(LIBUV)/fs-poll.c -o $(OBJ)/fs-poll.o
+
+$(OBJ)/getaddrinfo.o:  $(LIBUV)/getaddrinfo.c
+	$(CC) $(CCFLAGS) $(LIBUV)/getaddrinfo.c -o $(OBJ)/getaddrinfo.o
+
+$(OBJ)/getnameinfo.o:  $(LIBUV)/getnameinfo.c
+	$(CC) $(CCFLAGS) $(LIBUV)/getnameinfo.c -o $(OBJ)/getnameinfo.o
+
+$(OBJ)/inet.o:  $(LIBUV)/inet.c
+	$(CC) $(CCFLAGS) $(LIBUV)/inet.c -o $(OBJ)/inet.o
+
+$(OBJ)/linux-core.o:  $(LIBUV)/linux-core.c
+	$(CC) $(CCFLAGS) $(LIBUV)/linux-core.c -o $(OBJ)/linux-core.o
+
+$(OBJ)/linux-inotify.o:  $(LIBUV)/linux-inotify.c
+	$(CC) $(CCFLAGS) $(LIBUV)/linux-inotify.c -o $(OBJ)/linux-inotify.o
+
+$(OBJ)/linux-syscalls.o:  $(LIBUV)/linux-syscalls.c
+	$(CC) $(CCFLAGS) $(LIBUV)/linux-syscalls.c -o $(OBJ)/linux-syscalls.o
+
+$(OBJ)/loop.o:  $(LIBUV)/loop.c
+	$(CC) $(CCFLAGS) $(LIBUV)/loop.c -o $(OBJ)/loop.o
+
+$(OBJ)/loop-watcher.o:  $(LIBUV)/loop-watcher.c
+	$(CC) $(CCFLAGS) $(LIBUV)/loop-watcher.c -o $(OBJ)/loop-watcher.o
+
+$(OBJ)/pipe.o:  $(LIBUV)/pipe.c
+	$(CC) $(CCFLAGS) $(LIBUV)/pipe.c -o $(OBJ)/pipe.o
+
+$(OBJ)/poll.o:  $(LIBUV)/poll.c
+	$(CC) $(CCFLAGS) $(LIBUV)/poll.c -o $(OBJ)/poll.o
+
+$(OBJ)/process.o:  $(LIBUV)/process.c
+	$(CC) $(CCFLAGS) $(LIBUV)/process.c -o $(OBJ)/process.o
+
+$(OBJ)/procfs-exepath.o:  $(LIBUV)/procfs-exepath.c
+	$(CC) $(CCFLAGS) $(LIBUV)/procfs-exepath.c -o $(OBJ)/procfs-exepath.o
+
+$(OBJ)/proctitle.o:  $(LIBUV)/proctitle.c
+	$(CC) $(CCFLAGS) $(LIBUV)/proctitle.c -o $(OBJ)/proctitle.o
+
+$(OBJ)/pthread-fixes.o:  $(LIBUV)/pthread-fixes.c
+	$(CC) $(CCFLAGS) $(LIBUV)/pthread-fixes.c -o $(OBJ)/pthread-fixes.o
+
+$(OBJ)/signal.o:  $(LIBUV)/signal.c
+	$(CC) $(CCFLAGS) $(LIBUV)/signal.c -o $(OBJ)/signal.o
+
+$(OBJ)/stream.o:  $(LIBUV)/stream.c
+	$(CC) $(CCFLAGS) $(LIBUV)/stream.c -o $(OBJ)/stream.o
+
+$(OBJ)/sysinfo-loadavg.o:  $(LIBUV)/sysinfo-loadavg.c
+	$(CC) $(CCFLAGS) $(LIBUV)/sysinfo-loadavg.c -o $(OBJ)/sysinfo-loadavg.o
+
+$(OBJ)/sysinfo-memory.o:  $(LIBUV)/sysinfo-memory.c
+	$(CC) $(CCFLAGS) $(LIBUV)/sysinfo-memory.c -o $(OBJ)/sysinfo-memory.o
+
+$(OBJ)/tcp.o:  $(LIBUV)/tcp.c
+	$(CC) $(CCFLAGS) $(LIBUV)/tcp.c -o $(OBJ)/tcp.o
+
+$(OBJ)/thread.o:  $(LIBUV)/thread.c
+	$(CC) $(CCFLAGS) $(LIBUV)/thread.c -o $(OBJ)/thread.o
+
+$(OBJ)/threadpool.o:  $(LIBUV)/threadpool.c
+	$(CC) $(CCFLAGS) $(LIBUV)/threadpool.c -o $(OBJ)/threadpool.o
+
+$(OBJ)/timer.o:  $(LIBUV)/timer.c
+	$(CC) $(CCFLAGS) $(LIBUV)/timer.c -o $(OBJ)/timer.o
+
+$(OBJ)/tty.o:  $(LIBUV)/tty.c
+	$(CC) $(CCFLAGS) $(LIBUV)/tty.c -o $(OBJ)/tty.o
+
+$(OBJ)/udp.o:  $(LIBUV)/udp.c
+	$(CC) $(CCFLAGS) $(LIBUV)/udp.c -o $(OBJ)/udp.o
+
+$(OBJ)/uv-common.o:  $(LIBUV)/uv-common.c
+	$(CC) $(CCFLAGS) $(LIBUV)/uv-common.c -o $(OBJ)/uv-common.o
+
+$(OBJ)/uv-data-getter-setters.o:  $(LIBUV)/uv-data-getter-setters.c
+	$(CC) $(CCFLAGS) $(LIBUV)/uv-data-getter-setters.c -o $(OBJ)/uv-data-getter-setters.o
+
+$(OBJ)/version.o:  $(LIBUV)/version.c
+	$(CC) $(CCFLAGS) $(LIBUV)/version.c -o $(OBJ)/version.o
+
+$(OBJ)/actprim.o:  $(UIKIT)/actprim.c $(UIKIT)/actprim.h
+	$(CC) $(CCFLAGS) $(UIKIT)/actprim.c -o $(OBJ)/actprim.o
+
+$(OBJ)/psmem.o:  $(UIKIT)/psmem.c $(UIKIT)/psmem.h
+	$(CC) $(CCFLAGS) $(UIKIT)/psmem.c -o $(OBJ)/psmem.o
+
+$(OBJ)/viewprim.o:  $(UIKIT)/viewprim.c $(UIKIT)/view_kpd.c $(UIKIT)/view_kpdimg.c $(UIKIT)/view_clock.c $(UIKIT)/viewprim.h
+	$(CC) $(CCFLAGS) $(UIKIT)/viewprim.c -o $(OBJ)/viewprim.o
+
+$(OBJ)/wallpaper.o:  $(UIKIT)/wallpaper.c $(UIKIT)/wallpaper.h
+	$(CC) $(CCFLAGS) $(UIKIT)/wallpaper.c -o $(OBJ)/wallpaper.o
+
+$(OBJ)/pref.o:  $(UIKIT)/pref.c $(UIKIT)/pref.h
+	$(CC) $(CCFLAGS) $(UIKIT)/pref.c -o $(OBJ)/pref.o
+
+$(OBJ)/prefrd.o:  $(UIKIT)/prefrd.c $(UIKIT)/pref.h
+	$(CC) $(CCFLAGS) $(UIKIT)/prefrd.c -o $(OBJ)/prefrd.o
+
+$(OBJ)/dlgalert.o:  $(UIKIT)/dlgalert.c $(UIKIT)/dlg.h
+	$(CC) $(CCFLAGS) $(UIKIT)/dlgalert.c -o $(OBJ)/dlgalert.o
+
+$(OBJ)/dlgfldalert.o:  $(UIKIT)/dlgfldalert.c $(UIKIT)/dlg.h
+	$(CC) $(CCFLAGS) $(UIKIT)/dlgfldalert.c -o $(OBJ)/dlgfldalert.o
+
+$(OBJ)/dlginput.o:  $(UIKIT)/dlginput.c $(UIKIT)/dlg.h
+	$(CC) $(CCFLAGS) $(UIKIT)/dlginput.c -o $(OBJ)/dlginput.o
+
+$(OBJ)/dlgdigit.o:  $(UIKIT)/dlgdigit.c $(UIKIT)/dlg.h
+	$(CC) $(CCFLAGS) $(UIKIT)/dlgdigit.c -o $(OBJ)/dlgdigit.o
+
+$(OBJ)/dlgpassword.o:  $(UIKIT)/dlgpassword.c $(UIKIT)/dlg.h
+	$(CC) $(CCFLAGS) $(UIKIT)/dlgpassword.c -o $(OBJ)/dlgpassword.o
+
+$(OBJ)/dlguuid.o:  $(UIKIT)/dlguuid.c $(UIKIT)/dlg.h
+	$(CC) $(CCFLAGS) $(UIKIT)/dlguuid.c -o $(OBJ)/dlguuid.o
+
+$(OBJ)/dlgspinner.o:  $(UIKIT)/dlgspinner.c $(UIKIT)/dlg.h
+	$(CC) $(CCFLAGS) $(UIKIT)/dlgspinner.c -o $(OBJ)/dlgspinner.o
+
+$(OBJ)/dlgcheck.o:  $(UIKIT)/dlgcheck.c $(UIKIT)/dlg.h
+	$(CC) $(CCFLAGS) $(UIKIT)/dlgcheck.c -o $(OBJ)/dlgcheck.o
+
+$(OBJ)/dlgslider.o:  $(UIKIT)/dlgslider.c $(UIKIT)/dlg.h
+	$(CC) $(CCFLAGS) $(UIKIT)/dlgslider.c -o $(OBJ)/dlgslider.o
+
+$(OBJ)/dlgpicker.o:  $(UIKIT)/dlgpicker.c $(UIKIT)/dlg.h
+	$(CC) $(CCFLAGS) $(UIKIT)/dlgpicker.c -o $(OBJ)/dlgpicker.o
+
+$(OBJ)/dlgdatepicker.o:  $(UIKIT)/dlgdatepicker.c $(UIKIT)/dlg.h
+	$(CC) $(CCFLAGS) $(UIKIT)/dlgdatepicker.c -o $(OBJ)/dlgdatepicker.o
+
+$(OBJ)/dlgtimepicker.o:  $(UIKIT)/dlgtimepicker.c $(UIKIT)/dlg.h
+	$(CC) $(CCFLAGS) $(UIKIT)/dlgtimepicker.c -o $(OBJ)/dlgtimepicker.o
+
+$(OBJ)/dlgprogress.o:  $(UIKIT)/dlgprogress.c $(UIKIT)/dlg.h
+	$(CC) $(CCFLAGS) $(UIKIT)/dlgprogress.c -o $(OBJ)/dlgprogress.o
+
+$(OBJ)/cgtext.o:  $(UIKIT)/cgtext.c $(UIKIT)/cgtext.h
+	$(CC) $(CCFLAGS) $(UIKIT)/cgtext.c -o $(OBJ)/cgtext.o
+
+$(OBJ)/cgrect.o:  $(UIKIT)/cgrect.c $(UIKIT)/cgrect.h
+	$(CC) $(CCFLAGS) $(UIKIT)/cgrect.c -o $(OBJ)/cgrect.o
+
+$(OBJ)/bmpc.o:  $(UIKIT)/bmpc.c $(UIKIT)/bmpc.h
+	$(CC) $(CCFLAGS) $(UIKIT)/bmpc.c -o $(OBJ)/bmpc.o
+
+$(OBJ)/lcdc.o:  $(UIKIT)/lcdc.c $(UIKIT)/lcdc_com.c $(UIKIT)/lcdc.h
+	$(CC) $(CCFLAGS) $(UIKIT)/lcdc.c -o $(OBJ)/lcdc.o
+
+$(OBJ)/jpegdev.o:  $(UIKIT)/jpegdev.c $(UIKIT)/jpegdev.h
+	$(CC) $(CCFLAGS) $(UIKIT)/jpegdev.c -o $(OBJ)/jpegdev.o
+
+$(OBJ)/ctfont.o:  $(UIKIT)/ctfont.c $(UIKIT)/ctfont.h
+	$(CC) $(CCFLAGS) $(UIKIT)/ctfont.c -o $(OBJ)/ctfont.o
+
+$(OBJ)/ksc5601.o:  $(UIKIT)/ksc5601.c
+	$(CC) $(CCFLAGS) $(UIKIT)/ksc5601.c -o $(OBJ)/ksc5601.o
+
+$(OBJ)/prefspec.o:  $(UIKIT)/prefspec.c $(UIKIT)/prefspec.h
+	$(CC) $(CCFLAGS) $(UIKIT)/prefspec.c -o $(OBJ)/prefspec.o
+
+$(OBJ)/nsobject.o:  $(UIKIT)/nsobject.c $(UIKIT)/nsobject_.h
+	$(CC) $(CCFLAGS) $(UIKIT)/nsobject.c -o $(OBJ)/nsobject.o
+
+$(OBJ)/uikit.o:  $(UIKIT)/uikit.c $(UIKIT)/UIKit.h
+	$(CC) $(CCFLAGS) $(UIKIT)/uikit.c -o $(OBJ)/uikit.o
+
+$(OBJ)/uiimage.o:  $(UIKIT)/uiimage.c $(UIKIT)/uiimage_.h
+	$(CC) $(CCFLAGS) $(UIKIT)/uiimage.c -o $(OBJ)/uiimage.o
+
+$(OBJ)/uiview.o:  $(UIKIT)/uiview.c $(UIKIT)/uiview_.h
+	$(CC) $(CCFLAGS) $(UIKIT)/uiview.c -o $(OBJ)/uiview.o
+
+$(OBJ)/uiwindow.o:  $(UIKIT)/uiwindow.c $(UIKIT)/uiwindow_.h
+	$(CC) $(CCFLAGS) $(UIKIT)/uiwindow.c -o $(OBJ)/uiwindow.o
+
+$(OBJ)/uilabel.o:  $(UIKIT)/uilabel.c $(UIKIT)/uilabel_.h
+	$(CC) $(CCFLAGS) $(UIKIT)/uilabel.c -o $(OBJ)/uilabel.o
+
+$(OBJ)/uiimageview.o:  $(UIKIT)/uiimageview.c $(UIKIT)/uiimageview_.h
+	$(CC) $(CCFLAGS) $(UIKIT)/uiimageview.c -o $(OBJ)/uiimageview.o
+
+$(OBJ)/uiscrollview.o:  $(UIKIT)/uiscrollview.c $(UIKIT)/uiscrollview_.h
+	$(CC) $(CCFLAGS) $(UIKIT)/uiscrollview.c -o $(OBJ)/uiscrollview.o
+
+$(OBJ)/uitableviewcell.o:  $(UIKIT)/uitableviewcell.c $(UIKIT)/uitableviewcell_.h
+	$(CC) $(CCFLAGS) $(UIKIT)/uitableviewcell.c -o $(OBJ)/uitableviewcell.o
+
+$(OBJ)/uitableview.o:  $(UIKIT)/uitableview.c $(UIKIT)/uitableview_.h
+	$(CC) $(CCFLAGS) $(UIKIT)/uitableview.c -o $(OBJ)/uitableview.o
+
+$(OBJ)/uipickerview.o:  $(UIKIT)/uipickerview.c $(UIKIT)/uipickerview_.h
+	$(CC) $(CCFLAGS) $(UIKIT)/uipickerview.c -o $(OBJ)/uipickerview.o
+
+$(OBJ)/uidatepicker.o:  $(UIKIT)/uidatepicker.c $(UIKIT)/uidatepicker_.h
+	$(CC) $(CCFLAGS) $(UIKIT)/uidatepicker.c -o $(OBJ)/uidatepicker.o
+
+$(OBJ)/uitimepicker.o:  $(UIKIT)/uitimepicker.c $(UIKIT)/uitimepicker_.h
+	$(CC) $(CCFLAGS) $(UIKIT)/uitimepicker.c -o $(OBJ)/uitimepicker.o
+
+$(OBJ)/uicontrol.o:  $(UIKIT)/uicontrol.c $(UIKIT)/uicontrol_.h
+	$(CC) $(CCFLAGS) $(UIKIT)/uicontrol.c -o $(OBJ)/uicontrol.o
+
+$(OBJ)/uitextfield.o:  $(UIKIT)/uitextfield.c $(UIKIT)/uitextfield_.h
+	$(CC) $(CCFLAGS) $(UIKIT)/uitextfield.c -o $(OBJ)/uitextfield.o
+
+$(OBJ)/uibutton.o:  $(UIKIT)/uibutton.c $(UIKIT)/uibutton_.h
+	$(CC) $(CCFLAGS) $(UIKIT)/uibutton.c -o $(OBJ)/uibutton.o
+
+$(OBJ)/uiswitch.o:  $(UIKIT)/uiswitch.c $(UIKIT)/uiswitch_.h
+	$(CC) $(CCFLAGS) $(UIKIT)/uiswitch.c -o $(OBJ)/uiswitch.o
+
+$(OBJ)/uislider.o:  $(UIKIT)/uislider.c $(UIKIT)/uislider_.h
+	$(CC) $(CCFLAGS) $(UIKIT)/uislider.c -o $(OBJ)/uislider.o
+
+$(OBJ)/uistepper.o:  $(UIKIT)/uistepper.c $(UIKIT)/uistepper_.h
+	$(CC) $(CCFLAGS) $(UIKIT)/uistepper.c -o $(OBJ)/uistepper.o
+
+$(OBJ)/uitimer.o:  $(UIKIT)/uitimer.c $(UIKIT)/UITimer.h
+	$(CC) $(CCFLAGS) $(UIKIT)/uitimer.c -o $(OBJ)/uitimer.o
+
+$(OBJ)/gactivity.o:  $(UIKIT)/gactivity.c $(UIKIT)/gactivity.h
+	$(CC) $(CCFLAGS) $(UIKIT)/gactivity.c -o $(OBJ)/gactivity.o
+
+$(OBJ)/gapp.o:  $(UIKIT)/gapp.c $(UIKIT)/gapp.h
+	$(CC) $(CCFLAGS) $(UIKIT)/gapp.c -o $(OBJ)/gapp.o
+
+$(OBJ)/gesture.o:  $(UIKIT)/gesture.c $(UIKIT)/gesture.h
+	$(CC) $(CCFLAGS) $(UIKIT)/gesture.c -o $(OBJ)/gesture.o
+
+$(OBJ)/rtctime.o:  $(MYLIB)/rtctime.c $(MYLIB)/rtctime.h
+	$(CC) $(CCFLAGS) $(MYLIB)/rtctime.c -o $(OBJ)/rtctime.o
+
+$(OBJ)/prim.o:  $(MYLIB)/prim.c $(MYLIB)/prim.h
+	$(CC) $(CCFLAGS) $(MYLIB)/prim.c -o $(OBJ)/prim.o
+
+$(OBJ)/cbuf.o:  $(MYLIB)/cbuf.c $(MYLIB)/cbuf.h
+	$(CC) $(CCFLAGS) $(MYLIB)/cbuf.c -o $(OBJ)/cbuf.o
+
+$(OBJ)/epolllib.o:  $(MYLIB)/epolllib.c $(MYLIB)/epolllib.h
+	$(CC) $(CCFLAGS) $(MYLIB)/epolllib.c -o $(OBJ)/epolllib.o
+
+$(OBJ)/inputlib.o:  $(MYLIB)/inputlib.c $(MYLIB)/inputlib.h
+	$(CC) $(CCFLAGS) $(MYLIB)/inputlib.c -o $(OBJ)/inputlib.o
+
+$(OBJ)/spilib.o:  $(MYLIB)/spilib.c $(MYLIB)/spilib.h
+	$(CC) $(CCFLAGS) $(MYLIB)/spilib.c -o $(OBJ)/spilib.o
+
+$(OBJ)/vox.o:  $(MYLIB)/vox.c $(MYLIB)/vox.h
+	$(CC) $(CCFLAGS) $(MYLIB)/vox.c -o $(OBJ)/vox.o
+
+$(OBJ)/exec.o:  $(MYLIB)/exec.c $(MYLIB)/exec.h
+	$(CC) $(CCFLAGS) $(MYLIB)/exec.c -o $(OBJ)/exec.o
+
+$(OBJ)/sysprim.o:  $(MYLIB)/sysprim.c $(MYLIB)/sysprim.h
+	$(CC) $(CCFLAGS) $(MYLIB)/sysprim.c -o $(OBJ)/sysprim.o
+
+$(OBJ)/audio.o:  $(MYLIB)/audio.c $(MYLIB)/audio.h
+	$(CC) $(CCFLAGS) $(MYLIB)/audio.c -o $(OBJ)/audio.o
+
+$(OBJ)/file.o:  $(MYLIB)/file.c $(MYLIB)/file.h
+	$(CC) $(CCFLAGS) $(MYLIB)/file.c -o $(OBJ)/file.o
+
+$(OBJ)/wpaprim.o:  $(MYLIB)/wpaprim.c $(MYLIB)/wpaprim.h
+	$(CC) $(CCFLAGS) $(MYLIB)/wpaprim.c -o $(OBJ)/wpaprim.o
+
+$(OBJ)/wpactrl.o:  $(MYLIB)/wpactrl.c $(MYLIB)/wpactrl.h
+	$(CC) $(CCFLAGS) $(MYLIB)/wpactrl.c -o $(OBJ)/wpactrl.o
+
+$(OBJ)/wpanet.o:  $(MYLIB)/wpanet.c $(MYLIB)/wpanet.h
+	$(CC) $(CCFLAGS) $(MYLIB)/wpanet.c -o $(OBJ)/wpanet.o
+
+$(OBJ)/wpalib.o:  $(MYLIB)/wpalib.c $(MYLIB)/wpalib.h
+	$(CC) $(CCFLAGS) $(MYLIB)/wpalib.c -o $(OBJ)/wpalib.o
+
+$(OBJ)/niprim.o:  $(MYLIB)/niprim.c $(MYLIB)/niprim.h
+	$(CC) $(CCFLAGS) $(MYLIB)/niprim.c -o $(OBJ)/niprim.o
+
+$(OBJ)/sin.o:  $(MYLIB)/sin.c $(MYLIB)/sin.h
+	$(CC) $(CCFLAGS) $(MYLIB)/sin.c -o $(OBJ)/sin.o
+
