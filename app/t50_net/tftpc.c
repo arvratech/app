@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <errno.h>
+#include <unistd.h>
 #include "defs.h"
 #include "defs_pkt.h"
 #include "NSEnum.h"
@@ -53,23 +55,66 @@ int _TftpcOpen(void)
 {
 	struct sockaddr_in	addr;
 	int		fd, rval;
+	int		fd_open = 0;
+	int		udp_initialized = 0;
 
 	udpTftpc = &_udpTftpc;
 	timerTftpc = &_timerTftpc;
-	uv_timer_init((uv_loop_t *)MainLoop(), timerTftpc);
+
 	fd = uv__socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP);
-	if(!fd) {
-		strcpy(_errstr, strerror(errno));
+	if(fd < 0) {
+		snprintf(_errstr, sizeof(_errstr), "%s", strerror(errno));
 printf("_TftpcOpen...socket error: %s\n", _errstr);
-		return -1;
+		return -errno;
 	}
+	fd_open = 1;
+
 	uv_ip4_addr("127.0.0.1", 69, &addr);
 	addr.sin_addr.s_addr = htonl(INADDR_ANY);
+
 	rval = uv_udp_init(MainLoop(), udpTftpc);
+	if(rval) {
+		snprintf(_errstr, sizeof(_errstr), "%s", uv_strerror(rval));
+printf("_TftpcOpen...uv_udp_init error: %s\n", _errstr);
+		goto _tftpc_open_fail;
+	}
+	udp_initialized = 1;
+
 	rval = uv_udp_open(udpTftpc, fd);
+	if(rval) {
+		snprintf(_errstr, sizeof(_errstr), "%s", uv_strerror(rval));
+printf("_TftpcOpen...uv_udp_open error: %s\n", _errstr);
+		goto _tftpc_open_fail;
+	}
+	fd_open = 0;
+
 	rval = uv_udp_bind(udpTftpc, (const struct sockaddr*)&addr, 0);
+	if(rval) {
+		snprintf(_errstr, sizeof(_errstr), "%s", uv_strerror(rval));
+printf("_TftpcOpen...uv_udp_bind error: %s\n", _errstr);
+		goto _tftpc_open_fail;
+	}
+
 	rval = uv_udp_recv_start(udpTftpc, _OnTftpcAlloc, _OnTftpcRecv);
+	if(rval) {
+		snprintf(_errstr, sizeof(_errstr), "%s", uv_strerror(rval));
+printf("_TftpcOpen...uv_udp_recv_start error: %s\n", _errstr);
+		goto _tftpc_open_fail;
+	}
+
+	rval = uv_timer_init((uv_loop_t *)MainLoop(), timerTftpc);
+	if(rval) {
+		snprintf(_errstr, sizeof(_errstr), "%s", uv_strerror(rval));
+printf("_TftpcOpen...uv_timer_init error: %s\n", _errstr);
+		goto _tftpc_open_fail;
+	}
+
 	return 0;
+
+_tftpc_open_fail:
+	if(udp_initialized) uv_close((uv_handle_t *)udpTftpc, NULL);
+	if(fd_open) close(fd);
+	return (rval) ? rval : -errno;
 }
 
 void _TftpcClose(void)

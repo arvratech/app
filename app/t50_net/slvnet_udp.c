@@ -68,33 +68,66 @@ void _OnSlvnetUdpAlloc(uv_handle_t *handle, size_t suggested_size, uv_buf_t *buf
 
 void _OnSlvnetUdpRecv(uv_udp_t *handle, ssize_t nread, const uv_buf_t *buf, const struct sockaddr *addr, unsigned flags);
 
-void _SlvnetUdpOpen(void)
+int _SlvnetUdpOpen(void)
 {
 	struct sockaddr_in	addr;
 	int		fd, rval, addrlen;
+	int		fd_open = 0;
+	int		udp_initialized = 0;
 
 	fd = uv__socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP);
-	if(!fd) {
+	if(fd < 0) {
+		rval = -errno;
 printf("_SlvnetUdpOpen...socket error: %s\n", strerror(errno));
-		_SlvnetTimer(5000);
-		return;
+		goto _slvnet_udp_open_fail;
 	}
+	fd_open = 1;
 	addrlen = sizeof(addr);
 	memset(&addr, 0, addrlen);
 	addr.sin_family		= AF_INET;
 	addr.sin_addr.s_addr	= htonl(INADDR_ANY);
 	addr.sin_port			= htons(masterIpPort);
 	//uv_ip4_addr("127.0.0.1", masterIpPort, &addr);
+
 	rval = uv_udp_init(MainLoop(), udpSlvnet);
+	if(rval) {
+printf("_SlvnetUdpOpen...uv_udp_init error: %s\n", uv_strerror(rval));
+		goto _slvnet_udp_open_fail;
+	}
+	udp_initialized = 1;
+
 	rval = uv_udp_open(udpSlvnet, fd);
+	if(rval) {
+printf("_SlvnetUdpOpen...uv_udp_open error: %s\n", uv_strerror(rval));
+		goto _slvnet_udp_open_fail;
+	}
+	fd_open = 0;
+
 	rval = uv_udp_bind(udpSlvnet, (const struct sockaddr*)&addr, 0);
+	if(rval) {
+printf("_SlvnetUdpOpen...uv_udp_bind error: %s\n", uv_strerror(rval));
+		goto _slvnet_udp_open_fail;
+	}
+
 	rval = uv_udp_recv_start(udpSlvnet, _OnSlvnetUdpAlloc, _OnSlvnetUdpRecv);
+	if(rval) {
+printf("_SlvnetUdpOpen...uv_udp_recv_start error: %s\n", uv_strerror(rval));
+		goto _slvnet_udp_open_fail;
+	}
+
 	slvnetDisc  = 0;
 	slvnetState = S_SLVNET_IDLE;
 //#ifdef _DEBUG
 printf("_SlvnetUdpOpen...%d\n", (int)masterIpPort);
 //#endif
 	_SlvnetTimer(7);
+	return 0;
+
+_slvnet_udp_open_fail:
+	if(udp_initialized) uv_close((uv_handle_t *)udpSlvnet, NULL);
+	if(fd_open) close(fd);
+	_SlvnetTimer(5000);
+	return (rval) ? rval : -errno;
 }
 
 void _SlvnetUdpClose(void)
@@ -136,8 +169,10 @@ void _SlvnetUdpLogRx(unsigned char *buf, int size, unsigned char *IPAddr, unsign
 void _OnSlvnetTimer(uv_timer_t *handle)
 {
 	if(slvnetState == S_SLVNET_NULL) {
-		if(niState() >= S_NI_READY) _SlvnetUdpOpen();
-		else	_SlvnetTimer(700);
+		if(niState() >= S_NI_READY) {
+			int openStatus = _SlvnetUdpOpen();
+			if(openStatus) return;
+		} else	_SlvnetTimer(700);
 	} else if(slvnetState == S_SLVNET_IDLE) {
 		if(retryCount) {
 #ifdef _DEBUG
