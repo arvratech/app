@@ -1,0 +1,38 @@
+jpegdev_a20.c:	if(jpeg->fileName && jpeg->fileName[0]) {
+jpegdev_a20.c:		rval = jpegDecodeFile(jpeg->fileName, 0,  unsigned char *DestBuffer, &jpeg->width, &jpeg->height)
+jpegdev_a20.c:		rval = jpegDecode(jpeg->buf, jpeg->bufLength, unsigned char *DestBuffer, &jpeg->width, &jpeg->height)
+jpegdev.c:	if(jpeg->fileName && jpeg->fileName[0]) {
+jpegdev.c:		fp = fopen(jpeg->fileName, "r");
+jpegdev.c:	} else if(jpeg->buf && jpeg->bufLength > 0) {
+jpegdev.c:		size = jpeg->bufLength;
+jpegdev.c:		memcpy(jpegBuffer, jpeg->buf, size);
+jpegdev.c:	jpeg->width = jpeg_info->width; jpeg->height = jpeg_info->height;
+jpegdev.c:   		jpeg->buf = jpegBuffer + jpegParam.src_bufsize;
+jpegdev.c:		jpeg->bufLength = jpeg_info->image_size[0];
+jpegdev.c:printf("DecodeSize=%d\n", jpeg->bufLength);
+jpegdev.c:	if(jpeg->thbSupp) {
+jpegdev.c:	if(yuv->width != jpeg->width || yuv->height != jpeg->height) {
+jpegdev.c:		jpegParam.scaled_width	= jpeg->width;
+jpegdev.c:		jpegParam.scaled_height	= jpeg->height;					
+jpegdev.c://printf("JPEG encode target: %d %d\n", jpeg->width, jpeg->height);	
+jpegdev.c:	if(jpeg->thbSupp){
+jpegdev.c:		if(jpeg->thbSupp == eJPEG_ENC_THB_QQVGA) val = 1; else val = 0;
+jpegdev.c:	if(jpeg->thbSupp) {
+jpegdev.c:	jpeg->buf		= jpegBuffer;
+jpegdev.c:	jpeg->bufLength	= jpegInfo.image_size[0];
+lcdc_com.c:	jpeg->fileName	= NULL;
+lcdc_com.c:	jpeg->buf		= jpegBuffer;
+lcdc_com.c:	jpeg->bufLength	= jpegSize;
+lcdc_com.c:printf("jpegDevDecode: w=%d h=%d\n", jpeg->width, jpeg->height);
+lcdc_com.c:		if(width <= 0) width = jpeg->width;
+lcdc_com.c:		if(height <= 0) height = jpeg->height;
+lcdc_com.c:		memcpy((void *)g2d->addr, jpeg->buf, jpeg->bufLength);
+lcdc_com.c:		g2dSetSize(g2d, (int)jpeg->width, (int)jpeg->height);
+lcdc_com.c:	jpeg->fileName	= fileName;
+lcdc_com.c:	jpeg->buf		= NULL;
+lcdc_com.c:	jpeg->bufLength	= 0;
+lcdc_com.c://printf("jpegDevDecode: w=%d h=%d\n", jpeg->width, jpeg->height);
+lcdc_com.c:		if(width <= 0) width = jpeg->width;
+lcdc_com.c:		if(height <= 0) height = jpeg->height;
+lcdc_com.c:		memcpy((void *)g2d->addr, jpeg->buf, jpeg->bufLength);
+lcdc_com.c:		g2dSetSize(g2d, (int)jpeg->width, (int)jpeg->height);

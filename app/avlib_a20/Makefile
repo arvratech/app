@@ -1,0 +1,321 @@
+# MPlayer Makefile
+#
+# copyright (c) 2008 Diego Biurrun
+# Rewritten entirely from a set of Makefiles written by Arpi and many others.
+#
+# This file is part of MPlayer.
+#
+# MPlayer is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2 of the License, or
+# (at your option) any later version.
+#
+# MPlayer is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License along
+# with MPlayer; if not, write to the Free Software Foundation, Inc.,
+# 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+
+include config.mak
+
+###### variable declarations #######
+
+SRCS_COMMON-$(AUDIO_INPUT)           += $(SRCS_AUDIO_INPUT-yes)
+
+SRCS_COMMON-$(FAAD_INTERNAL)         += libfaad2/bits.c \
+                                        libfaad2/cfft.c \
+                                        libfaad2/common.c \
+                                        libfaad2/decoder.c \
+                                        libfaad2/drc.c \
+                                        libfaad2/drm_dec.c \
+                                        libfaad2/error.c \
+                                        libfaad2/filtbank.c \
+                                        libfaad2/hcr.c \
+                                        libfaad2/huffman.c \
+                                        libfaad2/ic_predict.c \
+                                        libfaad2/is.c \
+                                        libfaad2/lt_predict.c \
+                                        libfaad2/mdct.c \
+                                        libfaad2/mp4.c \
+                                        libfaad2/ms.c \
+                                        libfaad2/output.c \
+                                        libfaad2/pns.c \
+                                        libfaad2/pulse.c \
+                                        libfaad2/rvlc.c \
+                                        libfaad2/specrec.c \
+                                        libfaad2/syntax.c \
+                                        libfaad2/tns.c \
+
+SRCS_COMMON = demux.c \
+			  avad.c \
+			  avvd.c \
+			  lcdc.c \
+              stream.c \
+              $(SRCS_COMMON-yes)
+
+SRCS_MPLAYER = mplay.c \
+			   mp.c
+               $(SRCS_MPLAYER-yes)
+
+
+COMMON_LIBS-$(LIBAVFORMAT_A)      += libavformat/libavformat.a
+COMMON_LIBS-$(LIBAVCODEC_A)       += libavcodec/libavcodec.a
+COMMON_LIBS-$(LIBAVUTIL_A)        += libavutil/libavutil.a
+COMMON_LIBS += $(COMMON_LIBS-yes)
+
+OBJS_COMMON    += $(addsuffix .o, $(basename $(SRCS_COMMON)))
+OBJS_MPLAYER   += $(addsuffix .o, $(basename $(SRCS_MPLAYER)))
+OBJS_MPLAYER-$(PE_EXECUTABLE) += osdep/mplayer-rc.o
+OBJS_MPLAYER   += $(OBJS_MPLAYER-yes)
+
+MPLAYER_DEPS  = $(OBJS_MPLAYER)  $(OBJS_COMMON) $(COMMON_LIBS)
+DEPS = $(filter-out %.S,$(patsubst %.cpp,%.d,$(patsubst %.c,%.d,$(SRCS_COMMON) $(SRCS_MPLAYER:.m=.d) )))
+
+ALL_PRG-$(MPLAYER)  += mplay$(EXESUF)
+
+INSTALL_TARGETS-$(MPLAYER)  += install-mplay  install-mplay-man
+
+DIRS =  . \
+        libavcodec \
+        libavcodec/alpha \
+        libavcodec/arm \
+        libavcodec/bfin \
+        libavcodec/mlib \
+        libavcodec/ppc \
+        libavcodec/sh4 \
+        libavcodec/sparc \
+        libavcodec/x86 \
+        libavformat \
+        libavutil \
+        libavutil/arm \
+        libavutil/bfin \
+        libavutil/ppc \
+        libavutil/sh4 \
+        libavutil/tomi \
+        libfaad2 \
+		vendor \
+
+ALLHEADERS = $(foreach dir,$(DIRS),$(wildcard $(dir)/*.h))
+
+ADDSUFFIXES     = $(foreach suf,$(1),$(addsuffix $(suf),$(2)))
+ADD_ALL_DIRS    = $(call ADDSUFFIXES,$(1),$(DIRS))
+ADD_ALL_EXESUFS = $(1) $(call ADDSUFFIXES,$(EXESUFS_ALL),$(1))
+
+FFMPEGPARTS = libavcodec \
+              libavformat \
+              libavutil \
+
+FFMPEGLIBS  = $(foreach part, $(FFMPEGPARTS), $(part)/$(part).a)
+FFMPEGFILES = $(foreach part, $(FFMPEGPARTS), $(wildcard $(part)/*.[chS] $(part)/*/*.[chS]))
+
+
+
+###### generic rules #######
+
+all: $(ALL_PRG-yes)
+
+%.ho: %.h
+	$(CC) $(CFLAGS) -Wno-unused -c -o $@ -x c $<
+
+%.o: %.S
+	$(CC) $(ASFLAGS) -c -o $@ $<
+
+%.o: %.c
+	$(CC) $(DEPFLAGS) $(CFLAGS) -c -o $@ $<
+
+%.o: %.cpp
+	$(CXX) $(DEPFLAGS) $(CXXFLAGS) -c -o $@ $<
+
+%.o: %.m
+	$(CC) $(DEPFLAGS) $(CFLAGS) -c -o $@ $<
+
+%-rc.o: %.rc
+	$(WINDRES) -I. $< $@
+
+checkheaders: $(ALLHEADERS:.h=.ho)
+
+dep depend: $(DEPS)
+	for part in $(FFMPEGPARTS); do $(MAKE) -C $$part depend; done
+
+$(FFMPEGLIBS): $(FFMPEGFILES) config.h
+	$(MAKE) -C $(@D)
+	touch $@
+
+mplay$(EXESUF): $(MPLAYER_DEPS)
+mplay$(EXESUF): EXTRALIBS += $(EXTRALIBS_MPLAYER)
+mplay$(EXESUF):
+	$(CC) -o $@ $^ $(EXTRALIBS)
+	cp mplay ../../tftpboot/.
+
+codec-cfg$(EXESUF): codec-cfg.c codec-cfg.h help_mp.h
+	$(HOST_CC) -O -DCODECS2HTML -I. -o $@ $<
+
+#codecs.conf.h: codec-cfg$(EXESUF) etc/codecs.conf
+#	./$^ > $@
+
+# rebuild version.h each time the working copy is updated
+ifeq ($(wildcard .svn/entries),.svn/entries)
+version.h: .svn/entries
+endif
+version.h: version.sh
+	./$< `$(CC) -dumpversion`
+
+%$(EXESUF): %.c
+	$(CC) $(CFLAGS) -o $@ $^
+
+
+###### dependency declarations / specific CFLAGS ######
+
+# Make sure all generated header files are created.
+codec-cfg.d codec-cfg.o: codecs.conf.h
+$(call ADDSUFFIXES,.d .o, osdep/mplayer.rc): version.h
+
+osdep/mplayer-rc.o: osdep/mplayer.exe.manifest
+
+libfaad2/%:    CFLAGS := -Ilibfaad2 -D_GNU_SOURCE -DHAVE_CONFIG_H $(CFLAGS_FAAD_FIXED) $(CFLAGS)
+
+###### installation / clean / generic rules #######
+
+install: $(INSTALL_TARGETS-yes)
+
+install-dirs:
+	$(INSTALL) -d $(BINDIR) $(CONFDIR) $(LIBDIR)
+
+install-%: %$(EXESUF) install-dirs
+	$(INSTALL) -m 755 $(INSTALLSTRIP) $< $(BINDIR)
+
+uninstall:
+	rm -f $(BINDIR)/mplay$(EXESUF) $(BINDIR)/gmplay$(EXESUF)
+	rm -f $(MANDIR)/man1/mplay.1
+	rm -f $(prefix)/share/pixmaps/mplay.xpm
+	rm -f $(prefix)/share/applications/mplay.desktop
+	rm -f $(MANDIR)/man1/mplay.1
+	rm -f $(foreach lang,$(MAN_LANGS),$(foreach man,mplay.1,$(MANDIR)/$(lang)/man1/$(man)))
+
+clean:
+	-rm -f $(call ADD_ALL_DIRS,/*.o /*.a /*.ho /*~ /*.d)
+	-rm -f $(call ADD_ALL_EXESUFS,mplay)
+
+distclean: clean testsclean toolsclean driversclean dhahelperclean dhahelperwinclean
+	-rm -rf DOCS/tech/doxygen
+	-rm -f $(call ADD_ALL_DIRS,/*.d)
+	-rm -f config.log config.mak config.h codecs.conf.h help_mp.h \
+           version.h $(VIDIX_PCI_FILES) TAGS tags
+	-rm -f $(call ADD_ALL_EXESUFS,codec-cfg cpuinfo)
+	-rm -f libavutil/avconfig.h
+
+doxygen:
+	doxygen DOCS/tech/Doxyfile
+
+TAGS:
+	rm -f $@; find . -name '*.[chS]' -o -name '*.asm' | xargs etags -a
+
+tags:
+	rm -f $@; find . -name '*.[chS]' -o -name '*.asm' | xargs ctags -a
+
+
+###### tests / tools #######
+
+TEST_OBJS = mp_msg.o osdep/$(GETCH) osdep/$(TIMER) -ltermcap -lm
+
+codec-cfg-test$(EXESUF): codec-cfg.c codecs.conf.h help_mp.h $(TEST_OBJS)
+	$(CC) -I. -DTESTING -o $@ $^
+
+codecs2html$(EXESUF): codec-cfg.c help_mp.h $(TEST_OBJS)
+	$(CC) -I. -DCODECS2HTML -o $@ $^
+
+libvo/aspecttest$(EXESUF): libvo/aspect.o libvo/geometry.o $(TEST_OBJS)
+
+LOADER_TEST_OBJS = $(SRCS_WIN32_EMULATION:.c=.o) $(SRCS_QTX_EMULATION:.S=.o) libavutil/libavutil.a osdep/mmap_anon.o cpudetect.o path.o $(TEST_OBJS)
+
+tests: $(addsuffix $(EXESUF),$(TESTS))
+
+testsclean:
+	-rm -f $(call ADD_ALL_EXESUFS,$(TESTS))
+
+TOOLS = $(addprefix TOOLS/,alaw-gen asfinfo avi-fix avisubdump compare dump_mp4 movinfo netstream subrip vivodump)
+
+ifdef ARCH_X86
+TOOLS += TOOLS/fastmemcpybench TOOLS/modify_reg
+endif
+
+ALLTOOLS = $(TOOLS) TOOLS/bmovl-test TOOLS/vfw2menc
+
+tools: $(addsuffix $(EXESUF),$(TOOLS))
+alltools: $(addsuffix $(EXESUF),$(ALLTOOLS))
+
+toolsclean:
+	-rm -f $(call ADD_ALL_EXESUFS,$(ALLTOOLS))
+	-rm -f TOOLS/realcodecs/*.so.6.0
+
+TOOLS/bmovl-test$(EXESUF): -lSDL_image
+
+TOOLS/subrip$(EXESUF): vobsub.o spudec.o unrar_exec.o libvo/aclib.o \
+    libswscale/libswscale.a libavutil/libavutil.a $(TEST_OBJS)
+
+TOOLS/vfw2menc$(EXESUF): -lwinmm -lole32
+
+mplay-nomain.o: mplay.c
+	$(CC) $(CFLAGS) -DDISABLE_MAIN -c -o $@ $<
+
+TOOLS/netstream$(EXESUF): TOOLS/netstream.c
+TOOLS/vivodump$(EXESUF): TOOLS/vivodump.c
+TOOLS/netstream$(EXESUF) TOOLS/vivodump$(EXESUF): $(subst mplay.o,mplay-nomain.o,$(OBJS_MPLAYER)) $(filter-out %mencoder.o,$(OBJS_MENCODER)) $(OBJS_COMMON) $(COMMON_LIBS)
+	$(CC) $(CFLAGS) -o $@ $^ $(EXTRALIBS_MPLAYER) $(EXTRALIBS)
+
+REAL_SRCS    = $(wildcard TOOLS/realcodecs/*.c)
+REAL_TARGETS = $(REAL_SRCS:.c=.so.6.0)
+
+realcodecs: $(REAL_TARGETS)
+realcodecs: CFLAGS += -g
+
+%.so.6.0: %.o
+	ld -shared -o $@ $< -ldl -lc
+
+
+
+###### drivers #######
+
+KERNEL_INC = /lib/modules/`uname -r`/build/include
+KERNEL_VERSION = $(shell grep RELEASE $(KERNEL_INC)/linux/version.h | cut -d'"' -f2)
+KERNEL_CFLAGS = -O2 -D__KERNEL__ -DMODULE -Wall -I$(KERNEL_INC) -include $(KERNEL_INC)/linux/modversions.h
+KERNEL_OBJS = $(addprefix drivers/, mga_vid.o tdfx_vid.o radeon_vid.o rage128_vid.o)
+MODULES_DIR = /lib/modules/$(KERNEL_VERSION)/misc
+DRIVER_OBJS = $(KERNEL_OBJS) drivers/mga_vid_test drivers/tdfx_vid_test
+
+drivers: $(DRIVER_OBJS)
+
+$(DRIVER_OBJS): CFLAGS = $(KERNEL_CFLAGS)
+drivers/mga_vid.o: drivers/mga_vid.c drivers/mga_vid.h
+drivers/tdfx_vid.o: drivers/tdfx_vid.c drivers/3dfx.h
+drivers/radeon_vid.o drivers/rage128_vid.o: CFLAGS += -fomit-frame-pointer -fno-strict-aliasing -fno-common -ffast-math
+drivers/radeon_vid.o: drivers/radeon_vid.c drivers/radeon.h drivers/radeon_vid.h
+drivers/rage128_vid.o: drivers/radeon_vid.c drivers/radeon.h drivers/radeon_vid.h
+	$(CC) $(CFLAGS) -DRAGE128 -c $< -o $@
+
+install-drivers: $(DRIVER_OBJS)
+	-mkdir -p $(MODULES_DIR)
+	install -m 644 $(KERNEL_OBJS) $(MODULES_DIR)
+	depmod -a
+	-mknod /dev/mga_vid    c 178 0
+	-mknod /dev/tdfx_vid   c 178 0
+	-mknod /dev/radeon_vid c 178 0
+	-ln -s /dev/radeon_vid /dev/rage128_vid
+
+driversclean:
+	-rm -f $(DRIVER_OBJS) drivers/*~
+
+# Do not include dependencies when they are about to be removed anyway.
+ifneq ($(MAKECMDGOALS),distclean)
+-include $(DEPS)
+endif
+
+.PHONY: all doxygen *install* *tools drivers dhahelper*
+.PHONY: checkheaders *clean dep depend tests
+
+# Disable suffix rules.  Most of the builtin rules are suffix rules,
+# so this saves some time on slow systems.
+.SUFFIXES:

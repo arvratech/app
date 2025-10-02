@@ -1,0 +1,300 @@
+async.c:	handle->async_cb = async_cb;
+async.c:	handle->pending = 0;
+async.c:	QUEUE_INSERT_TAIL(&loop->async_handles, &handle->queue);
+async.c://  if (ACCESS_ONCE(int, handle->pending) != 0)
+async.c://  if (cmpxchgi(&handle->pending, 0, 1) == 0)	changed by KDK
+async.c://  val = atomic_cmpxchg(&handle->pending, 0, 1);
+async.c:// if(val == 0) uv_async_watcher_send(handle->loop);
+async.c:	handle->pending = 1;
+async.c:	uv_async_watcher_send(handle->loop);
+async.c:	QUEUE_REMOVE(&handle->queue);
+core.c:  handle->flags |= UV_CLOSING;
+core.c:  handle->close_cb = close_cb;
+core.c:  switch (handle->type) {
+core.c:  if (handle->type == UV_TCP || handle->type == UV_NAMED_PIPE)
+core.c:  else if (handle->type == UV_UDP)
+core.c:  assert(handle->flags & UV_CLOSING);
+core.c:  assert(!(handle->flags & UV_CLOSED));
+core.c:  handle->next_closing = handle->loop->closing_handles;
+core.c:  handle->loop->closing_handles = handle;
+core.c:  assert(handle->flags & UV_CLOSING);
+core.c:  assert(!(handle->flags & UV_CLOSED));
+core.c:  handle->flags |= UV_CLOSED;
+core.c:  switch (handle->type) {
+core.c:  QUEUE_REMOVE(&handle->handle_queue);
+core.c:  if (handle->close_cb) {
+core.c:    handle->close_cb(handle);
+core.c:  switch (handle->type) {
+fs-poll.c:  loop = handle->loop;
+fs-poll.c:  handle->poll_ctx = ctx;
+fs-poll.c:  ctx = handle->poll_ctx;
+fs-poll.c:  handle->poll_ctx = NULL;
+fs-poll.c:  ctx = handle->poll_ctx;
+fs-poll.c:  assert(ctx->parent_handle->poll_ctx == ctx);
+fs-poll.c:#include "win/handle-inl.h"
+fs-poll.c:  assert(handle->flags & UV__HANDLE_CLOSING);
+fs-poll.c:  assert(!(handle->flags & UV_HANDLE_CLOSED));
+linux-inotify.c:        tmp_path = uv__strdup(handle->path);
+linux-inotify.c:        QUEUE_INSERT_TAIL(&tmp_watcher_list.watchers, &handle->watchers);
+linux-inotify.c:        handle->path = tmp_path;
+linux-inotify.c:        tmp_path = handle->path;
+linux-inotify.c:        handle->path = NULL;
+linux-inotify.c:        err = uv_fs_event_start(handle, handle->cb, tmp_path, 0);
+linux-inotify.c:  err = init_inotify(handle->loop);
+linux-inotify.c:  wd = uv__inotify_add_watch(handle->loop->inotify_fd, path, events);
+linux-inotify.c:  w = find_watcher(handle->loop, wd);
+linux-inotify.c:  RB_INSERT(watcher_root, CAST(&handle->loop->inotify_watchers), w);
+linux-inotify.c:  QUEUE_INSERT_TAIL(&w->watchers, &handle->watchers);
+linux-inotify.c:  handle->path = w->path;
+linux-inotify.c:  handle->cb = cb;
+linux-inotify.c:  handle->wd = wd;
+linux-inotify.c:  w = find_watcher(handle->loop, handle->wd);
+linux-inotify.c:  handle->wd = -1;
+linux-inotify.c:  handle->path = NULL;
+linux-inotify.c:  QUEUE_REMOVE(&handle->watchers);
+linux-inotify.c:  maybe_free_watcher_list(w, handle->loop);
+loop-watcher.c:    handle->name##_cb = NULL;                                                 \
+loop-watcher.c:    QUEUE_INSERT_HEAD(&handle->loop->name##_handles, &handle->queue);         \
+loop-watcher.c:    handle->name##_cb = cb;                                                   \
+loop-watcher.c:    QUEUE_REMOVE(&handle->queue);                                             \
+pipe.c:  handle->shutdown_req = NULL;
+pipe.c:  handle->connect_req = NULL;
+pipe.c:  handle->pipe_fname = NULL;
+pipe.c:  handle->ipc = ipc;
+pipe.c:  handle->flags |= UV_HANDLE_BOUND;
+pipe.c:  handle->pipe_fname = pipe_fname; /* Is a strdup'ed copy. */
+pipe.c:  handle->io_watcher.fd = sockfd;
+pipe.c:  handle->connection_cb = cb;
+pipe.c:  handle->io_watcher.cb = uv__server_io;
+pipe.c:  uv__io_start(handle->loop, &handle->io_watcher, POLLIN);
+pipe.c:  if (handle->pipe_fname) {
+pipe.c:    unlink(handle->pipe_fname);
+pipe.c:    uv__free((void*)handle->pipe_fname);
+pipe.c:    handle->pipe_fname = NULL;
+pipe.c:    handle->io_watcher.fd = err;
+pipe.c:    uv__io_start(handle->loop, &handle->io_watcher, POLLIN | POLLOUT);
+pipe.c:  handle->delayed_error = err;
+pipe.c:  handle->connect_req = req;
+pipe.c:  uv__req_init(handle->loop, req, UV_CONNECT);
+pipe.c:    uv__io_feed(handle->loop, &handle->io_watcher);
+pipe.c:  if (!handle->ipc)
+pipe.c:  if (handle->accepted_fd == -1)
+pipe.c:  if (handle->queued_fds == NULL)
+pipe.c:  queued_fds = handle->queued_fds;
+pipe.c:  if (!handle->ipc)
+pipe.c:  if (handle->accepted_fd == -1)
+pipe.c:    return uv__handle_type(handle->accepted_fd);
+poll.c:    handle->poll_cb(handle, UV_EBADF, 0);
+poll.c:  handle->poll_cb(handle, 0, pevents);
+poll.c:  uv__io_init(&handle->io_watcher, uv__poll_io, fd);
+poll.c:  handle->poll_cb = NULL;
+poll.c:  uv__io_stop(handle->loop,
+poll.c:              &handle->io_watcher,
+poll.c:  uv__platform_invalidate_fd(handle->loop, handle->io_watcher.fd);
+poll.c:  uv__io_start(handle->loop, &handle->io_watcher, events);
+poll.c:  handle->poll_cb = poll_cb;
+process.c:  loop = handle->loop;
+process.c:  QUEUE_REMOVE(&handle->queue);
+process.c:  if (QUEUE_EMPTY(&handle->loop->process_handles))
+process.c:    uv_signal_stop(&handle->loop->child_watcher);
+signal.c:  if (handle != NULL && handle->signum == signum)
+signal.c:       handle != NULL && handle->signum == signum;
+signal.c:      r = write(handle->loop->signal_pipefd[1], &msg, sizeof msg);
+signal.c:      handle->caught_signals++;
+signal.c:    if (handle->type == UV_SIGNAL)
+signal.c:  handle->signum = 0;
+signal.c:  handle->caught_signals = 0;
+signal.c:  handle->dispatched_signals = 0;
+signal.c:  if (handle->caught_signals == handle->dispatched_signals) {
+signal.c:   * time frame that handle->signum == 0.
+signal.c:  if (signum == handle->signum) {
+signal.c:    handle->signal_cb = signal_cb;
+signal.c:  if (handle->signum != 0) {
+signal.c:      (!oneshot && (first_handle->flags & UV__SIGNAL_ONE_SHOT))) {
+signal.c:  handle->signum = signum;
+signal.c:    handle->flags |= UV__SIGNAL_ONE_SHOT;
+signal.c:  handle->signal_cb = signal_cb;
+signal.c:      if (msg->signum == handle->signum) {
+signal.c:        assert(!(handle->flags & UV_CLOSING));
+signal.c:        handle->signal_cb(handle, handle->signum);
+signal.c:      handle->dispatched_signals++;
+signal.c:      if (handle->flags & UV__SIGNAL_ONE_SHOT)
+signal.c:      if ((handle->flags & UV_CLOSING) &&
+signal.c:          (handle->caught_signals == handle->dispatched_signals)) {
+signal.c:  if (handle->signum == 0)
+signal.c:  first_handle = uv__signal_first_handle(handle->signum);
+signal.c:    uv__signal_unregister_handler(handle->signum);
+signal.c:    rem_oneshot = handle->flags & UV__SIGNAL_ONE_SHOT;
+signal.c:    first_oneshot = first_handle->flags & UV__SIGNAL_ONE_SHOT;
+signal.c:      ret = uv__signal_register_handler(handle->signum, 1);
+signal.c:  handle->signum = 0;
+stream.c:  assert(req->handle->write_queue_size >= size);
+stream.c:  switch (handle->type) {
+stream.c:  assert(handle->type == UV_TCP ||
+stream.c:         handle->type == UV_TTY ||
+stream.c:         handle->type == UV_NAMED_PIPE);
+stream.c:  s = handle->select;
+stream.c:  return handle->io_watcher.fd;
+stream.c:  if (handle->select != NULL) {
+stream.c:    s = handle->select;
+stream.c:    handle->select = NULL;
+stream.c:  uv__io_close(handle->loop, &handle->io_watcher);
+stream.c:  if (handle->io_watcher.fd != -1) {
+stream.c:    if (handle->io_watcher.fd > STDERR_FILENO)
+stream.c:      uv__close(handle->io_watcher.fd);
+stream.c:    handle->io_watcher.fd = -1;
+stream.c:  if (handle->accepted_fd != -1) {
+stream.c:    uv__close(handle->accepted_fd);
+stream.c:    handle->accepted_fd = -1;
+stream.c:  if (handle->queued_fds != NULL) {
+stream.c:    queued_fds = handle->queued_fds;
+stream.c:    uv__free(handle->queued_fds);
+stream.c:    handle->queued_fds = NULL;
+stream.c:  assert(!uv__io_active(&handle->io_watcher, POLLIN | POLLOUT));
+tcp.c:    handle->flags |= flags;
+tcp.c:      if (handle->flags & UV_HANDLE_BOUND) {
+tcp.c:        handle->flags |= flags;
+tcp.c:        handle->flags |= flags;
+tcp.c:    handle->flags |= flags;
+tcp.c:  assert(handle->type == UV_TCP);
+tcp.c:  if (handle->connect_req != NULL)
+tcp.c:  handle->delayed_error = 0;
+tcp.c:      handle->delayed_error = UV__ERR(errno);
+tcp.c:  uv__req_init(handle->loop, req, UV_CONNECT);
+tcp.c:  handle->connect_req = req;
+tcp.c:  uv__io_start(handle->loop, &handle->io_watcher, POLLOUT);
+tcp.c:  if (handle->delayed_error)
+tcp.c:    uv__io_feed(handle->loop, &handle->io_watcher);
+tcp.c:  if (handle->delayed_error)
+tcp.c:    return handle->delayed_error;
+tcp.c:  if (handle->delayed_error)
+tcp.c:    return handle->delayed_error;
+tcp.c:    handle->flags |= UV_TCP_NODELAY;
+tcp.c:    handle->flags &= ~UV_TCP_NODELAY;
+tcp.c:    handle->flags |= UV_TCP_KEEPALIVE;
+tcp.c:    handle->flags &= ~UV_TCP_KEEPALIVE;
+tcp.c:    handle->flags &= ~UV_TCP_SINGLE_ACCEPT;
+tcp.c:    handle->flags |= UV_TCP_SINGLE_ACCEPT;
+test.c:  ASSERT(order_cb_called++ == *(int*)handle->data);
+test.c:  ASSERT(order_cb_called++ == *(int*)handle->data);
+timer.c:	handle->timer_cb = NULL;
+timer.c:	handle->repeat = 0;
+timer.c:	clamped_timeout = handle->loop->time + timeout;
+timer.c:	handle->timer_cb = cb;
+timer.c:	handle->timeout = clamped_timeout;
+timer.c:	handle->repeat = repeat;
+timer.c:	handle->start_id = handle->loop->timer_counter++;
+timer.c:	heap_insert((struct heap*) &handle->loop->timer_heap, (struct heap_node*) &handle->heap_node,
+timer.c:	heap_remove((struct heap*) &handle->loop->timer_heap, (struct heap_node*) &handle->heap_node,
+timer.c:	if(handle->timer_cb == NULL) return UV_EINVAL;
+timer.c:	if(handle->repeat) {
+timer.c:		uv_timer_start(handle, handle->timer_cb, handle->repeat, handle->repeat);
+timer.c:	handle->repeat = repeat;
+timer.c:	return handle->repeat;
+timer.c:	if(handle->timeout <= loop->time) return 0;
+timer.c:	diff = handle->timeout - loop->time;
+timer.c:		if(handle->timeout > loop->time) break;
+timer.c:		handle->timer_cb(handle);
+udp.c:  uv__io_close(handle->loop, &handle->io_watcher);
+udp.c:  if (handle->io_watcher.fd != -1) {
+udp.c:    uv__close(handle->io_watcher.fd);
+udp.c:    handle->io_watcher.fd = -1;
+udp.c:  assert(!uv__io_active(&handle->io_watcher, POLLIN | POLLOUT));
+udp.c:  assert(handle->io_watcher.fd == -1);
+udp.c:  while (!QUEUE_EMPTY(&handle->write_queue)) {
+udp.c:    q = QUEUE_HEAD(&handle->write_queue);
+udp.c:    QUEUE_INSERT_TAIL(&handle->write_completed_queue, &req->queue);
+udp.c:  assert(handle->send_queue_size == 0);
+udp.c:  assert(handle->send_queue_count == 0);
+udp.c:  handle->recv_cb = NULL;
+udp.c:  handle->alloc_cb = NULL;
+udp.c:  assert(!(handle->flags & UV_UDP_PROCESSING));
+udp.c:  handle->flags |= UV_UDP_PROCESSING;
+udp.c:  while (!QUEUE_EMPTY(&handle->write_completed_queue)) {
+udp.c:    q = QUEUE_HEAD(&handle->write_completed_queue);
+udp.c:    uv__req_unregister(handle->loop, req);
+udp.c:    handle->send_queue_size -= uv__count_bufs(req->bufs, req->nbufs);
+udp.c:    handle->send_queue_count--;
+udp.c:  if (QUEUE_EMPTY(&handle->write_queue)) {
+udp.c:    uv__io_stop(handle->loop, &handle->io_watcher, POLLOUT);
+udp.c:    if (!uv__io_active(&handle->io_watcher, POLLIN))
+udp.c:  handle->flags &= ~UV_UDP_PROCESSING;
+udp.c:  assert(handle->type == UV_UDP);
+udp.c:  assert(handle->recv_cb != NULL);
+udp.c:  assert(handle->alloc_cb != NULL);
+udp.c:    handle->alloc_cb((uv_handle_t*) handle, 64 * 1024, &buf);
+udp.c:      handle->recv_cb(handle, UV_ENOBUFS, &buf, NULL, 0);
+udp.c:      nread = recvmsg(handle->io_watcher.fd, &h, 0);
+udp.c:        handle->recv_cb(handle, 0, &buf, NULL, 0);
+udp.c:        handle->recv_cb(handle, UV__ERR(errno), &buf, NULL, 0);
+udp.c:      handle->recv_cb(handle, nread, &buf, addr, flags);
+udp.c:      && handle->io_watcher.fd != -1
+udp.c:      && handle->recv_cb != NULL);
+udp.c:  while (!QUEUE_EMPTY(&handle->write_queue)) {
+udp.c:    q = QUEUE_HEAD(&handle->write_queue);
+udp.c:      size = sendmsg(handle->io_watcher.fd, &h, 0);
+udp.c:    QUEUE_INSERT_TAIL(&handle->write_completed_queue, &req->queue);
+udp.c:    uv__io_feed(handle->loop, &handle->io_watcher);
+udp.c:  fd = handle->io_watcher.fd;
+udp.c:    handle->io_watcher.fd = fd;
+udp.c:    handle->flags |= UV_HANDLE_IPV6;
+udp.c:  handle->flags |= UV_HANDLE_BOUND;
+udp.c:  if (handle->io_watcher.fd != -1)
+udp.c:  empty_queue = (handle->send_queue_count == 0);
+udp.c:  uv__req_init(handle->loop, req, UV_UDP_SEND);
+udp.c:    uv__req_unregister(handle->loop, req);
+udp.c:  handle->send_queue_size += uv__count_bufs(req->bufs, req->nbufs);
+udp.c:  handle->send_queue_count++;
+udp.c:  QUEUE_INSERT_TAIL(&handle->write_queue, &req->queue);
+udp.c:  if (empty_queue && !(handle->flags & UV_UDP_PROCESSING)) {
+udp.c:    if (!QUEUE_EMPTY(&handle->write_queue))
+udp.c:      uv__io_start(handle->loop, &handle->io_watcher, POLLOUT);
+udp.c:    uv__io_start(handle->loop, &handle->io_watcher, POLLOUT);
+udp.c:  if (handle->send_queue_count != 0)
+udp.c:    size = sendmsg(handle->io_watcher.fd, &h, 0);
+udp.c:  if (setsockopt(handle->io_watcher.fd,
+udp.c:  if (setsockopt(handle->io_watcher.fd,
+udp.c:  handle->alloc_cb = NULL;
+udp.c:  handle->recv_cb = NULL;
+udp.c:  handle->send_queue_size = 0;
+udp.c:  handle->send_queue_count = 0;
+udp.c:  uv__io_init(&handle->io_watcher, uv__udp_io, fd);
+udp.c:  QUEUE_INIT(&handle->write_queue);
+udp.c:  QUEUE_INIT(&handle->write_completed_queue);
+udp.c:  if (handle->io_watcher.fd != -1)
+udp.c:  handle->io_watcher.fd = sock;
+udp.c:  if (handle->flags & UV_HANDLE_IPV6)
+udp.c:    r = setsockopt(handle->io_watcher.fd,
+udp.c:    r = setsockopt(handle->io_watcher.fd,
+udp.c:  if (setsockopt(handle->io_watcher.fd,
+udp.c:  if (!(handle->flags & UV_HANDLE_IPV6))
+udp.c:  if (handle->flags & UV_HANDLE_IPV6)
+udp.c:  if (handle->flags & UV_HANDLE_IPV6)
+udp.c:    if (handle->flags & UV_HANDLE_IPV6) {
+udp.c:    if (setsockopt(handle->io_watcher.fd,
+udp.c:    if (setsockopt(handle->io_watcher.fd,
+udp.c:  if (handle->io_watcher.fd == -1)
+udp.c:  if (getsockname(handle->io_watcher.fd, name, &socklen))
+udp.c:  if (uv__io_active(&handle->io_watcher, POLLIN))
+udp.c:  handle->alloc_cb = alloc_cb;
+udp.c:  handle->recv_cb = recv_cb;
+udp.c:  uv__io_start(handle->loop, &handle->io_watcher, POLLIN);
+udp.c:  uv__io_stop(handle->loop, &handle->io_watcher, POLLIN);
+udp.c:  if (!uv__io_active(&handle->io_watcher, POLLOUT))
+udp.c:  handle->alloc_cb = NULL;
+udp.c:  handle->recv_cb = NULL;
+uv-common.c:  if (handle->type != UV_TCP)
+uv-common.c:  if (handle->type != UV_UDP)
+uv-common.c:  if (handle->type != UV_TCP)
+uv-common.c:  if (handle->type != UV_UDP)
+uv-common.c:  if (handle->type != UV_UDP)
+uv-common.c:  if (handle->type != UV_UDP || alloc_cb == NULL || recv_cb == NULL)
+uv-common.c:  if (handle->type != UV_UDP)
+uv-common.c:  required_len = strlen(handle->path);
+uv-common.c:  memcpy(buffer, handle->path, required_len);
+uv-data-getter-setters.c:  return handle->type;
+uv-data-getter-setters.c:  return handle->data;
+uv-data-getter-setters.c:  return handle->loop;
+uv-data-getter-setters.c:  handle->data = data;
+uv-data-getter-setters.c:  return handle->send_queue_size;
+uv-data-getter-setters.c:  return handle->send_queue_count;

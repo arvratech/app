@@ -1,0 +1,3 @@
+void AdmHwNwpStart(void *pss)
+{
+}

@@ -1,0 +1,108 @@
+int lcdDirection(void)
+{
+	return (int)_lcdLandscape;
+}
+
+void lcdSetDirection(int landscape)
+{
+	_lcdLandscape = landscape;
+	lcdSetDefaultClipRect();
+}
+
+int lcdRealWidth(void)
+{
+	return _lcdWidth;
+}
+
+int lcdRealHeight(void)
+{
+	return _lcdHeight;
+}
+
+int lcdWidth(void)
+{
+	int		val;
+
+	if(_lcdLandscape) val = _lcdHeight;
+	else	val = _lcdWidth;
+	return val;
+}
+
+int lcdHeight(void)
+{
+	int		val;
+
+	if(_lcdLandscape) val = _lcdWidth;
+	else	val = _lcdHeight;
+	return val;
+}
+
+int lcdPixelWidth(void)
+{
+	return g2dLcd->width;
+}
+
+int lcdPixelHeight(void)
+{
+	return g2dLcd->height;
+}
+
+// 24.8 fixed point format
+int lcdScale(void)
+{
+	int		scale;
+	//   model     resolution  pitch(mm/pixel) resolution(point)
+	// ILI9488r     320x480      0.153			  320x480
+	// ILI9806E-2C	480x800      0.108            336x560
+	if(g2dLcd->width > 400) scale = 0x016d;	// (30<<8) / 21;
+	else	scale = 0x0100;					// 1.0
+	return scale;
+}
+
+void lcdClipToRect(CGRect *rect)
+{
+	g2dLcd->clipRect.x = rect->x; g2dLcd->clipRect.y = rect->y;
+	g2dLcd->clipRect.width = rect->width; g2dLcd->clipRect.height = rect->height;
+}
+
+//void lcdClipToMask(CGRRect *rect, BMPC *mask)
+
+void lcdSetDefaultClipRect(void)
+{
+	g2dLcd->clipRect.x = 0; g2dLcd->clipRect.y = 0;
+	g2dLcd->clipRect.width = g2dLcd->width; g2dLcd->clipRect.height = g2dLcd->height;
+}
+
+void lcdPointToPixelRect(CGRect *rect)
+{
+	int		x, y;
+
+	x = rect->x; y = rect->y;
+	rect->x = _scale(x); rect->y = _scale(y);
+	rect->width = _scale(x+rect->width) - rect->x; rect->height = _scale(y+rect->height) - rect->y;
+}
+
+void lcdPixelClipToRect(CGRect *rect, CGRect *clipRect)
+{
+	int		x, y;
+
+	x = rect->x + clipRect->x; y = rect->y + clipRect->y;
+	g2dLcd->clipRect.x = _scale(x);
+	g2dLcd->clipRect.y = _scale(y);
+	g2dLcd->clipRect.width  = _scale(x+clipRect->width) - g2dLcd->clipRect.x;
+	g2dLcd->clipRect.height = _scale(y+clipRect->height) - g2dLcd->clipRect.y;
+	x = rect->x; y = rect->y;
+	rect->x = _scale(x); rect->y = _scale(y);
+	rect->width = _scale(x+rect->width) - rect->x; rect->height = _scale(y+rect->height) - rect->y;
+}
+
+void lcdClear(unsigned int color)
+{
+	int		x, y, w, h;
+
+	x = g2dLcd->clipRect.x; y = g2dLcd->clipRect.y; w = g2dLcd->clipRect.width; h = g2dLcd->clipRect.height;
+	g2dFill(g2dLcd, x, y, w, h, color);
+}
+
+
+#include "lcdc_com.c"
