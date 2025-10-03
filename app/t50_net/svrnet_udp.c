@@ -39,30 +39,63 @@ void SvrnetUdpInit(void )
 void _OnSvrnetAlloc(uv_handle_t *handle, size_t suggested_size, uv_buf_t *buf);
 void _OnSvrnetRecv(uv_udp_t *handle, ssize_t nread, const uv_buf_t *buf, const struct sockaddr *addr, unsigned flags);
 
-void _SvrnetUdpOpen(void)
+int _SvrnetUdpOpen(void)
 {
 	struct sockaddr_in	addr;
 	unsigned short	ipPort;
 	int		fd, rval, addrlen;
+	int		fd_open = 0;
+	int		udp_initialized = 0;
 
 	fd = uv__socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP);
-	if(!fd) {
+	if(fd < 0) {
+		rval = -errno;
 printf("_SvrnetUdpOpen...socket error: %s\n", strerror(errno));
-		_SvrnetTimer(5000);
-		return;
+		goto _svrnet_udp_open_fail;
 	}
+	fd_open = 1;
 	ipPort = syscfgServerIpPort(NULL)+1;
 	uv_ip4_addr("127.0.0.1", ipPort, &addr);
 	addr.sin_addr.s_addr = htonl(INADDR_ANY);
+
 	rval = uv_udp_init(MainLoop(), udpSvrnet);
+	if(rval) {
+printf("_SvrnetUdpOpen...uv_udp_init error: %s\n", uv_strerror(rval));
+		goto _svrnet_udp_open_fail;
+	}
+	udp_initialized = 1;
+
 	rval = uv_udp_open(udpSvrnet, fd);
+	if(rval) {
+printf("_SvrnetUdpOpen...uv_udp_open error: %s\n", uv_strerror(rval));
+		goto _svrnet_udp_open_fail;
+	}
+	fd_open = 0;
+
 	rval = uv_udp_bind(udpSvrnet, (const struct sockaddr*)&addr, 0);
+	if(rval) {
+printf("_SvrnetUdpOpen...uv_udp_bind error: %s\n", uv_strerror(rval));
+		goto _svrnet_udp_open_fail;
+	}
+
 	rval = uv_udp_recv_start(udpSvrnet, _OnSvrnetAlloc, _OnSvrnetRecv);
+	if(rval) {
+printf("_SvrnetUdpOpen...uv_udp_recv_start error: %s\n", uv_strerror(rval));
+		goto _svrnet_udp_open_fail;
+	}
+
 	svrnetState = S_SVRNET_IDLE;
 #ifdef _DEBUG
 printf("_SvrnetUdpOpen...\n");
 #endif
 	_SvrnetTimer(7);
+	return 0;
+
+_svrnet_udp_open_fail:
+	if(udp_initialized) uv_close((uv_handle_t *)udpSvrnet, NULL);
+	if(fd_open) close(fd);
+	_SvrnetTimer(5000);
+	return (rval) ? rval : -errno;
 }
 
 void _SvrnetUdpClose(void)
@@ -114,8 +147,10 @@ void _OnSvrnetTimer(uv_timer_t *handle)
 	NET_UDP		*net;
 
 	if(svrnetState == S_SVRNET_NULL) {
-		if(niState() >= S_NI_READY && camCodecState()) _SvrnetUdpOpen();
-		else	_SvrnetTimer(700);
+		if(niState() >= S_NI_READY && camCodecState()) {
+			int openStatus = _SvrnetUdpOpen();
+			if(openStatus) return;
+		} else	_SvrnetTimer(700);
 	} else if(svrnetState == S_SVRNET_IDLE) {
 		if(SlvnetIsConnected()) {
 			memcpy(camIpAddress, syscfgServerIpAddress(NULL), 4);
